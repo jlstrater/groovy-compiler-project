@@ -125,7 +125,7 @@ ruleset {
 
     // rulesets/dry.xml
     DuplicateListLiteral
-    DuplicateMapLiteral
+//    DuplicateMapLiteral
 //    DuplicateNumberLiteral
 //    DuplicateStringLiteral
 
@@ -180,7 +180,7 @@ ruleset {
     SpaceAfterSwitch
     SpaceAfterWhile
     SpaceAroundClosureArrow
-    SpaceAroundMapEntryColon
+    SpaceAroundMapEntryColon(characterAfterColonRegex: /\s/)
     SpaceAroundOperator
     SpaceBeforeClosingBrace
     SpaceBeforeOpeningBrace

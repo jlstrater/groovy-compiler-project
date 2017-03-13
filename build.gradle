@@ -31,7 +31,6 @@ dependencies {
 // Define the main class for the application
 mainClassName = 'App'
 
-
 codenarc {
     toolVersion = '0.25.2'
 }

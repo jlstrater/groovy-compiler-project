@@ -4,8 +4,10 @@ class FileInfo {
     String filename
     String path
     String extension
+    String info
 
     FileInfo(String fileInfo) {
+        this.info = fileInfo
         List tokens = fileInfo.split('/')
         String filenameAndExtension = tokens?.getAt(-1)
         List filenameTokens = filenameAndExtension.split(/\./)

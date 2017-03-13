@@ -1,11 +1,15 @@
 import groovy.util.logging.Slf4j
+import report.FileReportWriter
+import report.ReportWriter
 import utils.FileInfo
 
 @Slf4j
 @SuppressWarnings('NoDef')
 class App {
     private static final String GROOVYC_OUTPUT_DIR = 'build/groovyc'
+    private static final String LOCAL_GROOVYC_OUTPUT_DIR = 'build/local/groovyc'
     private static final String INDY_OUTPUT_DIR = 'build/indy'
+    private static final String LOCAL_INDY_OUTPUT_DIR = 'build/local/indy'
 
     static void main(String[] args) throws Exception {
         if (!args) {
@@ -18,30 +22,60 @@ class App {
             log.info 'Starting Analysis for program: ' + file.filename
 
             compileWithGroovyc(file)
-//            fetchByteCode(file, GROOVYC_OUTPUT_DIR)
+            String groovycByteCode = fetchByteCode(file, GROOVYC_OUTPUT_DIR)
 
             compileWithInvokeDynamic(file)
-//            fetchByteCode(file, INDY_OUTPUT_DIR)
+            String indyByteCode = fetchByteCode(file, INDY_OUTPUT_DIR)
+
+//            compileWithLocalGroovyC(file)
+//            String localGroovycByteCode = fetchByteCode(file, LOCAL_GROOVYC_OUTPUT_DIR)
+//
+//            compileWithLocalIndy(file)
+//            String localIndyByteCode = fetchByteCode(file, LOCAL_INDY_OUTPUT_DIR)
 
             //todo: compile with static compiler
 
+            //write to report
+            FileReportWriter writer = new FileReportWriter()
+            writer.writeReport(file.filename, [groovycByteCode, indyByteCode])
+
+            ReportWriter report = new ReportWriter()
+            report.write()
         }
     }
 
     static void compileWithGroovyc(FileInfo file) {
         log.info 'running groovyc for ' + file.filename
-        "groovyc $file.filename -d $GROOVYC_OUTPUT_DIR".execute()
+        "groovyc $file.info -d $GROOVYC_OUTPUT_DIR".execute()
     }
 
     static void compileWithInvokeDynamic(FileInfo file) {
         log.info 'running invoke dynamic for ' + file.filename
-        "groovyc --indy $file.filename -d $INDY_OUTPUT_DIR".execute()
+        "groovyc --indy $file.info -d $INDY_OUTPUT_DIR".execute()
+    }
+
+    static void compileWithLocalGroovyC(FileInfo file) {
+        log.info 'running with local groovyc for ' + file.filename
+        "groovyc $file.info -d $LOCAL_GROOVYC_OUTPUT_DIR".execute()
+    }
+
+    static void compileWithLocalIndy(FileInfo file) {
+        log.info 'running with local groovyc for ' + file.filename
+        "groovyc --indy $file.info -d $LOCAL_INDY_OUTPUT_DIR".execute()
     }
 
     @SuppressWarnings('JavaIoPackageAccess')
     static String fetchByteCode(FileInfo fileInfo, String outputDir) {
-        String fileText = new File(fileInfo.pathUpOneLevel + '/' + outputDir + '/' + fileInfo.filename + '.class').text
-        log.info fileText
-        fileText
+        def process = "javap -c ${outputDir + '/scripts/' + fileInfo.filename + '.class'}".execute()
+
+        StringBuffer out = new StringBuffer()
+        process.consumeProcessOutputStream(out)
+        process.waitFor()
+
+        new File("${fileInfo.pathUpOneLevel}/bytecode").mkdirs()
+        File file = new File("${fileInfo.pathUpOneLevel}/bytecode", "${fileInfo.filename}.bytecode")
+        file << out
+
+        out
     }
 }
