@@ -5,4 +5,3 @@ List results = []
 numbers.each {
     results << it * 2
 }
-results
