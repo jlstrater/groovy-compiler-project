@@ -28,31 +28,31 @@ class FileReportWriter extends ReportWriter {
                             a href: 'index.html', 'Home'
                             span class: 'divider'
                         }
-                        li(class: 'active') {
-                            a href: '#', filename.toUpperCase()
+                        li {
+                            a filename.toUpperCase()
                         }
                     }
                     h2 class: 'text-center', 'Bytecode Analysis for script: ' + filename
-                    div(class: 'row col-lg-10 col-lg-offset-1') {
-                        div(class: 'col-md-6') {
-                            h2 'Groovyc'
+                    div(class: 'row col-lg-12') {
+                        div(class: 'col-md-4') {
+                            h2 class: 'text-center', 'Groovyc (Legacy)'
                             pre {
                                 code class: 'assembly', results.get(0)
                             }
                         }
-                        div(class: 'col-md-6') {
-                            h2 'Invoke Dynamic'
+                        div(class: 'col-md-4') {
+                            h2 class: 'text-center', 'Invoke Dynamic'
                             pre {
                                 code class: 'assembly', results.get(1)
                             }
                         }
 
-                        /*div(class: 'col-md-4') {
-                            h2 'Static Compilation'
+                        div(class: 'col-md-4') {
+                            h2 class: 'text-center', 'Static Compilation'
                             pre {
-                                code class: 'assembly', ''
+                                code class: 'assembly', results.get(2)
                             }
-                        }*/
+                        }
                     }
                 }
             }
