@@ -66,7 +66,7 @@ class App {
 
     @SuppressWarnings('JavaIoPackageAccess')
     static String fetchByteCode(FileInfo fileInfo, String outputDir) {
-        def process = "javap -c ${outputDir + '/scripts/' + fileInfo.filename + '.class'}".execute()
+        def process = "javap -c ${outputDir + '/' + fileInfo.filename + '.class'}".execute()
 
         StringBuffer out = new StringBuffer()
         process.consumeProcessOutputStream(out)
