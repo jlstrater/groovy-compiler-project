@@ -16,8 +16,8 @@ class ReportWriter {
     void write() {
         new File(REPORT_DIR).mkdirs()
         File file = new File(REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE)
-        File reportFolder = new File(REPORT_DIR)
-        List<String> filenames = reportFolder.listFiles()*.name - 'index.html'
+        File reportFolder = new File(REPORT_DIR + '/reports')
+        List<String> filenames = reportFolder.listFiles()*.name
 
         file.withWriter { writer ->
             MarkupBuilder html = new MarkupBuilder(writer)
@@ -40,7 +40,7 @@ class ReportWriter {
                                 filenames.each { filename ->
                                     tr {
                                         td {
-                                            a href: filename, filename - 'BytecodeReport-' - '.html'
+                                            a href: 'reports/' + filename, filename - 'BytecodeReport-' - '.html'
                                         }
                                     }
                                 }

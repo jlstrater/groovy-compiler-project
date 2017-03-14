@@ -4,11 +4,12 @@ import groovy.xml.MarkupBuilder
 
 class FileReportWriter extends ReportWriter {
     public static final DEFAULT_OUTPUT_FILE = 'BytecodeReport'
+    public static final IND_REPORT_DIR = REPORT_DIR + '/reports'
 
     @SuppressWarnings(['JavaIoPackageAccess', 'NestedBlockDepth'])
     void writeReport(String filename, List<String> results) {
-        new File(REPORT_DIR).mkdirs()
-        File file = new File(REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
+        new File(IND_REPORT_DIR).mkdirs()
+        File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
         file.withWriter { writer ->
             MarkupBuilder html = new MarkupBuilder(writer)
 
@@ -25,7 +26,7 @@ class FileReportWriter extends ReportWriter {
                 body {
                     ul(class: 'breadcrumb') {
                         li {
-                            a href: 'index.html', 'Home'
+                            a href: '../index.html', 'Home'
                             span class: 'divider'
                         }
                         li {
