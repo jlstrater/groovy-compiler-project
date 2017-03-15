@@ -34,6 +34,11 @@ class FileReportWriter extends ReportWriter {
                         }
                     }
                     h2 class: 'text-center', 'Bytecode Analysis for script: ' + filename
+                    div(class: 'row col-lg-4 col-lg-offset-4') {
+                        pre {
+                            code class: 'groovy', new File('build/resources/test/scripts/' + filename + '.groovy').text
+                        }
+                    }
                     div(class: 'row col-lg-12') {
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Groovyc (Legacy)'

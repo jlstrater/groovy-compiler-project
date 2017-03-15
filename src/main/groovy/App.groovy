@@ -54,17 +54,27 @@ class App {
 
     static void compileWithGroovyc(FileInfo file) {
         log.info 'running groovyc for ' + file.filename
-        "groovyc $file.info -d $GROOVYC_OUTPUT_DIR".execute()
+        def process = "groovyc $file.info -d $GROOVYC_OUTPUT_DIR".execute()
+        process.waitFor()
     }
 
     static void compileWithInvokeDynamic(FileInfo file) {
         log.info 'running invoke dynamic for ' + file.filename
-        "groovyc --indy $file.info -d $INDY_OUTPUT_DIR".execute()
+        def process = "groovyc --indy $file.info -d $INDY_OUTPUT_DIR".execute()
+        process.waitFor()
     }
 
+    @SuppressWarnings('JavaIoPackageAccess')
     static void compileWithStaticConfig(FileInfo file) {
         log.info 'running static compilation for ' + file.filename
-        "groovyc --configscript $SC_CONFIG $file.info -d $SC_OUTPUT_DIR".execute()
+        StringBuffer error = new StringBuffer()
+        def process = "groovyc --configscript $SC_CONFIG $file.info -d $SC_OUTPUT_DIR".execute()
+        process.consumeProcessErrorStream(error)
+        process.waitFor()
+        if (error) {
+            File errorOutput = new File("${file.pathUpOneLevel}/bytecode", "${file.filename}.bytecode")
+            errorOutput.write error.toString()
+        }
     }
 
     static void compileWithLocalGroovyC(FileInfo file) {
