@@ -20,8 +20,6 @@ class AppTest extends Specification {
         app.main(filename)
 
         then:
-//        1 * app.compileWithGroovyc(_)
-//        1 * app.compileWithInvokeDynamic(_)
         notThrown(FileNotFoundException)
         0 * _
 

@@ -39,6 +39,11 @@ class FileReportWriter extends ReportWriter {
                             code class: 'groovy', new File('build/resources/test/scripts/' + filename + '.groovy').text
                         }
                     }
+
+                    div(class: 'row col-sm-12') {
+                        h1 'BEFORE'
+                    }
+
                     div(class: 'row col-lg-12') {
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Groovyc (Legacy)'
@@ -60,6 +65,31 @@ class FileReportWriter extends ReportWriter {
                             }
                         }
                     }
+
+                    div(class: 'col-sm-12') {
+                        h2 'AFTER'
+                    }
+//                    div(class: 'row col-lg-12') {
+//                        div(class: 'col-md-4') {
+//                            h2 class: 'text-center', 'Groovyc (Legacy)'
+//                            pre {
+//                                code class: 'assembly', results.get(3)
+//                            }
+//                        }
+//                        div(class: 'col-md-4') {
+//                            h2 class: 'text-center', 'Invoke Dynamic'
+//                            pre {
+//                                code class: 'assembly', results.get(4)
+//                            }
+//                        }
+//
+//                        div(class: 'col-md-4') {
+//                            h2 class: 'text-center', 'Static Compilation'
+//                            pre {
+//                                code class: 'assembly', results.get(5)
+//                            }
+//                        }
+//                    }
                 }
             }
         }
