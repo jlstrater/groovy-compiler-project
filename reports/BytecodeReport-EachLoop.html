@@ -29,6 +29,9 @@ numbers.each {
 </code>
       </pre>
     </div>
+    <div class='row col-sm-12'>
+      <h1>BEFORE</h1>
+    </div>
     <div class='row col-lg-12'>
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
@@ -338,6 +341,312 @@ public class EachLoop extends groovy.lang.Script {
       31: putstatic     #78                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
       34: aload_1
       35: invokevirtual #87                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+    </div>
+    <div class='col-sm-12'>
+      <h2>AFTER</h2>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "EachLoop.groovy"
+public class EachLoop extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public EachLoop();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public EachLoop(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #27                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #32                 // int 0
+       7: aaload
+       8: ldc           #34                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class EachLoop
+      12: aload_0
+      13: invokeinterface #40,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: iconst_3
+       5: anewarray     #46                 // class java/lang/Object
+       8: dup
+       9: iconst_0
+      10: iconst_1
+      11: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      14: aastore
+      15: dup
+      16: iconst_1
+      17: iconst_2
+      18: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      21: aastore
+      22: dup
+      23: iconst_2
+      24: iconst_3
+      25: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      28: aastore
+      29: invokestatic  #58                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+      32: astore_2
+      33: iconst_0
+      34: anewarray     #46                 // class java/lang/Object
+      37: invokestatic  #58                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+      40: new           #60                 // class groovy/lang/Reference
+      43: dup_x1
+      44: swap
+      45: invokespecial #63                 // Method groovy/lang/Reference."&lt;init&gt;":(Ljava/lang/Object;)V
+      48: astore_3
+      49: aload_1
+      50: ldc           #64                 // int 1
+      52: aaload
+      53: aload_2
+      54: new           #7                  // class EachLoop$_run_closure1
+      57: dup
+      58: aload_0
+      59: aload_0
+      60: aload_3
+      61: invokespecial #67                 // Method EachLoop$_run_closure1."&lt;init&gt;":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+      64: invokeinterface #70,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      69: areturn
+      70: aconst_null
+      71: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class EachLoop
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #84                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #86                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #80                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #92                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #86                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #95                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "EachLoop.groovy"
+public class EachLoop extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public EachLoop();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public EachLoop(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #21                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #27                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class EachLoop
+       4: aload_0
+       5: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: iconst_3
+       1: anewarray     #47                 // class java/lang/Object
+       4: dup
+       5: iconst_0
+       6: iconst_1
+       7: invokestatic  #53                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: iconst_2
+      14: invokestatic  #53                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: aastore
+      18: dup
+      19: iconst_2
+      20: iconst_3
+      21: invokestatic  #53                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: aastore
+      25: invokestatic  #59                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+      28: astore_1
+      29: iconst_0
+      30: anewarray     #47                 // class java/lang/Object
+      33: invokestatic  #59                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+      36: new           #61                 // class groovy/lang/Reference
+      39: dup_x1
+      40: swap
+      41: invokespecial #64                 // Method groovy/lang/Reference."&lt;init&gt;":(Ljava/lang/Object;)V
+      44: astore_2
+      45: aload_1
+      46: new           #7                  // class EachLoop$_run_closure1
+      49: dup
+      50: aload_0
+      51: aload_0
+      52: aload_2
+      53: invokespecial #67                 // Method EachLoop$_run_closure1."&lt;init&gt;":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+      56: invokedynamic #72,  0             // InvokeDynamic #1:invoke:(Ljava/util/List;Lgroovy/lang/Closure;)Ljava/lang/Object;
+      61: areturn
+      62: nop
+      63: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #84                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class EachLoop
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #88                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #90                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #84                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #96                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #90                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #99                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly'>Compiled from "EachLoop.groovy"
+public class EachLoop extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public EachLoop();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public EachLoop(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #21                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class EachLoop
+       2: aload_0
+       3: invokestatic  #31                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+       6: pop
+       7: return
+
+  public java.lang.Object run();
+    Code:
+       0: iconst_3
+       1: anewarray     #37                 // class java/lang/Object
+       4: dup
+       5: iconst_0
+       6: iconst_1
+       7: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: iconst_2
+      14: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: aastore
+      18: dup
+      19: iconst_2
+      20: iconst_3
+      21: invokestatic  #43                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: aastore
+      25: invokestatic  #49                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+      28: astore_1
+      29: iconst_0
+      30: anewarray     #37                 // class java/lang/Object
+      33: invokestatic  #49                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+      36: new           #51                 // class groovy/lang/Reference
+      39: dup_x1
+      40: swap
+      41: invokespecial #54                 // Method groovy/lang/Reference."&lt;init&gt;":(Ljava/lang/Object;)V
+      44: astore_2
+      45: aload_1
+      46: new           #7                  // class EachLoop$_run_closure1
+      49: dup
+      50: aload_0
+      51: aload_0
+      52: aload_2
+      53: invokespecial #57                 // Method EachLoop$_run_closure1."&lt;init&gt;":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+      56: invokestatic  #63                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.each:(Ljava/util/List;Lgroovy/lang/Closure;)Ljava/util/List;
+      59: areturn
+      60: aconst_null
+      61: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #73                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class EachLoop
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #77                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #79                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #73                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #85                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #79                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #88                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
       38: areturn
 }
 </code>

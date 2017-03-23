@@ -36,6 +36,9 @@ p.fullName
 </code>
       </pre>
     </div>
+    <div class='row col-sm-12'>
+      <h1>BEFORE</h1>
+    </div>
     <div class='row col-lg-12'>
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
@@ -268,7 +271,271 @@ public class PersonScriptWithMetaClassMethodOnObject extends groovy.lang.Script 
       <div class='col-md-4'>
         <h2 class='text-center'>Static Compilation</h2>
         <pre>
-          <code class='assembly'></code>
+          <code class='assembly'>org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/PersonScriptWithMetaClassMethodOnObject.groovy: 8: [Static type checking] - No such property: getFullName for class: groovy.lang.MetaClass
+ @ line 8, column 1.
+   p.metaClass.getFullName = {
+   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/PersonScriptWithMetaClassMethodOnObject.groovy: 9: [Static type checking] - No such property: first for class: PersonScriptWithMetaClassMethodOnObject
+ @ line 9, column 12.
+       return delegate.first + ' ' + delegate.last
+              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/PersonScriptWithMetaClassMethodOnObject.groovy: 9: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.String). Please check if the declared type is right and if the method exists.
+ @ line 9, column 27.
+       return delegate.first + ' ' + delegate.last
+                             ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/PersonScriptWithMetaClassMethodOnObject.groovy: 9: [Static type checking] - No such property: last for class: PersonScriptWithMetaClassMethodOnObject
+ @ line 9, column 35.
+       return delegate.first + ' ' + delegate.last
+                                     ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/PersonScriptWithMetaClassMethodOnObject.groovy: 9: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 9, column 33.
+       return delegate.first + ' ' + delegate.last
+                                   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/PersonScriptWithMetaClassMethodOnObject.groovy: 12: [Static type checking] - No such property: fullName for class: Person
+ @ line 12, column 1.
+   p.fullName
+   ^
+
+6 errors
+
+</code>
+        </pre>
+      </div>
+    </div>
+    <div class='col-sm-12'>
+      <h2>AFTER</h2>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "PersonScriptWithMetaClassMethodOnObject.groovy"
+public class PersonScriptWithMetaClassMethodOnObject extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public PersonScriptWithMetaClassMethodOnObject();
+    Code:
+       0: aload_0
+       1: invokespecial #18                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public PersonScriptWithMetaClassMethodOnObject(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #27                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #32                 // int 0
+       7: aaload
+       8: ldc           #34                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class PersonScriptWithMetaClassMethodOnObject
+      12: aload_0
+      13: invokeinterface #40,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #22                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #45                 // int 1
+       7: aaload
+       8: ldc           #47                 // class Person
+      10: iconst_4
+      11: anewarray     #49                 // class java/lang/Object
+      14: dup
+      15: iconst_0
+      16: ldc           #51                 // String first
+      18: aastore
+      19: dup
+      20: iconst_1
+      21: ldc           #53                 // String Jenn
+      23: aastore
+      24: dup
+      25: iconst_2
+      26: ldc           #55                 // String last
+      28: aastore
+      29: dup
+      30: iconst_3
+      31: ldc           #57                 // String Strater
+      33: aastore
+      34: invokestatic  #63                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createMap:([Ljava/lang/Object;)Ljava/util/Map;
+      37: invokeinterface #67,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callConstructor:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      42: ldc           #47                 // class Person
+      44: invokestatic  #71                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      47: checkcast     #47                 // class Person
+      50: astore_2
+      51: new           #7                  // class PersonScriptWithMetaClassMethodOnObject$_run_closure1
+      54: dup
+      55: aload_0
+      56: aload_0
+      57: invokespecial #74                 // Method PersonScriptWithMetaClassMethodOnObject$_run_closure1."&lt;init&gt;":(Ljava/lang/Object;Ljava/lang/Object;)V
+      60: astore_3
+      61: aload_3
+      62: aconst_null
+      63: aload_1
+      64: ldc           #75                 // int 2
+      66: aaload
+      67: aload_2
+      68: invokeinterface #79,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGroovyObjectGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      73: ldc           #81                 // String getFullName
+      75: checkcast     #83                 // class java/lang/String
+      78: invokestatic  #87                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.setProperty:(Ljava/lang/Object;Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;)V
+      81: aload_1
+      82: ldc           #88                 // int 3
+      84: aaload
+      85: aload_2
+      86: invokeinterface #79,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGroovyObjectGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      91: areturn
+      92: aconst_null
+      93: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #96                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class PersonScriptWithMetaClassMethodOnObject
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #100                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #102                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #96                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #108                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #102                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #111                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "PersonScriptWithMetaClassMethodOnObject.groovy"
+public class PersonScriptWithMetaClassMethodOnObject extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public PersonScriptWithMetaClassMethodOnObject();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public PersonScriptWithMetaClassMethodOnObject(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #21                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #27                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class PersonScriptWithMetaClassMethodOnObject
+       4: aload_0
+       5: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: ldc           #47                 // class Person
+       2: iconst_4
+       3: anewarray     #49                 // class java/lang/Object
+       6: dup
+       7: iconst_0
+       8: ldc           #51                 // String first
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: ldc           #53                 // String Jenn
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: ldc           #55                 // String last
+      20: aastore
+      21: dup
+      22: iconst_3
+      23: ldc           #57                 // String Strater
+      25: aastore
+      26: invokestatic  #63                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createMap:([Ljava/lang/Object;)Ljava/util/Map;
+      29: invokedynamic #68,  0             // InvokeDynamic #1:init:(Ljava/lang/Class;Ljava/util/Map;)Ljava/lang/Object;
+      34: invokedynamic #74,  0             // InvokeDynamic #2:cast:(Ljava/lang/Object;)LPerson;
+      39: astore_1
+      40: new           #7                  // class PersonScriptWithMetaClassMethodOnObject$_run_closure1
+      43: dup
+      44: aload_0
+      45: aload_0
+      46: invokespecial #77                 // Method PersonScriptWithMetaClassMethodOnObject$_run_closure1."&lt;init&gt;":(Ljava/lang/Object;Ljava/lang/Object;)V
+      49: astore_2
+      50: aload_2
+      51: aconst_null
+      52: aload_1
+      53: invokedynamic #84,  0             // InvokeDynamic #3:getProperty:(LPerson;)Ljava/lang/Object;
+      58: ldc           #86                 // String getFullName
+      60: checkcast     #88                 // class java/lang/String
+      63: invokestatic  #92                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.setProperty:(Ljava/lang/Object;Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/String;)V
+      66: aload_1
+      67: invokedynamic #95,  0             // InvokeDynamic #4:getProperty:(LPerson;)Ljava/lang/Object;
+      72: areturn
+      73: nop
+      74: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #105                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class PersonScriptWithMetaClassMethodOnObject
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #109                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #111                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #105                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #117                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #111                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #120                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly' />
         </pre>
       </div>
     </div>

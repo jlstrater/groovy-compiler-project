@@ -25,6 +25,9 @@
 </code>
       </pre>
     </div>
+    <div class='row col-sm-12'>
+      <h1>BEFORE</h1>
+    </div>
     <div class='row col-lg-12'>
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
@@ -99,6 +102,218 @@ public class HelloWorld extends groovy.lang.Script {
       31: putstatic     #62                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
       34: aload_1
       35: invokevirtual #71                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "HelloWorld.groovy"
+public class HelloWorld extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public HelloWorld();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public HelloWorld(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class HelloWorld
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: aload_0
+       1: ldc           #44                 // String Hello, World!
+       3: invokedynamic #50,  0             // InvokeDynamic #1:invoke:(LHelloWorld;Ljava/lang/String;)Ljava/lang/Object;
+       8: areturn
+       9: nop
+      10: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #60                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class HelloWorld
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #66                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #68                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #60                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #74                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #68                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #77                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly'>Compiled from "HelloWorld.groovy"
+public class HelloWorld extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public HelloWorld();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public HelloWorld(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class HelloWorld
+       2: aload_0
+       3: invokestatic  #28                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+       6: pop
+       7: return
+
+  public java.lang.Object run();
+    Code:
+       0: aload_0
+       1: checkcast     #2                  // class HelloWorld
+       4: ldc           #34                 // String Hello, World!
+       6: invokevirtual #38                 // Method println:(Ljava/lang/Object;)V
+       9: aconst_null
+      10: areturn
+      11: aconst_null
+      12: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #46                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class HelloWorld
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #52                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #54                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #46                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #60                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #54                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #63                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+    </div>
+    <div class='col-sm-12'>
+      <h2>AFTER</h2>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "HelloWorld.groovy"
+public class HelloWorld extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public HelloWorld();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public HelloWorld(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #24                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #29                 // int 0
+       7: aaload
+       8: ldc           #31                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class HelloWorld
+      12: aload_0
+      13: invokeinterface #37,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #42                 // int 1
+       7: aaload
+       8: aload_0
+       9: ldc           #44                 // String Hello, World!
+      11: invokeinterface #48,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+      16: areturn
+      17: aconst_null
+      18: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #56                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class HelloWorld
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #62                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #64                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #56                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #70                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #64                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #73                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
       38: areturn
 }
 </code>
