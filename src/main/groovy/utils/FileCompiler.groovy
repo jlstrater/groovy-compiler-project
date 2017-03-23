@@ -21,8 +21,8 @@ class FileCompiler {
         compileWithInvokeDynamic(file)
         String indyBytecode = fetchByteCode(file, INDY_OUTPUT_DIR)
 
-        compileWithStaticConfig(file)
-        String staticBytecode = fetchByteCode(file, SC_OUTPUT_DIR)
+        String errors = compileWithStaticConfig(file)
+        String staticBytecode = errors ?: fetchByteCode(file, SC_OUTPUT_DIR)
 
         [groovycBytecode, indyBytecode, staticBytecode]
     }
@@ -40,44 +40,28 @@ class FileCompiler {
     }
 
     @SuppressWarnings('JavaIoPackageAccess')
-    void compileWithStaticConfig(FileInfo file) {
+    String compileWithStaticConfig(FileInfo file) {
         log.info 'running static compilation for ' + file.filename
         StringBuffer error = new StringBuffer()
         Process process = "groovyc --configscript $SC_CONFIG $file.info -d $SC_OUTPUT_DIR".execute()
         process.consumeProcessErrorStream(error)
         process.waitFor()
          if (error) {
-             File dir = new File("${file.pathUpOneLevel}/bytecode/before")
-             if (!dir.exists()) { dir.mkdirs() }
-             File errorOutput = new File("${file.pathUpOneLevel}/bytecode", "${file.filename}.bytecode")
-            errorOutput.write error.toString()
+            return error
         }
     }
 
-    @SuppressWarnings('JavaIoPackageAccess')
     String fetchByteCode(FileInfo fileInfo, String outputDir) {
         String classFileName = outputDir + '/' + fileInfo.filename + '.class'
-        String bytecodeFileName = fileInfo.pathUpOneLevel + '/bytecode/before' + fileInfo.filename + '.bytecode'
-        File bytecodeFile = new File(bytecodeFileName)
-        if (bytecodeFile.exists()) {
-            return bytecodeFile.text // compilation errors
-        }
-        writeBytecodeToFile(classFileName, fileInfo)
+        javapOnBytecode(classFileName)
     }
 
-    @SuppressWarnings('JavaIoPackageAccess')
-    String writeBytecodeToFile(String classFileInfo, FileInfo fileInfo) {
+    static String javapOnBytecode(String classFileInfo) {
         Process process = "javap -c $classFileInfo".execute()
 
         StringBuffer out = new StringBuffer()
         process.consumeProcessOutputStream(out)
         process.waitFor()
-
-        File dir = new File("${fileInfo.pathUpOneLevel}/bytecode/before")
-        if (!dir.exists()) { dir.mkdirs() }
-        File file = new File("${fileInfo.pathUpOneLevel}/bytecode/before", "${fileInfo.filename}.bytecode")
-        file << out
-
         out
     }
 }

@@ -2,12 +2,13 @@ package report
 
 import groovy.xml.MarkupBuilder
 
+@SuppressWarnings('AbcMetric')
 class FileReportWriter extends ReportWriter {
     public static final DEFAULT_OUTPUT_FILE = 'BytecodeReport'
     public static final IND_REPORT_DIR = REPORT_DIR + '/reports'
 
     @SuppressWarnings(['JavaIoPackageAccess', 'NestedBlockDepth'])
-    void writeReport(String filename, List<String> results) {
+    void writeReport(String filename, List<String> before, List<String> after) {
         new File(IND_REPORT_DIR).mkdirs()
         File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
         file.withWriter { writer ->
@@ -48,20 +49,20 @@ class FileReportWriter extends ReportWriter {
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Groovyc (Legacy)'
                             pre {
-                                code class: 'assembly', results.get(0)
+                                code class: 'assembly', before.get(0)
                             }
                         }
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Invoke Dynamic'
                             pre {
-                                code class: 'assembly', results.get(1)
+                                code class: 'assembly', before.get(1)
                             }
                         }
 
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Static Compilation'
                             pre {
-                                code class: 'assembly', results.get(2)
+                                code class: 'assembly', before.get(2)
                             }
                         }
                     }
@@ -69,27 +70,27 @@ class FileReportWriter extends ReportWriter {
                     div(class: 'col-sm-12') {
                         h2 'AFTER'
                     }
-//                    div(class: 'row col-lg-12') {
-//                        div(class: 'col-md-4') {
-//                            h2 class: 'text-center', 'Groovyc (Legacy)'
-//                            pre {
-//                                code class: 'assembly', results.get(3)
-//                            }
-//                        }
-//                        div(class: 'col-md-4') {
-//                            h2 class: 'text-center', 'Invoke Dynamic'
-//                            pre {
-//                                code class: 'assembly', results.get(4)
-//                            }
-//                        }
-//
-//                        div(class: 'col-md-4') {
-//                            h2 class: 'text-center', 'Static Compilation'
-//                            pre {
-//                                code class: 'assembly', results.get(5)
-//                            }
-//                        }
-//                    }
+                    div(class: 'row col-lg-12') {
+                        div(class: 'col-md-4') {
+                            h2 class: 'text-center', 'Groovyc (Legacy)'
+                            pre {
+                                code class: 'assembly', after.get(0)
+                            }
+                        }
+                        div(class: 'col-md-4') {
+                            h2 class: 'text-center', 'Invoke Dynamic'
+                            pre {
+                                code class: 'assembly', after.get(1)
+                            }
+                        }
+
+                        div(class: 'col-md-4') {
+                            h2 class: 'text-center', 'Static Compilation'
+                            pre {
+                                code class: 'assembly', after.get(2)
+                            }
+                        }
+                    }
                 }
             }
         }

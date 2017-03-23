@@ -16,16 +16,17 @@ class App {
         FileCompiler fileCompiler = new FileCompiler()
         FileReportWriter writer = new FileReportWriter()
         ReportWriter report = new ReportWriter()
+        ByteCodeOptimizer byteCodeOptimizer = new ByteCodeOptimizer()
 
         args.each { String fileinfo ->
             FileInfo file = new FileInfo(fileinfo)
             List beforeOutputFiles = fileCompiler.compileFile(file)
 
             // reader, process bytecode, and write to new files
-            new ByteCodeOptimizer().processClassFiles(file)
+            List afterOutputFiles = byteCodeOptimizer.processClassFiles(file)
 
             //write to 'before' and 'after' report
-            writer.writeReport(file.filename, beforeOutputFiles)
+            writer.writeReport(file.filename, beforeOutputFiles, afterOutputFiles)
             report.write()
         }
     }
