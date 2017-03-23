@@ -1,6 +1,7 @@
 
 import static jdk.internal.org.objectweb.asm.Opcodes.ACONST_NULL
 import static jdk.internal.org.objectweb.asm.Opcodes.ALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.ILOAD
 import static jdk.internal.org.objectweb.asm.Opcodes.POP
 import static jdk.internal.org.objectweb.asm.Opcodes.POP2
 
@@ -26,6 +27,7 @@ class ByteCodeOptimizer {
     protected static final int[] LOAD_CODES = [
             ACONST_NULL,
             ALOAD,
+            ILOAD,
     ]
 
     @SuppressWarnings('JavaIoPackageAccess')
