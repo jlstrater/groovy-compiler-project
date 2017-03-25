@@ -1,0 +1,2263 @@
+<html>
+  <head>
+    <title>Bytecode Analysis Report</title>
+    <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/default.min.css' />
+    <script src='https://code.jquery.com/jquery-3.1.1.slim.min.js' type='text/javascript'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js' type='text/javascript'></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <ul class='breadcrumb'>
+      <li>
+        <a href='../index.html'>Home</a>
+        <span class='divider' />
+      </li>
+      <li>
+        <a>RECURSIVE</a>
+      </li>
+    </ul>
+    <h2 class='text-center'>Bytecode Analysis for script: recursive</h2>
+    <div class='row col-lg-4 col-lg-offset-4'>
+      <pre>
+        <code class='groovy'>/*
+ * The Computer Language Benchmarks Game
+ * http://shootout.alioth.debian.org/
+ *
+ * contributed by Anthony Borla
+ * modified by Isaac Gouy
+ */
+
+def ack(x, y) {
+    if (x == 0) return y + 1
+    if (y == 0) return ack(x - 1, 1)
+    return ack(x - 1, ack(x, y - 1))
+}
+
+def fib(int n) {
+    if (n &lt; 2) return 1
+    return fib(n - 2) + fib(n - 1)
+}
+
+def fib(double n) {
+    if (n &lt; 2.0D) return 1.0D
+    return fib(n - 2.0D) + fib(n - 1.0D)
+}
+
+def tak(int x, int y, int z) {
+    if (y &lt; x) return tak(tak(x - 1, y, z), tak(y - 1, z, x), tak(z - 1, x, y))
+    return z
+}
+
+def tak(double x, double y, double z) {
+    if (y &lt; x) return tak(tak(x - 1.0D, y, z), tak(y - 1.0D, z, x), tak(z - 1.0D, x, y))
+    return z
+}
+
+def n = Integer.parseInt(args[0])
+
+printf("Ack(3,%d): %d\n", n, ack(3, n))
+printf("Fib(%.1f): %.1f\n", 27.0D + n, fib(27.0D + n))
+n -= 1
+printf("Tak(%d,%d,%d): %d\n", n * 3, n * 2, n, tak(n * 3, n * 2, n))
+printf("Fib(3): %d\n", fib(3))
+printf("Tak(3.0,2.0,1.0): %.1f\n", tak(3.0D, 2.0D, 1.0D))
+</code>
+      </pre>
+    </div>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
+      <table class='table'>
+        <tr>
+          <th></th>
+          <th>Groovyc</th>
+          <th>Indy</th>
+          <th>Static</th>
+        </tr>
+        <tr>
+          <td>Lines Before</td>
+          <td>717</td>
+          <td>298</td>
+          <td>93</td>
+        </tr>
+        <tr>
+          <td>Lines After</td>
+          <td>715</td>
+          <td>296</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Lines Removed</td>
+          <td>2</td>
+          <td>2</td>
+          <td>N/A</td>
+        </tr>
+      </table>
+    </div>
+    <div class='row col-sm-12'>
+      <h1>BEFORE</h1>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "recursive.groovy"
+public class recursive extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public recursive();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public recursive(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #22                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #27                 // int 0
+       7: aaload
+       8: ldc           #29                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class recursive
+      12: aload_0
+      13: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #40                 // int 1
+       7: aaload
+       8: ldc           #42                 // class java/lang/Integer
+      10: aload_1
+      11: ldc           #43                 // int 2
+      13: aaload
+      14: aload_1
+      15: ldc           #44                 // int 3
+      17: aaload
+      18: aload_0
+      19: invokeinterface #48,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGroovyObjectGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      24: iconst_0
+      25: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      28: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      33: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      38: astore_2
+      39: aload_2
+      40: pop
+      41: aload_1
+      42: ldc           #56                 // int 4
+      44: aaload
+      45: aload_0
+      46: ldc           #58                 // String Ack(3,%d): %d\n
+      48: aload_2
+      49: aload_1
+      50: ldc           #59                 // int 5
+      52: aaload
+      53: aload_0
+      54: iconst_3
+      55: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      58: aload_2
+      59: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      64: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      69: pop
+      70: aload_1
+      71: ldc           #67                 // int 6
+      73: aaload
+      74: aload_0
+      75: ldc           #69                 // String Fib(%.1f): %.1f\n
+      77: aload_1
+      78: ldc           #70                 // int 7
+      80: aaload
+      81: ldc2_w        #71                 // double 27.0d
+      84: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      87: aload_2
+      88: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      93: aload_1
+      94: ldc           #78                 // int 8
+      96: aaload
+      97: aload_0
+      98: aload_1
+      99: ldc           #79                 // int 9
+     101: aaload
+     102: ldc2_w        #71                 // double 27.0d
+     105: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     108: aload_2
+     109: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     114: invokeinterface #82,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     119: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     124: pop
+     125: aload_1
+     126: ldc           #83                 // int 10
+     128: aaload
+     129: aload_2
+     130: iconst_1
+     131: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     134: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     139: dup
+     140: astore_2
+     141: pop
+     142: aload_1
+     143: ldc           #84                 // int 11
+     145: aaload
+     146: aload_0
+     147: ldc           #86                 // String Tak(%d,%d,%d): %d\n
+     149: aload_1
+     150: ldc           #87                 // int 12
+     152: aaload
+     153: aload_2
+     154: iconst_3
+     155: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     158: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     163: aload_1
+     164: ldc           #88                 // int 13
+     166: aaload
+     167: aload_2
+     168: iconst_2
+     169: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     172: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     177: aload_2
+     178: aload_1
+     179: ldc           #89                 // int 14
+     181: aaload
+     182: aload_0
+     183: aload_1
+     184: ldc           #90                 // int 15
+     186: aaload
+     187: aload_2
+     188: iconst_3
+     189: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     192: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     197: aload_1
+     198: ldc           #91                 // int 16
+     200: aaload
+     201: aload_2
+     202: iconst_2
+     203: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     206: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     211: aload_2
+     212: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     217: invokestatic  #97                 // Method org/codehaus/groovy/runtime/ArrayUtil.createArray:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)[Ljava/lang/Object;
+     220: invokeinterface #100,  3          // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;[Ljava/lang/Object;)Ljava/lang/Object;
+     225: pop
+     226: getstatic     #102                // Field __$stMC:Z
+     229: ifne          241
+     232: invokestatic  #108                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+     235: ifne          241
+     238: goto          271
+     241: aload_1
+     242: ldc           #109                // int 17
+     244: aaload
+     245: aload_0
+     246: ldc           #111                // String Fib(3): %d\n
+     248: aload_1
+     249: ldc           #112                // int 18
+     251: aaload
+     252: aload_0
+     253: iconst_3
+     254: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     257: invokeinterface #82,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     262: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     267: pop
+     268: goto          290
+     271: aload_1
+     272: ldc           #113                // int 19
+     274: aaload
+     275: aload_0
+     276: ldc           #111                // String Fib(3): %d\n
+     278: aload         0
+     280: iconst_3
+     281: invokevirtual #117                // Method fib:(I)Ljava/lang/Object;
+     284: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     289: pop
+     290: getstatic     #102                // Field __$stMC:Z
+     293: ifne          305
+     296: invokestatic  #108                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+     299: ifne          305
+     302: goto          347
+     305: aload_1
+     306: ldc           #118                // int 20
+     308: aaload
+     309: aload_0
+     310: ldc           #120                // String Tak(3.0,2.0,1.0): %.1f\n
+     312: aload_1
+     313: ldc           #121                // int 21
+     315: aaload
+     316: aload_0
+     317: ldc2_w        #122                // double 3.0d
+     320: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     323: ldc2_w        #124                // double 2.0d
+     326: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     329: dconst_1
+     330: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     333: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     338: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     343: areturn
+     344: goto          372
+     347: aload_1
+     348: ldc           #126                // int 22
+     350: aaload
+     351: aload_0
+     352: ldc           #120                // String Tak(3.0,2.0,1.0): %.1f\n
+     354: aload         0
+     356: ldc2_w        #122                // double 3.0d
+     359: ldc2_w        #124                // double 2.0d
+     362: dconst_1
+     363: invokevirtual #130                // Method tak:(DDD)Ljava/lang/Object;
+     366: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     371: areturn
+     372: aconst_null
+     373: areturn
+
+  public java.lang.Object ack(java.lang.Object, java.lang.Object);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_3
+       4: aload_1
+       5: iconst_0
+       6: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       9: invokestatic  #139                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      12: ifeq          30
+      15: aload_3
+      16: ldc           #140                // int 23
+      18: aaload
+      19: aload_2
+      20: iconst_1
+      21: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      29: areturn
+      30: aload_2
+      31: iconst_0
+      32: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      35: invokestatic  #139                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      38: ifeq          70
+      41: aload_3
+      42: ldc           #141                // int 24
+      44: aaload
+      45: aload_0
+      46: aload_3
+      47: ldc           #142                // int 25
+      49: aaload
+      50: aload_1
+      51: iconst_1
+      52: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      55: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      60: iconst_1
+      61: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      64: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      69: areturn
+      70: aload_3
+      71: ldc           #143                // int 26
+      73: aaload
+      74: aload_0
+      75: aload_3
+      76: ldc           #144                // int 27
+      78: aaload
+      79: aload_1
+      80: iconst_1
+      81: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      84: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      89: aload_3
+      90: ldc           #145                // int 28
+      92: aaload
+      93: aload_0
+      94: aload_1
+      95: aload_3
+      96: ldc           #146                // int 29
+      98: aaload
+      99: aload_2
+     100: iconst_1
+     101: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     104: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     109: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     114: invokeinterface #63,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     119: areturn
+     120: aconst_null
+     121: areturn
+
+  public java.lang.Object fib(int);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: invokestatic  #151                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigInt:()Z
+       7: ifeq          31
+      10: invokestatic  #154                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      13: ifeq          31
+      16: getstatic     #102                // Field __$stMC:Z
+      19: ifne          31
+      22: invokestatic  #108                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      25: ifne          31
+      28: goto          116
+      31: iload_1
+      32: iconst_2
+      33: if_icmpge     40
+      36: iconst_1
+      37: goto          41
+      40: iconst_0
+      41: ifeq          49
+      44: iconst_1
+      45: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      48: areturn
+      49: aload_2
+      50: ldc           #155                // int 30
+      52: aaload
+      53: aload_2
+      54: ldc           #156                // int 31
+      56: aaload
+      57: aload_0
+      58: aload_2
+      59: ldc           #157                // int 32
+      61: aaload
+      62: iload_1
+      63: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      66: iconst_2
+      67: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      70: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      75: invokeinterface #82,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+      80: aload_2
+      81: ldc           #158                // int 33
+      83: aaload
+      84: aload_0
+      85: aload_2
+      86: ldc           #159                // int 34
+      88: aaload
+      89: iload_1
+      90: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      93: iconst_1
+      94: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      97: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     102: invokeinterface #82,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     107: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     112: areturn
+     113: goto          160
+     116: iload_1
+     117: iconst_2
+     118: if_icmpge     125
+     121: iconst_1
+     122: goto          126
+     125: iconst_0
+     126: ifeq          134
+     129: iconst_1
+     130: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     133: areturn
+     134: aload_2
+     135: ldc           #160                // int 35
+     137: aaload
+     138: aload         0
+     140: iload_1
+     141: iconst_2
+     142: isub
+     143: invokevirtual #117                // Method fib:(I)Ljava/lang/Object;
+     146: aload         0
+     148: iload_1
+     149: iconst_1
+     150: isub
+     151: invokevirtual #117                // Method fib:(I)Ljava/lang/Object;
+     154: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     159: areturn
+     160: aconst_null
+     161: areturn
+
+  public java.lang.Object fib(double);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_3
+       4: invokestatic  #165                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigD:()Z
+       7: ifeq          31
+      10: invokestatic  #154                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      13: ifeq          31
+      16: getstatic     #102                // Field __$stMC:Z
+      19: ifne          31
+      22: invokestatic  #108                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      25: ifne          31
+      28: goto          121
+      31: dload_1
+      32: ldc2_w        #124                // double 2.0d
+      35: dcmpg
+      36: ifge          43
+      39: iconst_1
+      40: goto          44
+      43: iconst_0
+      44: ifeq          52
+      47: dconst_1
+      48: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      51: areturn
+      52: aload_3
+      53: ldc           #166                // int 36
+      55: aaload
+      56: aload_3
+      57: ldc           #167                // int 37
+      59: aaload
+      60: aload_0
+      61: aload_3
+      62: ldc           #168                // int 38
+      64: aaload
+      65: dload_1
+      66: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      69: ldc2_w        #124                // double 2.0d
+      72: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      75: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      80: invokeinterface #82,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+      85: aload_3
+      86: ldc           #169                // int 39
+      88: aaload
+      89: aload_0
+      90: aload_3
+      91: ldc           #170                // int 40
+      93: aaload
+      94: dload_1
+      95: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      98: dconst_1
+      99: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     102: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     107: invokeinterface #82,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     112: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     117: areturn
+     118: goto          170
+     121: dload_1
+     122: ldc2_w        #124                // double 2.0d
+     125: dcmpg
+     126: ifge          133
+     129: iconst_1
+     130: goto          134
+     133: iconst_0
+     134: ifeq          142
+     137: dconst_1
+     138: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     141: areturn
+     142: aload_3
+     143: ldc           #171                // int 41
+     145: aaload
+     146: aload         0
+     148: dload_1
+     149: ldc2_w        #124                // double 2.0d
+     152: dsub
+     153: invokevirtual #173                // Method fib:(D)Ljava/lang/Object;
+     156: aload         0
+     158: dload_1
+     159: dconst_1
+     160: dsub
+     161: invokevirtual #173                // Method fib:(D)Ljava/lang/Object;
+     164: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     169: areturn
+     170: aconst_null
+     171: areturn
+
+  public java.lang.Object tak(int, int, int);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore        4
+       5: invokestatic  #151                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigInt:()Z
+       8: ifeq          32
+      11: invokestatic  #154                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      14: ifeq          32
+      17: getstatic     #102                // Field __$stMC:Z
+      20: ifne          32
+      23: invokestatic  #108                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      26: ifne          32
+      29: goto          171
+      32: iload_2
+      33: iload_1
+      34: if_icmpge     41
+      37: iconst_1
+      38: goto          42
+      41: iconst_0
+      42: ifeq          168
+      45: aload         4
+      47: ldc           #176                // int 42
+      49: aaload
+      50: aload_0
+      51: aload         4
+      53: ldc           #177                // int 43
+      55: aaload
+      56: aload_0
+      57: aload         4
+      59: ldc           #178                // int 44
+      61: aaload
+      62: iload_1
+      63: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      66: iconst_1
+      67: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      70: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      75: iload_2
+      76: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      79: iload_3
+      80: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      83: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      88: aload         4
+      90: ldc           #179                // int 45
+      92: aaload
+      93: aload_0
+      94: aload         4
+      96: ldc           #180                // int 46
+      98: aaload
+      99: iload_2
+     100: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     103: iconst_1
+     104: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     107: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     112: iload_3
+     113: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     116: iload_1
+     117: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     120: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     125: aload         4
+     127: ldc           #181                // int 47
+     129: aaload
+     130: aload_0
+     131: aload         4
+     133: ldc           #182                // int 48
+     135: aaload
+     136: iload_3
+     137: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     140: iconst_1
+     141: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     144: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     149: iload_1
+     150: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     153: iload_2
+     154: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     157: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     162: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     167: areturn
+     168: goto          226
+     171: iload_2
+     172: iload_1
+     173: if_icmpge     180
+     176: iconst_1
+     177: goto          181
+     180: iconst_0
+     181: ifeq          226
+     184: aload         4
+     186: ldc           #183                // int 49
+     188: aaload
+     189: aload_0
+     190: aload         0
+     192: iload_1
+     193: iconst_1
+     194: isub
+     195: iload_2
+     196: iload_3
+     197: invokevirtual #185                // Method tak:(III)Ljava/lang/Object;
+     200: aload         0
+     202: iload_2
+     203: iconst_1
+     204: isub
+     205: iload_3
+     206: iload_1
+     207: invokevirtual #185                // Method tak:(III)Ljava/lang/Object;
+     210: aload         0
+     212: iload_3
+     213: iconst_1
+     214: isub
+     215: iload_1
+     216: iload_2
+     217: invokevirtual #185                // Method tak:(III)Ljava/lang/Object;
+     220: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     225: areturn
+     226: iload_3
+     227: invokestatic  #52                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     230: areturn
+     231: aconst_null
+     232: areturn
+
+  public java.lang.Object tak(double, double, double);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore        7
+       5: invokestatic  #165                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigD:()Z
+       8: ifeq          32
+      11: invokestatic  #154                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      14: ifeq          32
+      17: getstatic     #102                // Field __$stMC:Z
+      20: ifne          32
+      23: invokestatic  #108                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      26: ifne          32
+      29: goto          175
+      32: dload_3
+      33: dload_1
+      34: dcmpg
+      35: ifge          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: ifeq          172
+      46: aload         7
+      48: ldc           #187                // int 50
+      50: aaload
+      51: aload_0
+      52: aload         7
+      54: ldc           #188                // int 51
+      56: aaload
+      57: aload_0
+      58: aload         7
+      60: ldc           #189                // int 52
+      62: aaload
+      63: dload_1
+      64: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      67: dconst_1
+      68: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      71: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      76: dload_3
+      77: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      80: dload         5
+      82: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      85: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      90: aload         7
+      92: ldc           #190                // int 53
+      94: aaload
+      95: aload_0
+      96: aload         7
+      98: ldc           #191                // int 54
+     100: aaload
+     101: dload_3
+     102: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     105: dconst_1
+     106: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     109: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     114: dload         5
+     116: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     119: dload_1
+     120: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     123: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     128: aload         7
+     130: ldc           #192                // int 55
+     132: aaload
+     133: aload_0
+     134: aload         7
+     136: ldc           #193                // int 56
+     138: aaload
+     139: dload         5
+     141: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     144: dconst_1
+     145: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     148: invokeinterface #55,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     153: dload_1
+     154: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     157: dload_3
+     158: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     161: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     166: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     171: areturn
+     172: goto          234
+     175: dload_3
+     176: dload_1
+     177: dcmpg
+     178: ifge          185
+     181: iconst_1
+     182: goto          186
+     185: iconst_0
+     186: ifeq          234
+     189: aload         7
+     191: ldc           #194                // int 57
+     193: aaload
+     194: aload_0
+     195: aload         0
+     197: dload_1
+     198: dconst_1
+     199: dsub
+     200: dload_3
+     201: dload         5
+     203: invokevirtual #130                // Method tak:(DDD)Ljava/lang/Object;
+     206: aload         0
+     208: dload_3
+     209: dconst_1
+     210: dsub
+     211: dload         5
+     213: dload_1
+     214: invokevirtual #130                // Method tak:(DDD)Ljava/lang/Object;
+     217: aload         0
+     219: dload         5
+     221: dconst_1
+     222: dsub
+     223: dload_1
+     224: dload_3
+     225: invokevirtual #130                // Method tak:(DDD)Ljava/lang/Object;
+     228: invokeinterface #66,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     233: areturn
+     234: dload         5
+     236: invokestatic  #77                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     239: areturn
+     240: aconst_null
+     241: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #202                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class recursive
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #206                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #208                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #202                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #214                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #208                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #217                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "recursive.groovy"
+public class recursive extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public recursive();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public recursive(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class recursive
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: ldc           #44                 // class java/lang/Integer
+       2: aload_0
+       3: invokedynamic #50,  0             // InvokeDynamic #1:getProperty:(Lrecursive;)Ljava/lang/Object;
+       8: iconst_0
+       9: invokedynamic #55,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      14: invokedynamic #60,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      19: astore_1
+      20: aload_1
+      21: pop
+      22: aload_0
+      23: ldc           #62                 // String Ack(3,%d): %d\n
+      25: aload_1
+      26: aload_0
+      27: iconst_3
+      28: aload_1
+      29: invokedynamic #68,  0             // InvokeDynamic #4:invoke:(Lrecursive;ILjava/lang/Object;)Ljava/lang/Object;
+      34: invokedynamic #73,  0             // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      39: pop
+      40: aload_0
+      41: ldc           #75                 // String Fib(%.1f): %.1f\n
+      43: ldc2_w        #76                 // double 27.0d
+      46: aload_1
+      47: invokedynamic #82,  0             // InvokeDynamic #6:invoke:(DLjava/lang/Object;)Ljava/lang/Object;
+      52: aload_0
+      53: ldc2_w        #76                 // double 27.0d
+      56: aload_1
+      57: invokedynamic #82,  0             // InvokeDynamic #6:invoke:(DLjava/lang/Object;)Ljava/lang/Object;
+      62: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      67: invokedynamic #73,  0             // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      72: pop
+      73: aload_1
+      74: iconst_1
+      75: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      80: dup
+      81: astore_1
+      82: pop
+      83: aload_0
+      84: ldc           #92                 // String Tak(%d,%d,%d): %d\n
+      86: aload_1
+      87: iconst_3
+      88: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      93: aload_1
+      94: iconst_2
+      95: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     100: aload_1
+     101: aload_0
+     102: aload_1
+     103: iconst_3
+     104: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     109: aload_1
+     110: iconst_2
+     111: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     116: aload_1
+     117: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     122: invokedynamic #103,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     127: pop
+     128: aload_0
+     129: ldc           #105                // String Fib(3): %d\n
+     131: aload_0
+     132: iconst_3
+     133: invokedynamic #108,  0            // InvokeDynamic #7:invoke:(Lrecursive;I)Ljava/lang/Object;
+     138: invokedynamic #111,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+     143: pop
+     144: aload_0
+     145: ldc           #113                // String Tak(3.0,2.0,1.0): %.1f\n
+     147: aload_0
+     148: ldc2_w        #114                // double 3.0d
+     151: ldc2_w        #116                // double 2.0d
+     154: dconst_1
+     155: invokedynamic #120,  0            // InvokeDynamic #10:invoke:(Lrecursive;DDD)Ljava/lang/Object;
+     160: invokedynamic #111,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+     165: areturn
+     166: nop
+     167: athrow
+
+  public java.lang.Object ack(java.lang.Object, java.lang.Object);
+    Code:
+       0: aload_1
+       1: iconst_0
+       2: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #135                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          19
+      11: aload_2
+      12: iconst_1
+      13: invokedynamic #136,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      18: areturn
+      19: aload_2
+      20: iconst_0
+      21: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: invokestatic  #135                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      27: ifeq          45
+      30: aload_0
+      31: aload_1
+      32: iconst_1
+      33: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      38: iconst_1
+      39: invokedynamic #139,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;I)Ljava/lang/Object;
+      44: areturn
+      45: aload_0
+      46: aload_1
+      47: iconst_1
+      48: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      53: aload_0
+      54: aload_1
+      55: aload_2
+      56: iconst_1
+      57: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      62: invokedynamic #142,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      67: invokedynamic #142,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      72: areturn
+      73: nop
+      74: athrow
+
+  public java.lang.Object fib(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          18
+      13: iconst_1
+      14: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: areturn
+      18: aload_0
+      19: iload_1
+      20: iconst_2
+      21: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      26: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      31: aload_0
+      32: iload_1
+      33: iconst_1
+      34: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      39: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      44: invokedynamic #150,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      49: areturn
+      50: nop
+      51: athrow
+
+  public java.lang.Object fib(double);
+    Code:
+       0: dload_1
+       1: ldc2_w        #116                // double 2.0d
+       4: dcmpg
+       5: ifge          12
+       8: iconst_1
+       9: goto          13
+      12: iconst_0
+      13: ifeq          21
+      16: dconst_1
+      17: invokestatic  #157                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      20: areturn
+      21: aload_0
+      22: dload_1
+      23: ldc2_w        #116                // double 2.0d
+      26: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      31: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      36: aload_0
+      37: dload_1
+      38: dconst_1
+      39: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      44: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      49: invokedynamic #150,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      54: areturn
+      55: nop
+      56: athrow
+
+  public java.lang.Object tak(int, int, int);
+    Code:
+       0: iload_2
+       1: iload_1
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          65
+      13: aload_0
+      14: aload_0
+      15: iload_1
+      16: iconst_1
+      17: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      22: iload_2
+      23: iload_3
+      24: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      29: aload_0
+      30: iload_2
+      31: iconst_1
+      32: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      37: iload_3
+      38: iload_1
+      39: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      44: aload_0
+      45: iload_3
+      46: iconst_1
+      47: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      52: iload_1
+      53: iload_2
+      54: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      59: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      64: areturn
+      65: iload_3
+      66: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      69: areturn
+      70: nop
+      71: athrow
+
+  public java.lang.Object tak(double, double, double);
+    Code:
+       0: dload_3
+       1: dload_1
+       2: dcmpg
+       3: ifge          10
+       6: iconst_1
+       7: goto          11
+      10: iconst_0
+      11: ifeq          69
+      14: aload_0
+      15: aload_0
+      16: dload_1
+      17: dconst_1
+      18: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      23: dload_3
+      24: dload         5
+      26: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      31: aload_0
+      32: dload_3
+      33: dconst_1
+      34: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      39: dload         5
+      41: dload_1
+      42: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      47: aload_0
+      48: dload         5
+      50: dconst_1
+      51: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      56: dload_1
+      57: dload_3
+      58: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      63: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      68: areturn
+      69: dload         5
+      71: invokestatic  #157                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      74: areturn
+      75: nop
+      76: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #178                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class recursive
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #182                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #184                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #178                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #190                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #184                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #193                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly'>org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 35: [Static type checking] - The variable [args] is undeclared.
+ @ line 35, column 26.
+   def n = Integer.parseInt(args[0])
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 35: [Static type checking] - Cannot find matching method java.lang.Integer#parseInt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 35, column 9.
+   def n = Integer.parseInt(args[0])
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 38: [Static type checking] - Cannot find matching method double#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 38, column 29.
+   printf("Fib(%.1f): %.1f\n", 27.0D + n, fib(27.0D + n))
+                               ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 38: [Static type checking] - Cannot find matching method double#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 38, column 44.
+   .1f): %.1f\n", 27.0D + n, fib(27.0D + n)
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 39: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 39, column 1.
+   n -= 1
+   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#multiply(int). Please check if the declared type is right and if the method exists.
+ @ line 40, column 31.
+   printf("Tak(%d,%d,%d): %d\n", n * 3, n * 2, n, tak(n * 3, n * 2, n))
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#multiply(int). Please check if the declared type is right and if the method exists.
+ @ line 40, column 38.
+   printf("Tak(%d,%d,%d): %d\n", n * 3, n * 2, n, tak(n * 3, n * 2, n))
+                                        ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#multiply(int). Please check if the declared type is right and if the method exists.
+ @ line 40, column 52.
+   : %d\n", n * 3, n * 2, n, tak(n * 3, n *
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#multiply(int). Please check if the declared type is right and if the method exists.
+ @ line 40, column 59.
+   , n * 3, n * 2, n, tak(n * 3, n * 2, n))
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 40: [Static type checking] - Cannot find matching method recursive#tak(java.lang.Object, java.lang.Object, java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 40, column 48.
+   ,%d): %d\n", n * 3, n * 2, n, tak(n * 3,
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 10: [Static type checking] - Cannot find matching method java.lang.Object#plus(int). Please check if the declared type is right and if the method exists.
+ @ line 10, column 26.
+       if (x == 0) return y + 1
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 11: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 11, column 28.
+       if (y == 0) return ack(x - 1, 1)
+                              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 12: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 12, column 16.
+       return ack(x - 1, ack(x, y - 1))
+                  ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 12: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 12, column 30.
+       return ack(x - 1, ack(x, y - 1))
+                                ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 17: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 17, column 23.
+       return fib(n - 2) + fib(n - 1)
+                         ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 22: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 22, column 26.
+       return fib(n - 2.0D) + fib(n - 1.0D)
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 26: [Static type checking] - Cannot find matching method recursive#tak(java.lang.Object, java.lang.Object, java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 26, column 23.
+       if (y &lt; x) return tak(tak(x - 1, y, z), tak(y - 1, z, x), tak(z - 1, x, y))
+                         ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/recursive.groovy: 31: [Static type checking] - Cannot find matching method recursive#tak(java.lang.Object, java.lang.Object, java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 31, column 23.
+       if (y &lt; x) return tak(tak(x - 1.0D, y, z), tak(y - 1.0D, z, x), tak(z - 1.0D, x, y))
+                         ^
+
+18 errors
+
+</code>
+        </pre>
+      </div>
+    </div>
+    <div class='col-sm-12'>
+      <h2>AFTER</h2>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "recursive.groovy"
+public class recursive extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public recursive();
+    Code:
+       0: aload_0
+       1: invokespecial #15                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public recursive(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #24                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #29                 // int 0
+       7: aaload
+       8: ldc           #31                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class recursive
+      12: aload_0
+      13: invokeinterface #37,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #42                 // int 1
+       7: aaload
+       8: ldc           #44                 // class java/lang/Integer
+      10: aload_1
+      11: ldc           #45                 // int 2
+      13: aaload
+      14: aload_1
+      15: ldc           #46                 // int 3
+      17: aaload
+      18: aload_0
+      19: invokeinterface #50,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGroovyObjectGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      24: iconst_0
+      25: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      28: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      33: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      38: astore_2
+      39: aload_1
+      40: ldc           #58                 // int 4
+      42: aaload
+      43: aload_0
+      44: ldc           #60                 // String Ack(3,%d): %d\n
+      46: aload_2
+      47: aload_1
+      48: ldc           #61                 // int 5
+      50: aaload
+      51: aload_0
+      52: iconst_3
+      53: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      56: aload_2
+      57: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      62: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      67: pop
+      68: aload_1
+      69: ldc           #69                 // int 6
+      71: aaload
+      72: aload_0
+      73: ldc           #71                 // String Fib(%.1f): %.1f\n
+      75: aload_1
+      76: ldc           #72                 // int 7
+      78: aaload
+      79: ldc2_w        #73                 // double 27.0d
+      82: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      85: aload_2
+      86: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      91: aload_1
+      92: ldc           #80                 // int 8
+      94: aaload
+      95: aload_0
+      96: aload_1
+      97: ldc           #81                 // int 9
+      99: aaload
+     100: ldc2_w        #73                 // double 27.0d
+     103: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     106: aload_2
+     107: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     112: invokeinterface #84,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     117: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     122: pop
+     123: aload_1
+     124: ldc           #85                 // int 10
+     126: aaload
+     127: aload_2
+     128: iconst_1
+     129: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     132: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     137: dup
+     138: astore_2
+     139: pop
+     140: aload_1
+     141: ldc           #86                 // int 11
+     143: aaload
+     144: aload_0
+     145: ldc           #88                 // String Tak(%d,%d,%d): %d\n
+     147: aload_1
+     148: ldc           #89                 // int 12
+     150: aaload
+     151: aload_2
+     152: iconst_3
+     153: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     156: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     161: aload_1
+     162: ldc           #90                 // int 13
+     164: aaload
+     165: aload_2
+     166: iconst_2
+     167: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     170: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     175: aload_2
+     176: aload_1
+     177: ldc           #91                 // int 14
+     179: aaload
+     180: aload_0
+     181: aload_1
+     182: ldc           #92                 // int 15
+     184: aaload
+     185: aload_2
+     186: iconst_3
+     187: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     190: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     195: aload_1
+     196: ldc           #93                 // int 16
+     198: aaload
+     199: aload_2
+     200: iconst_2
+     201: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     204: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     209: aload_2
+     210: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     215: invokestatic  #99                 // Method org/codehaus/groovy/runtime/ArrayUtil.createArray:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)[Ljava/lang/Object;
+     218: invokeinterface #102,  3          // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;[Ljava/lang/Object;)Ljava/lang/Object;
+     223: pop
+     224: getstatic     #104                // Field __$stMC:Z
+     227: ifne          239
+     230: invokestatic  #110                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+     233: ifne          239
+     236: goto          269
+     239: aload_1
+     240: ldc           #111                // int 17
+     242: aaload
+     243: aload_0
+     244: ldc           #113                // String Fib(3): %d\n
+     246: aload_1
+     247: ldc           #114                // int 18
+     249: aaload
+     250: aload_0
+     251: iconst_3
+     252: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     255: invokeinterface #84,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     260: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     265: pop
+     266: goto          287
+     269: aload_1
+     270: ldc           #115                // int 19
+     272: aaload
+     273: aload_0
+     274: ldc           #113                // String Fib(3): %d\n
+     276: aload_0
+     277: iconst_3
+     278: invokevirtual #119                // Method fib:(I)Ljava/lang/Object;
+     281: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     286: pop
+     287: getstatic     #104                // Field __$stMC:Z
+     290: ifne          302
+     293: invokestatic  #110                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+     296: ifne          302
+     299: goto          344
+     302: aload_1
+     303: ldc           #120                // int 20
+     305: aaload
+     306: aload_0
+     307: ldc           #122                // String Tak(3.0,2.0,1.0): %.1f\n
+     309: aload_1
+     310: ldc           #123                // int 21
+     312: aaload
+     313: aload_0
+     314: ldc2_w        #124                // double 3.0d
+     317: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     320: ldc2_w        #126                // double 2.0d
+     323: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     326: dconst_1
+     327: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     330: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     335: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     340: areturn
+     341: goto          368
+     344: aload_1
+     345: ldc           #128                // int 22
+     347: aaload
+     348: aload_0
+     349: ldc           #122                // String Tak(3.0,2.0,1.0): %.1f\n
+     351: aload_0
+     352: ldc2_w        #124                // double 3.0d
+     355: ldc2_w        #126                // double 2.0d
+     358: dconst_1
+     359: invokevirtual #132                // Method tak:(DDD)Ljava/lang/Object;
+     362: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     367: areturn
+     368: aconst_null
+     369: areturn
+
+  public java.lang.Object ack(java.lang.Object, java.lang.Object);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_3
+       4: aload_1
+       5: iconst_0
+       6: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       9: invokestatic  #141                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      12: ifeq          30
+      15: aload_3
+      16: ldc           #142                // int 23
+      18: aaload
+      19: aload_2
+      20: iconst_1
+      21: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      29: areturn
+      30: aload_2
+      31: iconst_0
+      32: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      35: invokestatic  #141                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      38: ifeq          70
+      41: aload_3
+      42: ldc           #143                // int 24
+      44: aaload
+      45: aload_0
+      46: aload_3
+      47: ldc           #144                // int 25
+      49: aaload
+      50: aload_1
+      51: iconst_1
+      52: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      55: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      60: iconst_1
+      61: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      64: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      69: areturn
+      70: aload_3
+      71: ldc           #145                // int 26
+      73: aaload
+      74: aload_0
+      75: aload_3
+      76: ldc           #146                // int 27
+      78: aaload
+      79: aload_1
+      80: iconst_1
+      81: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      84: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      89: aload_3
+      90: ldc           #147                // int 28
+      92: aaload
+      93: aload_0
+      94: aload_1
+      95: aload_3
+      96: ldc           #148                // int 29
+      98: aaload
+      99: aload_2
+     100: iconst_1
+     101: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     104: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     109: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     114: invokeinterface #65,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     119: areturn
+     120: aconst_null
+     121: areturn
+
+  public java.lang.Object fib(int);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: invokestatic  #153                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigInt:()Z
+       7: ifeq          31
+      10: invokestatic  #156                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      13: ifeq          31
+      16: getstatic     #104                // Field __$stMC:Z
+      19: ifne          31
+      22: invokestatic  #110                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      25: ifne          31
+      28: goto          116
+      31: iload_1
+      32: iconst_2
+      33: if_icmpge     40
+      36: iconst_1
+      37: goto          41
+      40: iconst_0
+      41: ifeq          49
+      44: iconst_1
+      45: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      48: areturn
+      49: aload_2
+      50: ldc           #157                // int 30
+      52: aaload
+      53: aload_2
+      54: ldc           #158                // int 31
+      56: aaload
+      57: aload_0
+      58: aload_2
+      59: ldc           #159                // int 32
+      61: aaload
+      62: iload_1
+      63: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      66: iconst_2
+      67: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      70: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      75: invokeinterface #84,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+      80: aload_2
+      81: ldc           #160                // int 33
+      83: aaload
+      84: aload_0
+      85: aload_2
+      86: ldc           #161                // int 34
+      88: aaload
+      89: iload_1
+      90: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      93: iconst_1
+      94: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      97: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     102: invokeinterface #84,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     107: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     112: areturn
+     113: goto          158
+     116: iload_1
+     117: iconst_2
+     118: if_icmpge     125
+     121: iconst_1
+     122: goto          126
+     125: iconst_0
+     126: ifeq          134
+     129: iconst_1
+     130: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     133: areturn
+     134: aload_2
+     135: ldc           #162                // int 35
+     137: aaload
+     138: aload_0
+     139: iload_1
+     140: iconst_2
+     141: isub
+     142: invokevirtual #119                // Method fib:(I)Ljava/lang/Object;
+     145: aload_0
+     146: iload_1
+     147: iconst_1
+     148: isub
+     149: invokevirtual #119                // Method fib:(I)Ljava/lang/Object;
+     152: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     157: areturn
+     158: aconst_null
+     159: areturn
+
+  public java.lang.Object fib(double);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_3
+       4: invokestatic  #167                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigD:()Z
+       7: ifeq          31
+      10: invokestatic  #156                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      13: ifeq          31
+      16: getstatic     #104                // Field __$stMC:Z
+      19: ifne          31
+      22: invokestatic  #110                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      25: ifne          31
+      28: goto          121
+      31: dload_1
+      32: ldc2_w        #126                // double 2.0d
+      35: dcmpg
+      36: ifge          43
+      39: iconst_1
+      40: goto          44
+      43: iconst_0
+      44: ifeq          52
+      47: dconst_1
+      48: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      51: areturn
+      52: aload_3
+      53: ldc           #168                // int 36
+      55: aaload
+      56: aload_3
+      57: ldc           #169                // int 37
+      59: aaload
+      60: aload_0
+      61: aload_3
+      62: ldc           #170                // int 38
+      64: aaload
+      65: dload_1
+      66: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      69: ldc2_w        #126                // double 2.0d
+      72: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      75: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      80: invokeinterface #84,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+      85: aload_3
+      86: ldc           #171                // int 39
+      88: aaload
+      89: aload_0
+      90: aload_3
+      91: ldc           #172                // int 40
+      93: aaload
+      94: dload_1
+      95: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      98: dconst_1
+      99: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     102: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     107: invokeinterface #84,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     112: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     117: areturn
+     118: goto          168
+     121: dload_1
+     122: ldc2_w        #126                // double 2.0d
+     125: dcmpg
+     126: ifge          133
+     129: iconst_1
+     130: goto          134
+     133: iconst_0
+     134: ifeq          142
+     137: dconst_1
+     138: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     141: areturn
+     142: aload_3
+     143: ldc           #173                // int 41
+     145: aaload
+     146: aload_0
+     147: dload_1
+     148: ldc2_w        #126                // double 2.0d
+     151: dsub
+     152: invokevirtual #175                // Method fib:(D)Ljava/lang/Object;
+     155: aload_0
+     156: dload_1
+     157: dconst_1
+     158: dsub
+     159: invokevirtual #175                // Method fib:(D)Ljava/lang/Object;
+     162: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     167: areturn
+     168: aconst_null
+     169: areturn
+
+  public java.lang.Object tak(int, int, int);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore        4
+       5: invokestatic  #153                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigInt:()Z
+       8: ifeq          32
+      11: invokestatic  #156                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      14: ifeq          32
+      17: getstatic     #104                // Field __$stMC:Z
+      20: ifne          32
+      23: invokestatic  #110                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      26: ifne          32
+      29: goto          171
+      32: iload_2
+      33: iload_1
+      34: if_icmpge     41
+      37: iconst_1
+      38: goto          42
+      41: iconst_0
+      42: ifeq          168
+      45: aload         4
+      47: ldc           #178                // int 42
+      49: aaload
+      50: aload_0
+      51: aload         4
+      53: ldc           #179                // int 43
+      55: aaload
+      56: aload_0
+      57: aload         4
+      59: ldc           #180                // int 44
+      61: aaload
+      62: iload_1
+      63: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      66: iconst_1
+      67: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      70: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      75: iload_2
+      76: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      79: iload_3
+      80: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      83: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      88: aload         4
+      90: ldc           #181                // int 45
+      92: aaload
+      93: aload_0
+      94: aload         4
+      96: ldc           #182                // int 46
+      98: aaload
+      99: iload_2
+     100: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     103: iconst_1
+     104: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     107: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     112: iload_3
+     113: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     116: iload_1
+     117: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     120: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     125: aload         4
+     127: ldc           #183                // int 47
+     129: aaload
+     130: aload_0
+     131: aload         4
+     133: ldc           #184                // int 48
+     135: aaload
+     136: iload_3
+     137: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     140: iconst_1
+     141: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     144: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     149: iload_1
+     150: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     153: iload_2
+     154: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     157: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     162: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     167: areturn
+     168: goto          223
+     171: iload_2
+     172: iload_1
+     173: if_icmpge     180
+     176: iconst_1
+     177: goto          181
+     180: iconst_0
+     181: ifeq          223
+     184: aload         4
+     186: ldc           #185                // int 49
+     188: aaload
+     189: aload_0
+     190: aload_0
+     191: iload_1
+     192: iconst_1
+     193: isub
+     194: iload_2
+     195: iload_3
+     196: invokevirtual #187                // Method tak:(III)Ljava/lang/Object;
+     199: aload_0
+     200: iload_2
+     201: iconst_1
+     202: isub
+     203: iload_3
+     204: iload_1
+     205: invokevirtual #187                // Method tak:(III)Ljava/lang/Object;
+     208: aload_0
+     209: iload_3
+     210: iconst_1
+     211: isub
+     212: iload_1
+     213: iload_2
+     214: invokevirtual #187                // Method tak:(III)Ljava/lang/Object;
+     217: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     222: areturn
+     223: iload_3
+     224: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     227: areturn
+     228: aconst_null
+     229: areturn
+
+  public java.lang.Object tak(double, double, double);
+    Code:
+       0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore        7
+       5: invokestatic  #167                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigD:()Z
+       8: ifeq          32
+      11: invokestatic  #156                // Method org/codehaus/groovy/runtime/BytecodeInterface8.isOrigZ:()Z
+      14: ifeq          32
+      17: getstatic     #104                // Field __$stMC:Z
+      20: ifne          32
+      23: invokestatic  #110                // Method org/codehaus/groovy/runtime/BytecodeInterface8.disabledStandardMetaClass:()Z
+      26: ifne          32
+      29: goto          175
+      32: dload_3
+      33: dload_1
+      34: dcmpg
+      35: ifge          42
+      38: iconst_1
+      39: goto          43
+      42: iconst_0
+      43: ifeq          172
+      46: aload         7
+      48: ldc           #189                // int 50
+      50: aaload
+      51: aload_0
+      52: aload         7
+      54: ldc           #190                // int 51
+      56: aaload
+      57: aload_0
+      58: aload         7
+      60: ldc           #191                // int 52
+      62: aaload
+      63: dload_1
+      64: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      67: dconst_1
+      68: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      71: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      76: dload_3
+      77: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      80: dload         5
+      82: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      85: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      90: aload         7
+      92: ldc           #192                // int 53
+      94: aaload
+      95: aload_0
+      96: aload         7
+      98: ldc           #193                // int 54
+     100: aaload
+     101: dload_3
+     102: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     105: dconst_1
+     106: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     109: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     114: dload         5
+     116: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     119: dload_1
+     120: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     123: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     128: aload         7
+     130: ldc           #194                // int 55
+     132: aaload
+     133: aload_0
+     134: aload         7
+     136: ldc           #195                // int 56
+     138: aaload
+     139: dload         5
+     141: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     144: dconst_1
+     145: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     148: invokeinterface #57,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     153: dload_1
+     154: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     157: dload_3
+     158: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     161: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     166: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     171: areturn
+     172: goto          231
+     175: dload_3
+     176: dload_1
+     177: dcmpg
+     178: ifge          185
+     181: iconst_1
+     182: goto          186
+     185: iconst_0
+     186: ifeq          231
+     189: aload         7
+     191: ldc           #196                // int 57
+     193: aaload
+     194: aload_0
+     195: aload_0
+     196: dload_1
+     197: dconst_1
+     198: dsub
+     199: dload_3
+     200: dload         5
+     202: invokevirtual #132                // Method tak:(DDD)Ljava/lang/Object;
+     205: aload_0
+     206: dload_3
+     207: dconst_1
+     208: dsub
+     209: dload         5
+     211: dload_1
+     212: invokevirtual #132                // Method tak:(DDD)Ljava/lang/Object;
+     215: aload_0
+     216: dload         5
+     218: dconst_1
+     219: dsub
+     220: dload_1
+     221: dload_3
+     222: invokevirtual #132                // Method tak:(DDD)Ljava/lang/Object;
+     225: invokeinterface #68,  5           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     230: areturn
+     231: dload         5
+     233: invokestatic  #79                 // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     236: areturn
+     237: aconst_null
+     238: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #204                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class recursive
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #208                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #210                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #204                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #216                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #210                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #219                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "recursive.groovy"
+public class recursive extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public recursive();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
+       4: return
+
+  public recursive(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."&lt;init&gt;":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class recursive
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: ldc           #44                 // class java/lang/Integer
+       2: aload_0
+       3: invokedynamic #50,  0             // InvokeDynamic #1:getProperty:(Lrecursive;)Ljava/lang/Object;
+       8: iconst_0
+       9: invokedynamic #55,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      14: invokedynamic #60,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      19: astore_1
+      20: aload_0
+      21: ldc           #62                 // String Ack(3,%d): %d\n
+      23: aload_1
+      24: aload_0
+      25: iconst_3
+      26: aload_1
+      27: invokedynamic #68,  0             // InvokeDynamic #4:invoke:(Lrecursive;ILjava/lang/Object;)Ljava/lang/Object;
+      32: invokedynamic #73,  0             // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      37: pop
+      38: aload_0
+      39: ldc           #75                 // String Fib(%.1f): %.1f\n
+      41: ldc2_w        #76                 // double 27.0d
+      44: aload_1
+      45: invokedynamic #82,  0             // InvokeDynamic #6:invoke:(DLjava/lang/Object;)Ljava/lang/Object;
+      50: aload_0
+      51: ldc2_w        #76                 // double 27.0d
+      54: aload_1
+      55: invokedynamic #82,  0             // InvokeDynamic #6:invoke:(DLjava/lang/Object;)Ljava/lang/Object;
+      60: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      65: invokedynamic #73,  0             // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      70: pop
+      71: aload_1
+      72: iconst_1
+      73: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      78: dup
+      79: astore_1
+      80: pop
+      81: aload_0
+      82: ldc           #92                 // String Tak(%d,%d,%d): %d\n
+      84: aload_1
+      85: iconst_3
+      86: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      91: aload_1
+      92: iconst_2
+      93: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      98: aload_1
+      99: aload_0
+     100: aload_1
+     101: iconst_3
+     102: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     107: aload_1
+     108: iconst_2
+     109: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     114: aload_1
+     115: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     120: invokedynamic #103,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     125: pop
+     126: aload_0
+     127: ldc           #105                // String Fib(3): %d\n
+     129: aload_0
+     130: iconst_3
+     131: invokedynamic #108,  0            // InvokeDynamic #7:invoke:(Lrecursive;I)Ljava/lang/Object;
+     136: invokedynamic #111,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+     141: pop
+     142: aload_0
+     143: ldc           #113                // String Tak(3.0,2.0,1.0): %.1f\n
+     145: aload_0
+     146: ldc2_w        #114                // double 3.0d
+     149: ldc2_w        #116                // double 2.0d
+     152: dconst_1
+     153: invokedynamic #120,  0            // InvokeDynamic #10:invoke:(Lrecursive;DDD)Ljava/lang/Object;
+     158: invokedynamic #111,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+     163: areturn
+     164: nop
+     165: athrow
+
+  public java.lang.Object ack(java.lang.Object, java.lang.Object);
+    Code:
+       0: aload_1
+       1: iconst_0
+       2: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #135                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          19
+      11: aload_2
+      12: iconst_1
+      13: invokedynamic #136,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      18: areturn
+      19: aload_2
+      20: iconst_0
+      21: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: invokestatic  #135                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      27: ifeq          45
+      30: aload_0
+      31: aload_1
+      32: iconst_1
+      33: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      38: iconst_1
+      39: invokedynamic #139,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;I)Ljava/lang/Object;
+      44: areturn
+      45: aload_0
+      46: aload_1
+      47: iconst_1
+      48: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      53: aload_0
+      54: aload_1
+      55: aload_2
+      56: iconst_1
+      57: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      62: invokedynamic #142,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      67: invokedynamic #142,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      72: areturn
+      73: nop
+      74: athrow
+
+  public java.lang.Object fib(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          18
+      13: iconst_1
+      14: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: areturn
+      18: aload_0
+      19: iload_1
+      20: iconst_2
+      21: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      26: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      31: aload_0
+      32: iload_1
+      33: iconst_1
+      34: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      39: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      44: invokedynamic #150,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      49: areturn
+      50: nop
+      51: athrow
+
+  public java.lang.Object fib(double);
+    Code:
+       0: dload_1
+       1: ldc2_w        #116                // double 2.0d
+       4: dcmpg
+       5: ifge          12
+       8: iconst_1
+       9: goto          13
+      12: iconst_0
+      13: ifeq          21
+      16: dconst_1
+      17: invokestatic  #157                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      20: areturn
+      21: aload_0
+      22: dload_1
+      23: ldc2_w        #116                // double 2.0d
+      26: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      31: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      36: aload_0
+      37: dload_1
+      38: dconst_1
+      39: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      44: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      49: invokedynamic #150,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      54: areturn
+      55: nop
+      56: athrow
+
+  public java.lang.Object tak(int, int, int);
+    Code:
+       0: iload_2
+       1: iload_1
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          65
+      13: aload_0
+      14: aload_0
+      15: iload_1
+      16: iconst_1
+      17: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      22: iload_2
+      23: iload_3
+      24: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      29: aload_0
+      30: iload_2
+      31: iconst_1
+      32: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      37: iload_3
+      38: iload_1
+      39: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      44: aload_0
+      45: iload_3
+      46: iconst_1
+      47: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      52: iload_1
+      53: iload_2
+      54: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      59: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      64: areturn
+      65: iload_3
+      66: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      69: areturn
+      70: nop
+      71: athrow
+
+  public java.lang.Object tak(double, double, double);
+    Code:
+       0: dload_3
+       1: dload_1
+       2: dcmpg
+       3: ifge          10
+       6: iconst_1
+       7: goto          11
+      10: iconst_0
+      11: ifeq          69
+      14: aload_0
+      15: aload_0
+      16: dload_1
+      17: dconst_1
+      18: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      23: dload_3
+      24: dload         5
+      26: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      31: aload_0
+      32: dload_3
+      33: dconst_1
+      34: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      39: dload         5
+      41: dload_1
+      42: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      47: aload_0
+      48: dload         5
+      50: dconst_1
+      51: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      56: dload_1
+      57: dload_3
+      58: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      63: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      68: areturn
+      69: dload         5
+      71: invokestatic  #157                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      74: areturn
+      75: nop
+      76: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #178                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class recursive
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #182                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #184                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #178                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #190                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #184                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #193                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly' />
+        </pre>
+      </div>
+    </div>
+  </body>
+</html>
