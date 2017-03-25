@@ -25,6 +25,8 @@ class App {
             // reader, process bytecode, and write to new files
             List afterOutputFiles = byteCodeOptimizer.processClassFiles(file)
 
+            // benchmark bytecode
+
             //write to 'before' and 'after' report
             writer.writeReport(file.filename, beforeOutputFiles, afterOutputFiles)
             report.write()
