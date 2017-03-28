@@ -18,7 +18,7 @@
         <a>FORLOOP</a>
       </li>
     </ul>
-    <h2 class='text-center'>Bytecode Analysis for script: ForLoop</h2>
+    <h2 class='text-center'>Bytecode Analysis for script: forloop</h2>
     <div class='row col-lg-4 col-lg-offset-4'>
       <pre>
         <code class='groovy'>List numbers = [1,2,3]
@@ -30,7 +30,7 @@ results
 </code>
       </pre>
     </div>
-    <div class='row col-sm-10 text-center col-sm-offset-1'>
+    <div class='row col-sm-8 text-center col-sm-offset-3'>
       <table class='table'>
         <tr>
           <th></th>
@@ -58,6 +58,101 @@ results
         </tr>
       </table>
     </div>
+    <div class='row col-sm-12 text-center'>
+      <h2>Benchmarks</h2>
+      <div class='col-sm-4 text-center'>
+        <h3>For parameter: 1000</h3>
+        <table class='table'>
+          <tr>
+            <th></th>
+            <th>Groovyc</th>
+            <th>Indy</th>
+            <th>Static</th>
+          </tr>
+          <tr>
+            <td>Benchmark - Before</td>
+            <td>409</td>
+            <td>443</td>
+            <td>332</td>
+          </tr>
+          <tr>
+            <td>Benchmark - After</td>
+            <td>409</td>
+            <td>437</td>
+            <td>333</td>
+          </tr>
+        </table>
+      </div>
+      <div class='col-sm-4 text-center'>
+        <h3>For parameter: 100000</h3>
+        <table class='table'>
+          <tr>
+            <th></th>
+            <th>Groovyc</th>
+            <th>Indy</th>
+            <th>Static</th>
+          </tr>
+          <tr>
+            <td>Benchmark - Before</td>
+            <td>411</td>
+            <td>440</td>
+            <td>333</td>
+          </tr>
+          <tr>
+            <td>Benchmark - After</td>
+            <td>408</td>
+            <td>441</td>
+            <td>332</td>
+          </tr>
+        </table>
+      </div>
+      <div class='col-sm-4 text-center'>
+        <h3>For parameter: 1000000</h3>
+        <table class='table'>
+          <tr>
+            <th></th>
+            <th>Groovyc</th>
+            <th>Indy</th>
+            <th>Static</th>
+          </tr>
+          <tr>
+            <td>Benchmark - Before</td>
+            <td>407</td>
+            <td>441</td>
+            <td>331</td>
+          </tr>
+          <tr>
+            <td>Benchmark - After</td>
+            <td>410</td>
+            <td>439</td>
+            <td>333</td>
+          </tr>
+        </table>
+      </div>
+      <div class='col-sm-4 text-center'>
+        <h3>For parameter: 100000000</h3>
+        <table class='table'>
+          <tr>
+            <th></th>
+            <th>Groovyc</th>
+            <th>Indy</th>
+            <th>Static</th>
+          </tr>
+          <tr>
+            <td>Benchmark - Before</td>
+            <td>408</td>
+            <td>438</td>
+            <td>330</td>
+          </tr>
+          <tr>
+            <td>Benchmark - After</td>
+            <td>410</td>
+            <td>437</td>
+            <td>330</td>
+          </tr>
+        </table>
+      </div>
+    </div>
     <div class='row col-sm-12'>
       <h1>BEFORE</h1>
     </div>
@@ -65,11 +160,11 @@ results
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
         <pre>
-          <code class='assembly'>Compiled from "ForLoop.groovy"
-public class ForLoop extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "forloop.groovy"
+public class forloop extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public ForLoop();
+  public forloop();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
@@ -77,7 +172,7 @@ public class ForLoop extends groovy.lang.Script {
        7: astore_1
        8: return
 
-  public ForLoop(groovy.lang.Binding);
+  public forloop(groovy.lang.Binding);
     Code:
        0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_2
@@ -94,7 +189,7 @@ public class ForLoop extends groovy.lang.Script {
        5: ldc           #27                 // int 0
        7: aaload
        8: ldc           #29                 // class org/codehaus/groovy/runtime/InvokerHelper
-      10: ldc           #2                  // class ForLoop
+      10: ldc           #2                  // class forloop
       12: aload_0
       13: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
       18: pop
@@ -171,7 +266,7 @@ public class ForLoop extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #86                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class ForLoop
+       4: ldc           #2                  // class forloop
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #90                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -196,17 +291,17 @@ public class ForLoop extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Invoke Dynamic</h2>
         <pre>
-          <code class='assembly'>Compiled from "ForLoop.groovy"
-public class ForLoop extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "forloop.groovy"
+public class forloop extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public ForLoop();
+  public forloop();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public ForLoop(groovy.lang.Binding);
+  public forloop(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -216,7 +311,7 @@ public class ForLoop extends groovy.lang.Script {
   public static void main(java.lang.String...);
     Code:
        0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
-       2: ldc           #2                  // class ForLoop
+       2: ldc           #2                  // class forloop
        4: aload_0
        5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
       10: pop
@@ -279,7 +374,7 @@ public class ForLoop extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #101                // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class ForLoop
+       4: ldc           #2                  // class forloop
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #105                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -304,17 +399,17 @@ public class ForLoop extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Static Compilation</h2>
         <pre>
-          <code class='assembly'>Compiled from "ForLoop.groovy"
-public class ForLoop extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "forloop.groovy"
+public class forloop extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public ForLoop();
+  public forloop();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public ForLoop(groovy.lang.Binding);
+  public forloop(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -323,7 +418,7 @@ public class ForLoop extends groovy.lang.Script {
 
   public static void main(java.lang.String...);
     Code:
-       0: ldc           #2                  // class ForLoop
+       0: ldc           #2                  // class forloop
        2: aload_0
        3: invokestatic  #28                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
        6: pop
@@ -389,7 +484,7 @@ public class ForLoop extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #88                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class ForLoop
+       4: ldc           #2                  // class forloop
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #92                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -419,11 +514,11 @@ public class ForLoop extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
         <pre>
-          <code class='assembly'>Compiled from "ForLoop.groovy"
-public class ForLoop extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "forloop.groovy"
+public class forloop extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public ForLoop();
+  public forloop();
     Code:
        0: aload_0
        1: invokespecial #15                 // Method groovy/lang/Script."&lt;init&gt;":()V
@@ -431,7 +526,7 @@ public class ForLoop extends groovy.lang.Script {
        7: astore_1
        8: return
 
-  public ForLoop(groovy.lang.Binding);
+  public forloop(groovy.lang.Binding);
     Code:
        0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_2
@@ -448,7 +543,7 @@ public class ForLoop extends groovy.lang.Script {
        5: ldc           #29                 // int 0
        7: aaload
        8: ldc           #31                 // class org/codehaus/groovy/runtime/InvokerHelper
-      10: ldc           #2                  // class ForLoop
+      10: ldc           #2                  // class forloop
       12: aload_0
       13: invokeinterface #37,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
       18: pop
@@ -521,7 +616,7 @@ public class ForLoop extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #88                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class ForLoop
+       4: ldc           #2                  // class forloop
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #92                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -546,17 +641,17 @@ public class ForLoop extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Invoke Dynamic</h2>
         <pre>
-          <code class='assembly'>Compiled from "ForLoop.groovy"
-public class ForLoop extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "forloop.groovy"
+public class forloop extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public ForLoop();
+  public forloop();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public ForLoop(groovy.lang.Binding);
+  public forloop(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -566,7 +661,7 @@ public class ForLoop extends groovy.lang.Script {
   public static void main(java.lang.String...);
     Code:
        0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
-       2: ldc           #2                  // class ForLoop
+       2: ldc           #2                  // class forloop
        4: aload_0
        5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
       10: pop
@@ -625,7 +720,7 @@ public class ForLoop extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #101                // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class ForLoop
+       4: ldc           #2                  // class forloop
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #105                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -650,17 +745,17 @@ public class ForLoop extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Static Compilation</h2>
         <pre>
-          <code class='assembly'>Compiled from "ForLoop.groovy"
-public class ForLoop extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "forloop.groovy"
+public class forloop extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public ForLoop();
+  public forloop();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public ForLoop(groovy.lang.Binding);
+  public forloop(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -669,7 +764,7 @@ public class ForLoop extends groovy.lang.Script {
 
   public static void main(java.lang.String...);
     Code:
-       0: ldc           #2                  // class ForLoop
+       0: ldc           #2                  // class forloop
        2: aload_0
        3: invokestatic  #28                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
        6: pop
@@ -731,7 +826,7 @@ public class ForLoop extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #88                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class ForLoop
+       4: ldc           #2                  // class forloop
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #92                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
