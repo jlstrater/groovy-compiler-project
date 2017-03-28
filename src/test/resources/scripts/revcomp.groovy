@@ -6,7 +6,6 @@
  * slightly modified from Java version from
  * Anthony Donnefort and Razii
  */
-
 class ReversibleByteArray extends java.io.ByteArrayOutputStream {
 
     static final byte[] cmp = new byte[128]
@@ -46,21 +45,24 @@ class ReversibleByteArray extends java.io.ByteArrayOutputStream {
         }
     }
 }
-
-byte[] line = new byte[82]
-int read
-ReversibleByteArray buf = new ReversibleByteArray()
-while ((read = System.in.read(line)) != -1) {
-    int i = 0, last = 0
-    while (i < read) {
-        if (line[i] == '>') {
-            buf.write(line, last, i - last)
-            buf.reverse()
-            buf.reset()
-            last = i
+class revcomp {
+    public static void main(String[] args) {
+    byte[] line = new byte[82]
+    int read
+    ReversibleByteArray buf = new ReversibleByteArray()
+    while ( ( read = System.in.read ( line ) ) != - 1 ) {
+        int i = 0, last = 0
+        while (i < read) {
+            if (line[i] == '>') {
+                buf.write(line, last, i - last)
+                buf.reverse()
+                buf.reset()
+                last = i
+            }
+            i++
         }
-        i++
+        buf.write(line, last, read - last)
     }
-    buf.write(line, last, read - last)
+    buf.reverse ( )
+    }
 }
-buf.reverse()

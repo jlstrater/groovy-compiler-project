@@ -1,3 +1,4 @@
+import benchmark.Benchmark
 import groovy.util.logging.Slf4j
 import report.FileReportWriter
 import report.ReportWriter
@@ -16,19 +17,21 @@ class App {
         FileCompiler fileCompiler = new FileCompiler()
         FileReportWriter writer = new FileReportWriter()
         ReportWriter report = new ReportWriter()
+        Benchmark benchmark = new Benchmark()
         ByteCodeOptimizer byteCodeOptimizer = new ByteCodeOptimizer()
 
-        args.each { String fileinfo ->
-            FileInfo file = new FileInfo(fileinfo)
-            List beforeOutputFiles = fileCompiler.compileFile(file)
+        args.each { String file ->
+            FileInfo fileInfo = new FileInfo(file)
+            List beforeOutputFiles = fileCompiler.compileFile(fileInfo)
 
             // reader, process bytecode, and write to new files
-            List afterOutputFiles = byteCodeOptimizer.processClassFiles(file)
+            List afterOutputFiles = byteCodeOptimizer.processClassFiles(fileInfo)
 
             // benchmark bytecode
+            List benchmarkData = benchmark.runBenchmark(fileInfo.filename)
 
             //write to 'before' and 'after' report
-            writer.writeReport(file.filename, beforeOutputFiles, afterOutputFiles)
+            writer.writeReport(fileInfo.filename, beforeOutputFiles, afterOutputFiles, benchmarkData)
             report.write()
         }
     }

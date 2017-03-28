@@ -124,7 +124,7 @@ ruleset {
     ToStringReturnsNull
 
     // rulesets/dry.xml
-    DuplicateListLiteral
+//    DuplicateListLiteral
 //    DuplicateMapLiteral
 //    DuplicateNumberLiteral
 //    DuplicateStringLiteral

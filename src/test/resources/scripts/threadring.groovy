@@ -41,26 +41,31 @@ class MessageThread extends Thread {
         return msg
     }
 }
+class threadring {
+    public static void main(String[] args) {
+        int THREAD_COUNT = 503
 
-int THREAD_COUNT = 503
-int hopCount = args[0] as Integer
+        int hopCount = args[0] as Integer
 
-MessageThread first
-MessageThread last
-(THREAD_COUNT..1).each { i ->
-    first = new MessageThread(first, i)
-    if (i == THREAD_COUNT) last = first
-}
+        MessageThread first
+        MessageThread last
+        (THREAD_COUNT..1).each {
+            i ->
+                first = new MessageThread(first, i)
+                if (i == THREAD_COUNT) last = first
+        }
 // close the ring
-last.nextThread = first
+        last.nextThread = first
 
 // start all threads
-MessageThread t = first
-THREAD_COUNT.times {
-    t.start()
-    t = t.nextThread
-}
+        MessageThread t = first
+        THREAD_COUNT.times {
+            t.start()
+            t = t.nextThread
+        }
 
 // inject message
-first.enqueue(hopCount)
-first.join() // wait for System.exit
+        first.enqueue(hopCount)
+        first.join() // wait for System.exit
+    }
+}
