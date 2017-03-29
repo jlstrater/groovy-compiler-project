@@ -12,7 +12,7 @@ class ReportWriter {
 
     public static final DEFAULT_OUTPUT_FILE = 'index.html'
 
-    @SuppressWarnings(['JavaIoPackageAccess', 'NestedBlockDepth'])
+    @SuppressWarnings('NestedBlockDepth')
     void write() {
         new File(REPORT_DIR).mkdirs()
         File file = new File(REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE)

@@ -7,9 +7,9 @@ class FileCompiler {
 
     private static final String SC_CONFIG = 'build/resources/main/config/sc_config.groovy'
 
-    private static final String GROOVYC_OUTPUT_DIR = 'build/groovyc'
-    private static final String INDY_OUTPUT_DIR = 'build/indy'
-    private static final String SC_OUTPUT_DIR = 'build/static'
+    private static final String GROOVYC_OUTPUT_DIR = 'build/bytecode/groovyc'
+    private static final String INDY_OUTPUT_DIR = 'build/bytecode/indy'
+    private static final String SC_OUTPUT_DIR = 'build/bytecode/static'
 
     List compileFile(FileInfo file) {
 
@@ -39,7 +39,6 @@ class FileCompiler {
         process.waitFor()
     }
 
-    @SuppressWarnings('JavaIoPackageAccess')
     String compileWithStaticConfig(FileInfo file) {
         log.info 'running static compilation for ' + file.filename
         StringBuffer error = new StringBuffer()

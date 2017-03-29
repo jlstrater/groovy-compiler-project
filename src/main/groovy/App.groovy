@@ -21,11 +21,12 @@ class App {
         ByteCodeOptimizer byteCodeOptimizer = new ByteCodeOptimizer()
 
         args.each { String file ->
+            new File('build/bytecode').deleteDir()
             FileInfo fileInfo = new FileInfo(file)
             List beforeOutputFiles = fileCompiler.compileFile(fileInfo)
 
             // reader, process bytecode, and write to new files
-            List afterOutputFiles = byteCodeOptimizer.processClassFiles(fileInfo)
+            List afterOutputFiles = byteCodeOptimizer.processDirectory('build/bytecode')
 
             // benchmark bytecode
             List benchmarkData = benchmark.runBenchmark(fileInfo.filename)
@@ -33,6 +34,8 @@ class App {
             //write to 'before' and 'after' report
             writer.writeReport(fileInfo.filename, beforeOutputFiles, afterOutputFiles, benchmarkData)
             report.write()
+
+            new File('build/bytecode').deleteDir()
         }
     }
 }

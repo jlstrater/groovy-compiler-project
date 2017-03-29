@@ -8,16 +8,10 @@ class FileReportWriter extends ReportWriter {
     public static final DEFAULT_OUTPUT_FILE = 'BytecodeReport'
     public static final IND_REPORT_DIR = REPORT_DIR + '/reports'
 
-    @SuppressWarnings(['JavaIoPackageAccess', 'NestedBlockDepth', 'MethodSize'])
+    @SuppressWarnings(['NestedBlockDepth', 'MethodSize'])
     void writeReport(String filename, List<String> before, List<String> after, List<BenchmarkResultSet> benchmarkData) {
         new File(IND_REPORT_DIR).mkdirs()
         File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
-        List beforeSizes = before.collect {
-            it?.readLines()?.size() ?: 0
-        }
-        List afterSizes = after.collect {
-            it?.readLines()?.size() ?: 0
-        }
         file.withWriter { writer ->
             MarkupBuilder html = new MarkupBuilder(writer)
 
@@ -42,14 +36,14 @@ class FileReportWriter extends ReportWriter {
                         }
                     }
                     h2 class: 'text-center', 'Bytecode Analysis for script: ' + filename
-                    div(class: 'row col-lg-4 col-lg-offset-4') {
+                    div(class: 'row col-lg-5 col-lg-offset-4') {
                         pre {
                             code class: 'groovy',
                                 new File('build/resources/test/scripts/' + filename + '.groovy').text.stripIndent()
                         }
                     }
 
-                    div(class: 'row col-sm-8 text-center col-sm-offset-3') {
+                    div(class: 'row col-sm-10 text-center col-sm-offset-1') {
                         table(class: 'table') {
                             tr {
                                 th ''
@@ -58,30 +52,18 @@ class FileReportWriter extends ReportWriter {
                                 th 'Static'
                             }
                             tr {
-                                td 'Lines Before'
-                                td beforeSizes[0]
-                                td beforeSizes[1]
-                                td beforeSizes[2]
-                            }
-                            tr {
-                                td 'Lines After'
-                                td afterSizes[0]
-                                td afterSizes[1]
-                                td afterSizes[2]
-                            }
-                            tr {
                                 td 'Lines Removed'
-                                td (beforeSizes[0] - afterSizes[0])
-                                td (beforeSizes[1] - afterSizes[1])
-                                td afterSizes[2] ? (beforeSizes[2] - afterSizes[2]) : 'N/A'
+                                td after.find { it.compilationType == 'groovyc' }?.linesRemoved ?: 'Error'
+                                td after.find { it.compilationType == 'indy' }?.linesRemoved ?: 'Error'
+                                td after.find { it.compilationType == 'static' }?.linesRemoved ?: 'Error'
                             }
                         }
                     }
 
-                    div(class: 'row col-sm-12 text-center') {
+                    div(class: 'row col-sm-10 text-center col-sm-offset-1') {
                         h2 'Benchmarks'
                         benchmarkData*.parameter.unique().each { param ->
-                            div (class: 'col-sm-4 text-center') {
+                            div (class: 'col-sm-6 text-center') {
                                 h3 'For parameter: ' + param
                                 table(class: 'table') {
                                     tr {
@@ -91,28 +73,52 @@ class FileReportWriter extends ReportWriter {
                                         th 'Static'
                                     }
                                     tr {
-                                        td 'Benchmark - Before'
+                                        td 'Benchmark Average - Before'
                                         td benchmarkData.find {
                                             it.compilationType == 'groovyc' && it.parameter == param
-                                        }.runtime
+                                        }.stats.average
                                         td benchmarkData.find {
                                             it.compilationType == 'indy' && it.parameter == param
-                                        }.runtime
+                                        }.stats.average
                                         td benchmarkData.find {
                                             it.compilationType == 'static' && it.parameter == param
-                                        }.runtime
+                                        }.stats.average
                                     }
                                     tr {
-                                        td 'Benchmark - After'
+                                        td 'Benchmark Average - After'
                                         td benchmarkData.find {
                                             it.compilationType == 'newgroovyc' && it.parameter == param
-                                        }.runtime
+                                        }.stats.average
                                         td benchmarkData.find {
                                             it.compilationType == 'newindy' && it.parameter == param
-                                        }.runtime
+                                        }.stats.average
                                         td benchmarkData.find {
                                             it.compilationType == 'newstatic' && it.parameter == param
-                                        }.runtime
+                                        }.stats.average
+                                    }
+                                    tr {
+                                        td 'Benchmark Std Dev - Before'
+                                        td benchmarkData.find {
+                                            it.compilationType == 'groovyc' && it.parameter == param
+                                        }.stats.stddev
+                                        td benchmarkData.find {
+                                            it.compilationType == 'indy' && it.parameter == param
+                                        }.stats.stddev
+                                        td benchmarkData.find {
+                                            it.compilationType == 'static' && it.parameter == param
+                                        }.stats.stddev
+                                    }
+                                    tr {
+                                        td 'Benchmark Std Dev - After'
+                                        td benchmarkData.find {
+                                            it.compilationType == 'newgroovyc' && it.parameter == param
+                                        }.stats.stddev
+                                        td benchmarkData.find {
+                                            it.compilationType == 'newindy' && it.parameter == param
+                                        }.stats.stddev
+                                        td benchmarkData.find {
+                                            it.compilationType == 'newstatic' && it.parameter == param
+                                        }.stats.stddev
                                     }
                                 }
                             }
@@ -152,20 +158,20 @@ class FileReportWriter extends ReportWriter {
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Groovyc (Legacy)'
                             pre {
-                                code class: 'assembly', after.get(0)
+                                code class: 'assembly', after.find { it.compilationType == 'groovyc' }?.text
                             }
                         }
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Invoke Dynamic'
                             pre {
-                                code class: 'assembly', after.get(1)
+                                code class: 'assembly', after.find { it.compilationType == 'indy' }?.text
                             }
                         }
 
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Static Compilation'
                             pre {
-                                code class: 'assembly', after.get(2)
+                                code class: 'assembly', after.find { it.compilationType == 'static' }?.text
                             }
                         }
                     }

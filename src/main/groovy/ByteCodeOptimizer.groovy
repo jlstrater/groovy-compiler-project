@@ -15,8 +15,6 @@ import utils.FileInfo
 
 class ByteCodeOptimizer {
 
-    List<String> classDirs = ['build/groovyc', 'build/indy', 'build/static']
-
     protected static final int[] POP_CODES = [
             POP,
             POP2,
@@ -29,28 +27,24 @@ class ByteCodeOptimizer {
             ILOAD,
     ]
 
-    @SuppressWarnings('JavaIoPackageAccess')
-    List processDirectory(String directory, String root) {
+    Integer numLinesRemoved = 0
+
+    List<OptimizationResult> processDirectory(String directory, String parent = 'build/bytecode') {
+        List<OptimizationResult> results = []
         File dir = new File(directory)
         dir.eachFile { File file ->
             if (file.isDirectory()) {
-                processDirectory(file.path, root)
+                results << processDirectory(file.path, parent + '/' + file.name)
             } else {
-                processClassFiles(new FileInfo(file.path), root)
+                results << processClassFiles(new FileInfo(file.path), parent)
             }
         }
+        results.flatten()
     }
 
-    @SuppressWarnings('JavaIoPackageAccess')
-    List processClassFiles(FileInfo fileInfo) {
-        classDirs.collect {
-            FileInfo classFileInfo = new FileInfo(it + '/' + fileInfo.filename + '.class')
-            processClassFiles(classFileInfo, it)
-        }
-    }
-
-    @SuppressWarnings('JavaIoPackageAccess')
-    String processClassFiles(FileInfo classFileInfo, String outputDir) {
+    @SuppressWarnings('GStringAsMapKey')
+    OptimizationResult processClassFiles(FileInfo classFileInfo, String outputDir) {
+        numLinesRemoved = 0
         if (new File(classFileInfo.info).exists()) {
             ClassReader bytecodeReader = new ClassReader(new File(classFileInfo.info).bytes)
             ClassNode classNode = new ClassNode()
@@ -68,21 +62,33 @@ class ByteCodeOptimizer {
             FileOutputStream out = new FileOutputStream(newClassFileInfo)
             out.write bytecodeWriter.toByteArray()
 
-            return FileCompiler.javapOnBytecode(newClassFileInfo)
+            String compilationType = outputDir.tokenize('/').last()
+            return new OptimizationResult(compilationType: compilationType,
+                    text: FileCompiler.javapOnBytecode(newClassFileInfo), linesRemoved: numLinesRemoved,
+                    filename: classFileInfo.filename,)
         }
     }
 
     @SuppressWarnings('NoDef')
-    static void iterateThroughMethodNode(MethodNode methodNode) {
+    void iterateThroughMethodNode(MethodNode methodNode) {
         ListIterator<AbstractInsnNode> nodes = methodNode.instructions.iterator()
+        // how do you get the method's inner class for example main() { _main_closure_x...}
         AbstractInsnNode prev = null
         while (nodes.hasNext()) {
             AbstractInsnNode current = nodes.next()
             if (current.opcode in POP_CODES && current.previous.opcode in LOAD_CODES) {
                 methodNode.instructions.remove(current)
                 methodNode.instructions.remove(prev)
+                numLinesRemoved += 2
             }
             prev = current
         }
+    }
+
+    class OptimizationResult {
+        String compilationType
+        String text
+        Integer linesRemoved
+        String filename
     }
 }
