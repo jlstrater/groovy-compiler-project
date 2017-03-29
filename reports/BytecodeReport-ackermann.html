@@ -19,7 +19,7 @@
       </li>
     </ul>
     <h2 class='text-center'>Bytecode Analysis for script: ackermann</h2>
-    <div class='row col-lg-4 col-lg-offset-4'>
+    <div class='row col-lg-5 col-lg-offset-4'>
       <pre>
         <code class='groovy'>/*
  * The Computer Language Shootout
@@ -44,25 +44,13 @@ class ackermann {
 </code>
       </pre>
     </div>
-    <div class='row col-sm-8 text-center col-sm-offset-3'>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
       <table class='table'>
         <tr>
           <th></th>
           <th>Groovyc</th>
           <th>Indy</th>
           <th>Static</th>
-        </tr>
-        <tr>
-          <td>Lines Before</td>
-          <td>259</td>
-          <td>183</td>
-          <td>198</td>
-        </tr>
-        <tr>
-          <td>Lines After</td>
-          <td>251</td>
-          <td>177</td>
-          <td>190</td>
         </tr>
         <tr>
           <td>Lines Removed</td>
@@ -72,9 +60,9 @@ class ackermann {
         </tr>
       </table>
     </div>
-    <div class='row col-sm-12 text-center'>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
       <h2>Benchmarks</h2>
-      <div class='col-sm-4 text-center'>
+      <div class='col-sm-6 text-center'>
         <h3>For parameter: 1</h3>
         <table class='table'>
           <tr>
@@ -84,20 +72,32 @@ class ackermann {
             <th>Static</th>
           </tr>
           <tr>
-            <td>Benchmark - Before</td>
-            <td>454</td>
-            <td>607</td>
-            <td>376</td>
+            <td>Benchmark Average - Before</td>
+            <td>416</td>
+            <td>470</td>
+            <td>325</td>
           </tr>
           <tr>
-            <td>Benchmark - After</td>
-            <td>442</td>
-            <td>495</td>
-            <td>346</td>
+            <td>Benchmark Average - After</td>
+            <td>418</td>
+            <td>467</td>
+            <td>325</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - Before</td>
+            <td>2.04</td>
+            <td>7.38</td>
+            <td>7.49</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - After</td>
+            <td>4.07</td>
+            <td>2.75</td>
+            <td>6.84</td>
           </tr>
         </table>
       </div>
-      <div class='col-sm-4 text-center'>
+      <div class='col-sm-6 text-center'>
         <h3>For parameter: 2</h3>
         <table class='table'>
           <tr>
@@ -107,16 +107,28 @@ class ackermann {
             <th>Static</th>
           </tr>
           <tr>
-            <td>Benchmark - Before</td>
-            <td>446</td>
-            <td>576</td>
-            <td>333</td>
+            <td>Benchmark Average - Before</td>
+            <td>419</td>
+            <td>470</td>
+            <td>324</td>
           </tr>
           <tr>
-            <td>Benchmark - After</td>
-            <td>444</td>
-            <td>527</td>
-            <td>349</td>
+            <td>Benchmark Average - After</td>
+            <td>417</td>
+            <td>475</td>
+            <td>327</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - Before</td>
+            <td>3.64</td>
+            <td>4.42</td>
+            <td>6.91</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - After</td>
+            <td>4.72</td>
+            <td>5.99</td>
+            <td>7.15</td>
           </tr>
         </table>
       </div>

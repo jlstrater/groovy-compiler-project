@@ -19,7 +19,7 @@
       </li>
     </ul>
     <h2 class='text-center'>Bytecode Analysis for script: ary</h2>
-    <div class='row col-lg-4 col-lg-offset-4'>
+    <div class='row col-lg-5 col-lg-offset-4'>
       <pre>
         <code class='groovy'>// $Id: scripts.ary.java,v 1.1 2004-05-22 07:27:00 bfulgham Exp $
 // http://www.bagley.org/~doug/shootout/
@@ -49,25 +49,13 @@ public class ary {
 </code>
       </pre>
     </div>
-    <div class='row col-sm-8 text-center col-sm-offset-3'>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
       <table class='table'>
         <tr>
           <th></th>
           <th>Groovyc</th>
           <th>Indy</th>
           <th>Static</th>
-        </tr>
-        <tr>
-          <td>Lines Before</td>
-          <td>512</td>
-          <td>249</td>
-          <td>247</td>
-        </tr>
-        <tr>
-          <td>Lines After</td>
-          <td>464</td>
-          <td>219</td>
-          <td>215</td>
         </tr>
         <tr>
           <td>Lines Removed</td>
@@ -77,9 +65,9 @@ public class ary {
         </tr>
       </table>
     </div>
-    <div class='row col-sm-12 text-center'>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
       <h2>Benchmarks</h2>
-      <div class='col-sm-4 text-center'>
+      <div class='col-sm-6 text-center'>
         <h3>For parameter: 10</h3>
         <table class='table'>
           <tr>
@@ -89,20 +77,32 @@ public class ary {
             <th>Static</th>
           </tr>
           <tr>
-            <td>Benchmark - Before</td>
-            <td>423</td>
-            <td>509</td>
-            <td>327</td>
+            <td>Benchmark Average - Before</td>
+            <td>385</td>
+            <td>490</td>
+            <td>307</td>
           </tr>
           <tr>
-            <td>Benchmark - After</td>
-            <td>400</td>
-            <td>556</td>
-            <td>331</td>
+            <td>Benchmark Average - After</td>
+            <td>386</td>
+            <td>488</td>
+            <td>306</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - Before</td>
+            <td>4.42</td>
+            <td>4.66</td>
+            <td>3.83</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - After</td>
+            <td>4.08</td>
+            <td>4.02</td>
+            <td>2.2</td>
           </tr>
         </table>
       </div>
-      <div class='col-sm-4 text-center'>
+      <div class='col-sm-6 text-center'>
         <h3>For parameter: 100</h3>
         <table class='table'>
           <tr>
@@ -112,16 +112,28 @@ public class ary {
             <th>Static</th>
           </tr>
           <tr>
-            <td>Benchmark - Before</td>
-            <td>410</td>
-            <td>616</td>
-            <td>332</td>
+            <td>Benchmark Average - Before</td>
+            <td>391</td>
+            <td>565</td>
+            <td>313</td>
           </tr>
           <tr>
-            <td>Benchmark - After</td>
-            <td>402</td>
-            <td>620</td>
-            <td>336</td>
+            <td>Benchmark Average - After</td>
+            <td>395</td>
+            <td>567</td>
+            <td>312</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - Before</td>
+            <td>5.22</td>
+            <td>6.26</td>
+            <td>2.75</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - After</td>
+            <td>5.32</td>
+            <td>7.71</td>
+            <td>2.96</td>
           </tr>
         </table>
       </div>
