@@ -1,4 +1,4 @@
-package report
+package com.strater.jenn.report
 
 import groovy.xml.MarkupBuilder
 
@@ -17,7 +17,7 @@ class ReportWriter {
         new File(REPORT_DIR).mkdirs()
         File file = new File(REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE)
         File reportFolder = new File(REPORT_DIR + '/reports')
-        List<String> filenames = reportFolder.listFiles()*.name - 'App'
+        List<String> filenames = reportFolder.listFiles()*.name - 'com.strater.jenn.App'
 
         file.withWriter { writer ->
             MarkupBuilder html = new MarkupBuilder(writer)

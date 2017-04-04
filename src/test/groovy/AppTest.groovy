@@ -1,3 +1,4 @@
+import com.strater.jenn.App
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -25,5 +26,13 @@ class AppTest extends Specification {
 
         where:
         filename << filenames
+    }
+
+    void "test against this application (with no args)"() {
+        when:
+        app.main()
+
+        then:
+        0 * _
     }
 }

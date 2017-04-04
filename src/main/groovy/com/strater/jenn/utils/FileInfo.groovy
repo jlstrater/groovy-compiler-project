@@ -1,4 +1,4 @@
-package utils
+package com.strater.jenn.utils
 
 class FileInfo {
     String filename

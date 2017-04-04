@@ -1,4 +1,4 @@
-package utils
+package com.strater.jenn.utils
 
 import groovy.util.logging.Slf4j
 
@@ -62,5 +62,17 @@ class FileCompiler {
         process.consumeProcessOutputStream(out)
         process.waitFor()
         out
+    }
+
+    static String packageJar(String classDir, String jarName, String mainClassName) {
+        Process process = "jar cvfe ${jarName}.jar $mainClassName $classDir".execute()
+        StringBuffer error = new StringBuffer()
+        process.consumeProcessErrorStream(error)
+        process.waitFor()
+        if (error) {
+            return error
+        }
+        "mv ${jarName}.jar build/jars".execute()
+         'build/jars/' + jarName + '.jar'
     }
 }

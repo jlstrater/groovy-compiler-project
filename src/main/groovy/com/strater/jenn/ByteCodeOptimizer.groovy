@@ -1,3 +1,5 @@
+package com.strater.jenn
+
 import static jdk.internal.org.objectweb.asm.Opcodes.ACONST_NULL
 import static jdk.internal.org.objectweb.asm.Opcodes.ALOAD
 import static jdk.internal.org.objectweb.asm.Opcodes.ILOAD
@@ -10,8 +12,8 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode
 import jdk.internal.org.objectweb.asm.tree.MethodNode
 
-import utils.FileCompiler
-import utils.FileInfo
+import com.strater.jenn.utils.FileCompiler
+import com.strater.jenn.utils.FileInfo
 
 class ByteCodeOptimizer {
 
@@ -29,12 +31,12 @@ class ByteCodeOptimizer {
 
     Integer numLinesRemoved = 0
 
-    List<OptimizationResult> processDirectory(String directory, String parent = 'build/bytecode') {
+    List<OptimizationResult> processDirectory(String directory, String parent) {
         List<OptimizationResult> results = []
         File dir = new File(directory)
         dir.eachFile { File file ->
             if (file.isDirectory()) {
-                results << processDirectory(file.path, parent + '/' + file.name)
+                results << processDirectory(file.path, parent + file.name + '/')
             } else {
                 results << processClassFiles(new FileInfo(file.path), parent)
             }
@@ -56,9 +58,9 @@ class ByteCodeOptimizer {
             ClassWriter bytecodeWriter = new ClassWriter(0)
             classNode.accept(bytecodeWriter)
 
-            File dir = new File(outputDir + '/new')
+            File dir = new File(outputDir)
             dir.mkdirs()
-            String newClassFileInfo = outputDir + '/new/' + classFileInfo.filename + '.class'
+            String newClassFileInfo = outputDir + classFileInfo.filename + '.class'
             FileOutputStream out = new FileOutputStream(newClassFileInfo)
             out.write bytecodeWriter.toByteArray()
 

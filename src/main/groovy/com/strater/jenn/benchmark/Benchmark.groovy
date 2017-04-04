@@ -1,4 +1,4 @@
-package benchmark
+package com.strater.jenn.benchmark
 
 /*
  *  Licensed to the Apache Software Foundation (ASF) under one
@@ -29,8 +29,10 @@ class Benchmark {
     Map<String, List> benchData = [
             ackermann: [1, 2],
             ary: [10, 100],
+            binarytrees: [1],
             collectloop: [1000, 100000, 1000000, 100000000, 100000000000],
             eachloop: [1000, 100000, 1000000, 100000000, 100000000000],
+            echo: [1],
             fannkuch: [1, 2, 3],
             fibo: [10, 25, 50],
             forloop: [1000, 100000, 1000000, 100000000, 100000000000],
@@ -48,9 +50,9 @@ class Benchmark {
             groovyc: 'build/bytecode/groovyc',
             indy: 'build/bytecode/indy',
             static: 'build/bytecode/static',
-            newgroovyc: 'build/bytecode/groovyc/new',
-            newindy: 'build/bytecode/indy/new',
-            newstatic: 'build/bytecode/static/new',
+            newgroovyc: 'build/bytecode/new/groovyc',
+            newindy: 'build/bytecode/new/indy',
+            newstatic: 'build/bytecode/new/static',
     ]
 
     List runBenchmark(String filename) {
@@ -70,14 +72,44 @@ class Benchmark {
         results
     }
 
+    static Stats execBenchmarkOnApplication(String jarPath, String param) {
+        File jarFile = new File(jarPath)
+        if (jarFile.exists()) {
+            log.info '\t\t running jar'
+            StringBuffer error = new StringBuffer()
+
+            Map times = [:]
+            1.times { n ->
+                long time1 = System.nanoTime()
+                Process p = "java -jar $jarFile.path $param".execute()
+                p.consumeProcessErrorStream(error)
+                p.waitForOrKill(6 * 1000)
+                long time2 = System.nanoTime()
+                times[n] = (time2 - time1).toDouble()
+            }
+
+            if (error) {
+                log.info 'error: ' + error
+                return new Stats(average: 'Error', stddev: 'Error')
+            }
+            log.info 'main app runtime: ' + times.values().sum()
+
+            return calculateStats(times)
+        }
+        new Stats(average: 'N/A', stddev: 'N/A')
+    }
+
     static Stats execBenchmark(String classDir, String filename, param) {
         File classFile = new File(classDir + '/' + filename + '.class')
         if (classFile.exists()) {
             log.info '\t\trunning  '
             StringBuffer error = new StringBuffer()
 
+            // throw out first run as warmup
+            "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
+
             Map times = [:]
-            10.times { n ->
+            5.times { n ->
                 long time1 = System.nanoTime()
                 Process p = "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
                 p.consumeProcessErrorStream(error)
@@ -90,6 +122,7 @@ class Benchmark {
                 log.info 'error: ' + error
                 return new Stats(average: 'Error', stddev: 'Error')
             }
+
             List compilationTypeTokens = classDir.tokenize('/')[-2..-1]
             String compilationType = compilationTypeTokens.last() == 'new' ? 'new - ' + compilationTypeTokens[0] :
                     compilationTypeTokens[1]

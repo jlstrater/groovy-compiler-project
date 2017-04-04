@@ -1,6 +1,7 @@
-package report
+package com.strater.jenn.report
 
-import benchmark.BenchmarkResultSet
+import com.strater.jenn.benchmark.BenchmarkResultSet
+import com.strater.jenn.benchmark.Stats
 import groovy.xml.MarkupBuilder
 
 @SuppressWarnings(['AbcMetric', 'CyclomaticComplexity'])
@@ -39,7 +40,7 @@ class FileReportWriter extends ReportWriter {
                     div(class: 'row col-lg-5 col-lg-offset-4') {
                         pre {
                             code class: 'groovy',
-                                new File('build/resources/test/scripts/' + filename + '.groovy').text.stripIndent()
+                                    new File('build/resources/test/scripts/' + filename + '.groovy').text.stripIndent()
                         }
                     }
 
@@ -53,9 +54,9 @@ class FileReportWriter extends ReportWriter {
                             }
                             tr {
                                 td 'Lines Removed'
-                                td after.find { it.compilationType == 'groovyc' }?.linesRemoved ?: 'Error'
-                                td after.find { it.compilationType == 'indy' }?.linesRemoved ?: 'Error'
-                                td after.find { it.compilationType == 'static' }?.linesRemoved ?: 'Error'
+                                td after.findAll { it.compilationType == 'groovyc' }*.linesRemoved.sum() ?: 'Error'
+                                td after.findAll { it.compilationType == 'indy' }*.linesRemoved.sum() ?: 'Error'
+                                td after.findAll { it.compilationType == 'static' }*.linesRemoved.sum() ?: 'Error'
                             }
                         }
                     }
@@ -63,7 +64,7 @@ class FileReportWriter extends ReportWriter {
                     div(class: 'row col-sm-10 text-center col-sm-offset-1') {
                         h2 'Benchmarks'
                         benchmarkData*.parameter.unique().each { param ->
-                            div (class: 'col-sm-6 text-center') {
+                            div(class: 'col-sm-6 text-center') {
                                 h3 'For parameter: ' + param
                                 table(class: 'table') {
                                     tr {
@@ -158,20 +159,20 @@ class FileReportWriter extends ReportWriter {
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Groovyc (Legacy)'
                             pre {
-                                code class: 'assembly', after.find { it.compilationType == 'groovyc' }?.text
+                                code class: 'assembly', after.find { it.compilationType == 'groovyc' }*.text?.join('\n')
                             }
                         }
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Invoke Dynamic'
                             pre {
-                                code class: 'assembly', after.find { it.compilationType == 'indy' }?.text
+                                code class: 'assembly', after.find { it.compilationType == 'indy' }*.text?.join('\n')
                             }
                         }
 
                         div(class: 'col-md-4') {
                             h2 class: 'text-center', 'Static Compilation'
                             pre {
-                                code class: 'assembly', after.find { it.compilationType == 'static' }?.text
+                                code class: 'assembly', after.find { it.compilationType == 'static' }*.text?.join('\n')
                             }
                         }
                     }
@@ -180,4 +181,70 @@ class FileReportWriter extends ReportWriter {
         }
     }
 
+    @SuppressWarnings(['NestedBlockDepth', 'MethodSize'])
+    void writeAppReport(String filename, Integer linesRemoved, Stats beforeBenchmarkData,
+                        Stats afterBenchmarkData) {
+        new File(IND_REPORT_DIR).mkdirs()
+        File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
+        file.withWriter { writer ->
+            MarkupBuilder html = new MarkupBuilder(writer)
+
+            html.html {
+                head {
+                    title 'Bytecode Analysis Report'
+                    link rel: 'stylesheet', type: 'text/css', href: BOOTSTRAP_CSS
+                    link rel: 'stylesheet', type: 'text/css', href: HIGHLIGHT_JS_CSS
+                    script(src: JQUERY_JS, type: 'text/javascript', '')
+                    script(src: BOOTSTRAP_JS, type: 'text/javascript', '')
+                    script(src: HIGHLIGHT_JS_JS, type: 'text/javascript', '')
+                    script('hljs.initHighlightingOnLoad();')
+                }
+                body {
+                    ul(class: 'breadcrumb') {
+                        li {
+                            a href: '../index.html', 'Home'
+                            span class: 'divider'
+                        }
+                        li {
+                            a filename.toUpperCase()
+                        }
+                    }
+                    h2 class: 'text-center', 'Bytecode Analysis for com.strater.jenn.App: ' + filename
+
+                    div(class: 'row col-sm-10 text-center col-sm-offset-1') {
+                        h2 'Lines Removed: ' + linesRemoved
+                    }
+
+                    div(class: 'row col-sm-10 text-center col-sm-offset-1') {
+                        h2 'Benchmarks'
+                        div(class: 'col-sm-6 text-center') {
+                            table(class: 'table') {
+                                tr {
+                                    th ''
+                                    th 'Before Optimization'
+                                    th 'After Optimization'
+                                }
+                                tr {
+                                    td 'Benchmark Average - Before'
+                                    td beforeBenchmarkData.average
+                                }
+                                tr {
+                                    td 'Benchmark Average - After'
+                                    td afterBenchmarkData.average
+                                }
+                                tr {
+                                    td 'Benchmark Std Dev - Before'
+                                    td beforeBenchmarkData.stddev
+                                }
+                                tr {
+                                    td 'Benchmark Std Dev - After'
+                                    td afterBenchmarkData.stddev
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

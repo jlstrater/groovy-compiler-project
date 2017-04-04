@@ -1,8 +1,8 @@
-Compiled from "App.groovy"
-public class App implements groovy.lang.GroovyObject {
+Compiled from "com.strater.jenn.App.groovy"
+public class com.strater.jenn.App implements groovy.lang.GroovyObject {
   public static transient boolean __$stMC;
 
-  public App();
+  public com.strater.jenn.App();
     Code:
        0: aload_0
        1: invokespecial #41                 // Method java/lang/Object."<init>":()V
@@ -42,16 +42,16 @@ public class App implements groovy.lang.GroovyObject {
       36: ldc           #75                 // int 1
       38: aaload
       39: aload_0
-      40: new           #77                 // class App$_main_closure1
+      40: new           #77                 // class com.strater.jenn.App$_main_closure1
       43: dup
-      44: ldc           #2                  // class App
-      46: ldc           #2                  // class App
-      48: invokespecial #80                 // Method App$_main_closure1."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+      44: ldc           #2                  // class com.strater.jenn.App
+      46: ldc           #2                  // class com.strater.jenn.App
+      48: invokespecial #80                 // Method com.strater.jenn.App$_main_closure1."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
       51: invokeinterface #74,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
       56: pop
       57: return
 
-  public static void compileWithGroovyc(utils.FileInfo);
+  public static void compileWithGroovyc(com.strater.jenn.utils.FileInfo);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_1
@@ -126,7 +126,7 @@ public class App implements groovy.lang.GroovyObject {
      131: pop
      132: return
 
-  public static void compileWithInvokeDynamic(utils.FileInfo);
+  public static void compileWithInvokeDynamic(com.strater.jenn.utils.FileInfo);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_1
@@ -201,7 +201,7 @@ public class App implements groovy.lang.GroovyObject {
      131: pop
      132: return
 
-  public static void compileWithStaticConfig(utils.FileInfo);
+  public static void compileWithStaticConfig(com.strater.jenn.utils.FileInfo);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_1
@@ -373,7 +373,7 @@ public class App implements groovy.lang.GroovyObject {
      305: pop
      306: return
 
-  public static void compileWithLocalGroovyC(utils.FileInfo);
+  public static void compileWithLocalGroovyC(com.strater.jenn.utils.FileInfo);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_1
@@ -440,7 +440,7 @@ public class App implements groovy.lang.GroovyObject {
      118: pop
      119: return
 
-  public static void compileWithLocalIndy(utils.FileInfo);
+  public static void compileWithLocalIndy(com.strater.jenn.utils.FileInfo);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_1
@@ -507,7 +507,7 @@ public class App implements groovy.lang.GroovyObject {
      118: pop
      119: return
 
-  public static void compileWithLocalStaticConfig(utils.FileInfo);
+  public static void compileWithLocalStaticConfig(com.strater.jenn.utils.FileInfo);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_1
@@ -582,7 +582,7 @@ public class App implements groovy.lang.GroovyObject {
      129: pop
      130: return
 
-  public static java.lang.String fetchByteCode(utils.FileInfo, java.lang.String);
+  public static java.lang.String fetchByteCode(com.strater.jenn.utils.FileInfo, java.lang.String);
     Code:
        0: invokestatic  #45                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_2
@@ -763,7 +763,7 @@ public class App implements groovy.lang.GroovyObject {
     Code:
        0: aload_0
        1: invokevirtual #256                // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class App
+       4: ldc           #2                  // class com.strater.jenn.App
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #260                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -840,7 +840,7 @@ public class App implements groovy.lang.GroovyObject {
        3: ldc_w         #293                // int 63
        6: aaload
        7: ldc_w         #295                // class org/slf4j/LoggerFactory
-      10: ldc_w         #296                // String App
+      10: ldc_w         #296                // String com.strater.jenn.App
       13: invokeinterface #74,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
       18: astore_0
       19: aload_0
