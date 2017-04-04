@@ -2,9 +2,12 @@ package com.strater.jenn
 
 import static jdk.internal.org.objectweb.asm.Opcodes.ACONST_NULL
 import static jdk.internal.org.objectweb.asm.Opcodes.ALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.GOTO
 import static jdk.internal.org.objectweb.asm.Opcodes.ILOAD
 import static jdk.internal.org.objectweb.asm.Opcodes.POP
 import static jdk.internal.org.objectweb.asm.Opcodes.POP2
+
+import groovy.util.logging.Slf4j
 
 import jdk.internal.org.objectweb.asm.ClassReader
 import jdk.internal.org.objectweb.asm.ClassWriter
@@ -15,6 +18,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode
 import com.strater.jenn.utils.FileCompiler
 import com.strater.jenn.utils.FileInfo
 
+@Slf4j
 class ByteCodeOptimizer {
 
     protected static final int[] POP_CODES = [
@@ -73,18 +77,36 @@ class ByteCodeOptimizer {
 
     @SuppressWarnings('NoDef')
     void iterateThroughMethodNode(MethodNode methodNode) {
+        List jumpPoints = findGoTos(methodNode)
         ListIterator<AbstractInsnNode> nodes = methodNode.instructions.iterator()
-        // how do you get the method's inner class for example main() { _main_closure_x...}
         AbstractInsnNode prev = null
         while (nodes.hasNext()) {
             AbstractInsnNode current = nodes.next()
+
             if (current.opcode in POP_CODES && current.previous.opcode in LOAD_CODES) {
-                methodNode.instructions.remove(current)
-                methodNode.instructions.remove(prev)
-                numLinesRemoved += 2
+                if (current.index in jumpPoints || prev.index in jumpPoints) {
+                    log.error 'Ack! Removing a line that the program jumps to!!!!'
+                } else {
+                    methodNode.instructions.remove(current)
+                    methodNode.instructions.remove(prev)
+                    numLinesRemoved += 2
+                }
             }
             prev = current
         }
+    }
+
+    List findGoTos(MethodNode methodNode) {
+        List jumpPoints = []
+        ListIterator<AbstractInsnNode> nodes = methodNode.instructions.iterator()
+        while (nodes.hasNext()) {
+            AbstractInsnNode current = nodes.next()
+
+            if (current.opcode == GOTO) {
+                jumpPoints << current.next.index
+            }
+        }
+        jumpPoints
     }
 
     class OptimizationResult {
