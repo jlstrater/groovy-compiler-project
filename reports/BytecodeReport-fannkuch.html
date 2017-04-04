@@ -58,7 +58,7 @@ def fannkuch(int n) {
             check++
         }
 
-        while (r != 1) { 
+        while (r != 1) {
             count[r - 1] = r
             r--
         }
@@ -66,15 +66,15 @@ def fannkuch(int n) {
             for (i in 0..&lt;n) {
                 perm[i] = perm1[i]
             }
-            
+
             int flipsCount = 0
             int k
 
             while (!((k = perm[0]) == 0)) {
                 int k2 = (k + 1) &gt;&gt; 1
                 for (i in 0..&lt;k2) {
-                    int temp = perm[i] 
-                    perm[i] = perm[k - i] 
+                    int temp = perm[i]
+                    perm[i] = perm[k - i]
                     perm[k - i] = temp
                 }
                 flipsCount++
@@ -141,26 +141,26 @@ def fannkuch(int n) {
           </tr>
           <tr>
             <td>Benchmark Average - Before</td>
-            <td>416</td>
-            <td>483</td>
+            <td>441</td>
+            <td>519</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Average - After</td>
-            <td>417</td>
-            <td>478</td>
+            <td>441</td>
+            <td>505</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - Before</td>
-            <td>8.58</td>
-            <td>14.26</td>
+            <td>5.7</td>
+            <td>23.09</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - After</td>
-            <td>9.01</td>
-            <td>10.48</td>
+            <td>15.4</td>
+            <td>12.74</td>
             <td>N/A</td>
           </tr>
         </table>
@@ -176,26 +176,26 @@ def fannkuch(int n) {
           </tr>
           <tr>
             <td>Benchmark Average - Before</td>
-            <td>415</td>
-            <td>509</td>
+            <td>440</td>
+            <td>529</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Average - After</td>
-            <td>409</td>
-            <td>507</td>
+            <td>437</td>
+            <td>528</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - Before</td>
-            <td>9.18</td>
-            <td>8.54</td>
+            <td>13.99</td>
+            <td>22.52</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - After</td>
-            <td>2.08</td>
-            <td>8.94</td>
+            <td>17.06</td>
+            <td>24.43</td>
             <td>N/A</td>
           </tr>
         </table>
@@ -211,26 +211,26 @@ def fannkuch(int n) {
           </tr>
           <tr>
             <td>Benchmark Average - Before</td>
-            <td>416</td>
-            <td>512</td>
+            <td>441</td>
+            <td>535</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Average - After</td>
-            <td>421</td>
-            <td>504</td>
+            <td>436</td>
+            <td>543</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - Before</td>
-            <td>5.42</td>
-            <td>11.16</td>
+            <td>14.28</td>
+            <td>20.85</td>
             <td>N/A</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - After</td>
-            <td>5.29</td>
-            <td>2.32</td>
+            <td>16.3</td>
+            <td>37.45</td>
             <td>N/A</td>
           </tr>
         </table>
