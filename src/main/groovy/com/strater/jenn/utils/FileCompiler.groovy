@@ -13,7 +13,7 @@ class FileCompiler {
 
     List compileFile(FileInfo file) {
 
-        log.info 'Starting Analysis for program: ' + file.filename
+        log.debug 'Starting Analysis for program: ' + file.filename
 
         compileWithGroovyc(file)
         String groovycBytecode = fetchByteCode(file, GROOVYC_OUTPUT_DIR)
@@ -28,19 +28,19 @@ class FileCompiler {
     }
 
     void compileWithGroovyc(FileInfo file) {
-        log.info 'running groovyc for ' + file.filename
+        log.debug 'running groovyc for ' + file.filename
         Process process = "groovyc $file.info -d $GROOVYC_OUTPUT_DIR".execute()
         process.waitFor()
     }
 
     void compileWithInvokeDynamic(FileInfo file) {
-        log.info 'running invoke dynamic for ' + file.filename
+        log.debug 'running invoke dynamic for ' + file.filename
         Process process = "groovyc --indy $file.info -d $INDY_OUTPUT_DIR".execute()
         process.waitFor()
     }
 
     String compileWithStaticConfig(FileInfo file) {
-        log.info 'running static compilation for ' + file.filename
+        log.debug 'running static compilation for ' + file.filename
         StringBuffer error = new StringBuffer()
         Process process = "groovyc --configscript $SC_CONFIG $file.info -d $SC_OUTPUT_DIR".execute()
         process.consumeProcessErrorStream(error)

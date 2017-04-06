@@ -6,10 +6,22 @@
  * user guide available at https://docs.gradle.org/3.5-20170301121954+0000/userguide/tutorial_groovy_projects.html
  */
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+    }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'application'
 apply plugin: 'codenarc'
 apply plugin: 'idea'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -22,15 +34,15 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.9'
 
     // for generic logging rather than system out
-    compile group: 'org.slf4j', name:'slf4j-api', version: '1.6.4'
-    compile group: 'org.slf4j', name:'slf4j-simple', version: '1.6.4'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.6.4'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.4'
     compile group: 'org.ow2.asm', name: 'asm', version: '5.0.3'
 
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
 }
 
 // Define the main class for the application
-mainClassName = 'App'
+mainClassName = 'com.strater.jenn.App'
 
 codenarc {
     toolVersion = '0.27.0'
@@ -45,7 +57,11 @@ codenarcTest {
 logging.captureStandardOutput LogLevel.INFO
 
 run {
-    if(project.hasProperty('files')){
+    if (project.hasProperty('files')) {
         args(files.tokenize(','))
     }
+}
+
+task newJar(type: ShadowJar) {
+    from 'build/bytecode/main'
 }

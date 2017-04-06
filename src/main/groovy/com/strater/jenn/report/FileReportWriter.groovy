@@ -54,9 +54,9 @@ class FileReportWriter extends ReportWriter {
                             }
                             tr {
                                 td 'Lines Removed'
-                                td after.findAll { it.compilationType == 'groovyc' }*.linesRemoved.sum() ?: 'Error'
-                                td after.findAll { it.compilationType == 'indy' }*.linesRemoved.sum() ?: 'Error'
-                                td after.findAll { it.compilationType == 'static' }*.linesRemoved.sum() ?: 'Error'
+                                td after.findAll { it.compilationType == 'groovyc' }*.linesRemoved.sum() ?: 'Error or 0'
+                                td after.findAll { it.compilationType == 'indy' }*.linesRemoved.sum() ?: 'Error or 0'
+                                td after.findAll { it.compilationType == 'static' }*.linesRemoved.sum() ?: 'Error or 0'
                             }
                         }
                     }
@@ -225,19 +225,13 @@ class FileReportWriter extends ReportWriter {
                                     th 'After Optimization'
                                 }
                                 tr {
-                                    td 'Benchmark Average - Before'
+                                    td 'Benchmark Average'
                                     td beforeBenchmarkData.average
-                                }
-                                tr {
-                                    td 'Benchmark Average - After'
                                     td afterBenchmarkData.average
                                 }
                                 tr {
-                                    td 'Benchmark Std Dev - Before'
+                                    td 'Benchmark Std Dev'
                                     td beforeBenchmarkData.stddev
-                                }
-                                tr {
-                                    td 'Benchmark Std Dev - After'
                                     td afterBenchmarkData.stddev
                                 }
                             }

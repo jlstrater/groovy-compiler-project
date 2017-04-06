@@ -24,7 +24,7 @@ import groovy.util.logging.Slf4j
 
 @Slf4j
 class Benchmark {
-    static final String GROOVY_CLASSPATH = System.getenv('GROOVY_HOME') + '/embeddable/groovy-all-2.4.9.jar'
+    static final String GROOVY_CLASSPATH = System.getenv('GROOVY_HOME') + '/embeddable/groovy-all-2.4.9-indy.jar'
 
     Map<String, List> benchData = [
             ackermann: [1, 2],
@@ -75,24 +75,26 @@ class Benchmark {
     static Stats execBenchmarkOnApplication(String jarPath, String param) {
         File jarFile = new File(jarPath)
         if (jarFile.exists()) {
-            log.info '\t\t running jar'
+            log.debug '\t\t running jar'
             StringBuffer error = new StringBuffer()
+            StringBuffer out = new StringBuffer()
 
             Map times = [:]
-            1.times { n ->
+            10.times { n ->
                 long time1 = System.nanoTime()
                 Process p = "java -jar $jarFile.path $param".execute()
                 p.consumeProcessErrorStream(error)
+                p.consumeProcessOutputStream(out)
                 p.waitForOrKill(6 * 1000)
                 long time2 = System.nanoTime()
                 times[n] = (time2 - time1).toDouble()
             }
 
             if (error) {
-                log.info 'error: ' + error
+                log.debug 'error: ' + error
                 return new Stats(average: 'Error', stddev: 'Error')
             }
-            log.info 'main app runtime: ' + times.values().sum()
+            log.debug 'main app runtime: ' + times.values().sum()
 
             return calculateStats(times)
         }
@@ -102,14 +104,14 @@ class Benchmark {
     static Stats execBenchmark(String classDir, String filename, param) {
         File classFile = new File(classDir + '/' + filename + '.class')
         if (classFile.exists()) {
-            log.info '\t\trunning  '
+            log.debug '\t\trunning  '
             StringBuffer error = new StringBuffer()
 
             // throw out first run as warmup
             "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
 
             Map times = [:]
-            5.times { n ->
+            20.times { n ->
                 long time1 = System.nanoTime()
                 Process p = "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
                 p.consumeProcessErrorStream(error)
@@ -119,14 +121,14 @@ class Benchmark {
             }
 
             if (error) {
-                log.info 'error: ' + error
+                log.debug 'error: ' + error
                 return new Stats(average: 'Error', stddev: 'Error')
             }
 
             List compilationTypeTokens = classDir.tokenize('/')[-2..-1]
             String compilationType = compilationTypeTokens.last() == 'new' ? 'new - ' + compilationTypeTokens[0] :
                     compilationTypeTokens[1]
-            log.info "total runtime for $filename with $compilationType for param: $param = ${times.values().sum()}"
+            log.debug "total runtime for $filename with $compilationType for param: $param = ${times.values().sum()}"
 
             return calculateStats(times)
         }

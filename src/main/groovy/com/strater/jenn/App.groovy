@@ -52,12 +52,19 @@ class App {
         outputDir.exists() ? outputDir.delete() : outputDir.mkdir()
         Integer linesRemoved = byteCodeOptimizer.processDirectory('build/classes', 'build/bytecode/').linesRemoved.sum()
         new File('build/jars').mkdirs()
-        String oldJarFile = fileCompiler.packageJar('build/classes/main', 'old-app', 'com.strater.jenn.App')
-        String newJarFile = fileCompiler.packageJar('build/bytecode/main', 'new-app', 'com.strater.jenn.App')
-        Stats beforeBenchmarkData = benchmark.execBenchmarkOnApplication(oldJarFile,
-                '/build/resources/test/scripts/HelloWorld.groovy')
-        Stats afterBenchmarkData = benchmark.execBenchmarkOnApplication(newJarFile,
-                '/build/resources/test/scripts/HelloWorld.groovy')
+
+        Process p = './gradlew shadowJar'.execute()
+        p.waitFor()
+        String jarLocation = 'build/libs/groovy-compiler-project-all.jar'
+
+        Stats beforeBenchmarkData = benchmark.execBenchmarkOnApplication(jarLocation,
+                'build/resources/test/scripts/HelloWorld.groovy')
+
+        p = './gradlew newJar'.execute()
+        p.waitFor()
+
+        Stats afterBenchmarkData = benchmark.execBenchmarkOnApplication(jarLocation,
+                'build/resources/test/scripts/HelloWorld.groovy')
 
         writer.writeAppReport('App', linesRemoved, beforeBenchmarkData, afterBenchmarkData)
         report.write()
