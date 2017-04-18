@@ -2,10 +2,14 @@ package com.strater.jenn
 
 import static jdk.internal.org.objectweb.asm.Opcodes.ACONST_NULL
 import static jdk.internal.org.objectweb.asm.Opcodes.ALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.DUP
+import static jdk.internal.org.objectweb.asm.Opcodes.DUP2
 import static jdk.internal.org.objectweb.asm.Opcodes.GOTO
 import static jdk.internal.org.objectweb.asm.Opcodes.ILOAD
 import static jdk.internal.org.objectweb.asm.Opcodes.POP
 import static jdk.internal.org.objectweb.asm.Opcodes.POP2
+import static jdk.internal.org.objectweb.asm.Opcodes.ASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.ISTORE
 
 import groovy.util.logging.Slf4j
 
@@ -31,6 +35,16 @@ class ByteCodeOptimizer {
             ACONST_NULL,
             ALOAD,
             ILOAD,
+    ]
+
+    protected static final int[] STORE_CODES = [
+            ISTORE,
+            ASTORE,
+    ]
+
+    protected static final int[] DUP_CODES = [
+            DUP,
+            DUP2,
     ]
 
     Integer numLinesRemoved = 0
@@ -91,6 +105,11 @@ class ByteCodeOptimizer {
                     methodNode.instructions.remove(prev)
                     numLinesRemoved += 2
                 }
+            } else if (current.opcode in STORE_CODES && current.previous.opcode in DUP_CODES &&
+                    current?.next?.opcode in POP_CODES) {
+                methodNode.instructions.remove(prev)
+                methodNode.instructions.remove(nodes.next())
+                numLinesRemoved += 2
             }
             prev = current
         }
