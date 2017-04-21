@@ -18,6 +18,7 @@ class AppTest extends Specification {
         new File(this.class.getResource('jars').file).eachFile { File file ->
             jarFilenames << file.path
         }
+        // new comment
     }
 
     @Unroll
