@@ -82,7 +82,7 @@ class Benchmark {
             Map times = [:]
             10.times { n ->
                 long time1 = System.nanoTime()
-                Process p = "java -Djava.compiler=NONE -jar $jarFile.path $param ".execute()
+                Process p = "java -jar $jarFile.path $param ".execute()
                 p.consumeProcessErrorStream(error)
                 p.consumeProcessOutputStream(out)
                 p.waitForOrKill(6 * 1000)
@@ -111,9 +111,9 @@ class Benchmark {
             "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
 
             Map times = [:]
-            20.times { n ->
+            1.times { n ->
                 long time1 = System.nanoTime()
-                Process p = "java -Djava.compiler=NONE -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}"
+                Process p = "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}"
                         .execute()
                 p.consumeProcessErrorStream(error)
                 p.waitForOrKill(6 * 1000)

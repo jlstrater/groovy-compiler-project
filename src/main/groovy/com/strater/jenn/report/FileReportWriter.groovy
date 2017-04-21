@@ -1,5 +1,6 @@
 package com.strater.jenn.report
 
+import com.strater.jenn.ByteCodeOptimizer
 import com.strater.jenn.benchmark.BenchmarkResultSet
 import com.strater.jenn.benchmark.Stats
 import groovy.xml.MarkupBuilder
@@ -15,6 +16,20 @@ class FileReportWriter extends ReportWriter {
         File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
         file.withWriter { writer ->
             MarkupBuilder html = new MarkupBuilder(writer)
+
+            Integer linesRemovedGroovyc = after.findAll { it.compilationType == 'groovyc' }*.linesRemoved
+                    .sum() ?: 0
+            Integer linesRemovedIndy = after.findAll { it.compilationType == 'indy' }*.linesRemoved
+                    .sum() ?: 0
+            Integer linesRemovedStatic = after.findAll { it.compilationType == 'static' }*.linesRemoved
+                    .sum() ?: 0
+
+            Integer totalLinesGroovyc = after.findAll { it.compilationType == 'groovyc' }*.totalLines
+                    .sum() ?: 0
+            Integer totalLinesIndy = after.findAll { it.compilationType == 'indy' }*.totalLines
+                    .sum() ?: 0
+            Integer totalLinesStatic = after.findAll { it.compilationType == 'static' }*.totalLines
+                    .sum() ?: 0
 
             html.html {
                 head {
@@ -54,9 +69,24 @@ class FileReportWriter extends ReportWriter {
                             }
                             tr {
                                 td 'Lines Removed'
-                                td after.findAll { it.compilationType == 'groovyc' }*.linesRemoved.sum() ?: 'Error or 0'
-                                td after.findAll { it.compilationType == 'indy' }*.linesRemoved.sum() ?: 'Error or 0'
-                                td after.findAll { it.compilationType == 'static' }*.linesRemoved.sum() ?: 'Error or 0'
+                                td linesRemovedGroovyc
+                                td linesRemovedIndy
+                                td linesRemovedStatic
+                            }
+                            tr {
+                                td 'Total Lines - Before'
+                                td totalLinesGroovyc
+                                td totalLinesIndy
+                                td totalLinesStatic
+                            }
+                            tr {
+                                td 'Percentage of Lines Removed'
+                                td totalLinesGroovyc ? ((linesRemovedGroovyc / totalLinesGroovyc * 100) as double)
+                                        .round(1) : 'Error'
+                                td totalLinesIndy ? ((linesRemovedIndy / totalLinesIndy * 100) as double)
+                                        .round(1) : 'Error'
+                                td totalLinesStatic ? ((linesRemovedStatic / totalLinesStatic * 100) as double)
+                                        .round(1) : 'Error'
                             }
                         }
                     }
@@ -182,7 +212,7 @@ class FileReportWriter extends ReportWriter {
     }
 
     @SuppressWarnings(['NestedBlockDepth', 'MethodSize'])
-    void writeAppReport(String filename, Integer linesRemoved, Stats beforeBenchmarkData,
+    void writeAppReport(String filename, List<ByteCodeOptimizer.OptimizationResult> results, Stats beforeBenchmarkData,
                         Stats afterBenchmarkData) {
         new File(IND_REPORT_DIR).mkdirs()
         File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
@@ -212,7 +242,10 @@ class FileReportWriter extends ReportWriter {
                     h2 class: 'text-center', 'Bytecode Analysis for com.strater.jenn.App: ' + filename
 
                     div(class: 'row col-sm-10 text-center col-sm-offset-1') {
-                        h2 'Lines Removed: ' + linesRemoved
+                        h2 'Lines Removed: ' + results.linesRemoved.sum()
+                        h2 'Total Lines: ' + results.totalLines.sum()
+                        h2 'Percentage Lines Removed: ' + (((results.linesRemoved.sum() / results.totalLines.sum() )
+                                * 100) as double).round(1)
                     }
 
                     div(class: 'row col-sm-10 text-center col-sm-offset-1') {

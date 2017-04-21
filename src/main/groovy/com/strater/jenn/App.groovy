@@ -50,7 +50,8 @@ class App {
     static void runAgainstThisApplication() {
         File outputDir = new File('build/bytecode')
         outputDir.exists() ? outputDir.delete() : outputDir.mkdir()
-        Integer linesRemoved = byteCodeOptimizer.processDirectory('build/classes', 'build/bytecode/').linesRemoved.sum()
+        List<ByteCodeOptimizer.OptimizationResult> result = byteCodeOptimizer
+                .processDirectory('build/classes', 'build/bytecode/')
         new File('build/jars').mkdirs()
 
         Process p = './gradlew shadowJar'.execute()
@@ -66,7 +67,7 @@ class App {
         Stats afterBenchmarkData = benchmark.execBenchmarkOnApplication(jarLocation,
                 'build/resources/test/scripts/HelloWorld.groovy')
 
-        writer.writeAppReport('App', linesRemoved, beforeBenchmarkData, afterBenchmarkData)
+        writer.writeAppReport('App', result, beforeBenchmarkData, afterBenchmarkData)
         report.write()
         new File('build/bytecode').deleteDir()
     }

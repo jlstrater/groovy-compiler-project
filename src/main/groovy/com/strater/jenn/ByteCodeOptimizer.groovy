@@ -1,15 +1,48 @@
 package com.strater.jenn
 
+import static jdk.internal.org.objectweb.asm.Opcodes.AALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.AASTORE
 import static jdk.internal.org.objectweb.asm.Opcodes.ACONST_NULL
 import static jdk.internal.org.objectweb.asm.Opcodes.ALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.BALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.BASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.CALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.CASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.DALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.DASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.DCONST_0
+import static jdk.internal.org.objectweb.asm.Opcodes.DCONST_1
+import static jdk.internal.org.objectweb.asm.Opcodes.DLOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.DSTORE
 import static jdk.internal.org.objectweb.asm.Opcodes.DUP
-import static jdk.internal.org.objectweb.asm.Opcodes.DUP2
+import static jdk.internal.org.objectweb.asm.Opcodes.FALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.FASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.FCONST_0
+import static jdk.internal.org.objectweb.asm.Opcodes.FCONST_1
+import static jdk.internal.org.objectweb.asm.Opcodes.FCONST_2
+import static jdk.internal.org.objectweb.asm.Opcodes.FLOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.FSTORE
 import static jdk.internal.org.objectweb.asm.Opcodes.GOTO
+import static jdk.internal.org.objectweb.asm.Opcodes.IALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.IASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_0
+import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_1
+import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_2
+import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_4
+import static jdk.internal.org.objectweb.asm.Opcodes.ICONST_5
 import static jdk.internal.org.objectweb.asm.Opcodes.ILOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.LALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.LASTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.LCONST_0
+import static jdk.internal.org.objectweb.asm.Opcodes.LCONST_1
+import static jdk.internal.org.objectweb.asm.Opcodes.LDC
+import static jdk.internal.org.objectweb.asm.Opcodes.LLOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.LSTORE
 import static jdk.internal.org.objectweb.asm.Opcodes.POP
-import static jdk.internal.org.objectweb.asm.Opcodes.POP2
 import static jdk.internal.org.objectweb.asm.Opcodes.ASTORE
 import static jdk.internal.org.objectweb.asm.Opcodes.ISTORE
+import static jdk.internal.org.objectweb.asm.Opcodes.SALOAD
+import static jdk.internal.org.objectweb.asm.Opcodes.SASTORE
 
 import groovy.util.logging.Slf4j
 
@@ -27,24 +60,58 @@ class ByteCodeOptimizer {
 
     protected static final int[] POP_CODES = [
             POP,
-            POP2,
     ]
 
     // todo: add more codes
     protected static final int[] LOAD_CODES = [
             ACONST_NULL,
+            ICONST_0,
+            ICONST_1,
+            ICONST_2,
+            ICONST_1,
+            ICONST_4,
+            ICONST_5,
+            LCONST_0,
+            LCONST_1,
+            FCONST_0,
+            FCONST_1,
+            FCONST_2,
+            DCONST_0,
+            DCONST_1,
+            LDC,
             ALOAD,
+            LLOAD,
+            FLOAD,
+            DLOAD,
+            IALOAD,
+            LALOAD,
+            FALOAD,
+            DALOAD,
+            AALOAD,
+            BALOAD,
+            CALOAD,
+            SALOAD,
             ILOAD,
     ]
 
     protected static final int[] STORE_CODES = [
             ISTORE,
+            LSTORE,
+            FSTORE,
+            DSTORE,
             ASTORE,
+            IASTORE,
+            LASTORE,
+            FASTORE,
+            DASTORE,
+            AASTORE,
+            BASTORE,
+            CASTORE,
+            SASTORE,
     ]
 
     protected static final int[] DUP_CODES = [
             DUP,
-            DUP2,
     ]
 
     Integer numLinesRemoved = 0
@@ -71,6 +138,7 @@ class ByteCodeOptimizer {
             bytecodeReader.accept(classNode, 0)
 
             List<MethodNode> methods = classNode.methods
+            Integer numLinesBefore = methods.instructions*.size().sum()
             methods.each { iterateThroughMethodNode(it) }
 
             ClassWriter bytecodeWriter = new ClassWriter(0)
@@ -85,7 +153,7 @@ class ByteCodeOptimizer {
             String compilationType = outputDir.tokenize('/').last()
             return new OptimizationResult(compilationType: compilationType,
                     text: FileCompiler.javapOnBytecode(newClassFileInfo), linesRemoved: numLinesRemoved,
-                    filename: classFileInfo.filename,)
+                    filename: classFileInfo.filename, totalLines: numLinesBefore,)
         }
     }
 
@@ -132,6 +200,7 @@ class ByteCodeOptimizer {
         String compilationType
         String text
         Integer linesRemoved
+        Integer totalLines
         String filename
     }
 }

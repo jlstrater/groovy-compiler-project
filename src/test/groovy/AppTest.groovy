@@ -6,12 +6,17 @@ import spock.lang.Unroll
 class AppTest extends Specification {
 
     @Shared
-    private List<String> filenames = []
+    private List<String> scriptFilenames = []
+    @Shared
+    private List<String> jarFilenames = []
     private App app = new App()
 
     void setupSpec() {
         new File(this.class.getResource('scripts').file).eachFile { File file ->
-            filenames << file.path
+            scriptFilenames << file.path
+        }
+        new File(this.class.getResource('jars').file).eachFile { File file ->
+            jarFilenames << file.path
         }
     }
 
@@ -25,7 +30,7 @@ class AppTest extends Specification {
         0 * _
 
         where:
-        filename << filenames
+        filename << scriptFilenames
     }
 
     void "test against this application (with no args)"() {
@@ -34,5 +39,17 @@ class AppTest extends Specification {
 
         then:
         0 * _
+    }
+
+    void "test against jar: #jarname"() {
+        when:
+        app.main(filename)
+
+        then:
+        notThrown(FileNotFoundException)
+        0 * _
+
+        where:
+        filename << jarFilenames
     }
 }
