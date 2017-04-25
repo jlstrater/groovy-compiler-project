@@ -244,7 +244,7 @@ class FileReportWriter extends ReportWriter {
                     div(class: 'row col-sm-10 text-center col-sm-offset-1') {
                         h2 'Lines Removed: ' + results.linesRemoved.sum()
                         h2 'Total Lines: ' + results.totalLines.sum()
-                        h2 'Percentage Lines Removed: ' + (((results.linesRemoved.sum() / results.totalLines.sum() )
+                        h2 'Percentage Lines Removed: ' + (((results.linesRemoved.sum() / results.totalLines.sum())
                                 * 100) as double).round(1)
                     }
 
@@ -269,6 +269,44 @@ class FileReportWriter extends ReportWriter {
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings(['NestedBlockDepth', 'MethodSize'])
+    void writeJarReport(String filename, List<ByteCodeOptimizer.OptimizationResult> results, Integer reduction) {
+        new File(IND_REPORT_DIR).mkdirs()
+        File file = new File(IND_REPORT_DIR + '/' + DEFAULT_OUTPUT_FILE + '-' + filename + '.html')
+        file.withWriter { writer ->
+            MarkupBuilder html = new MarkupBuilder(writer)
+
+            html.html {
+                head {
+                    title 'Bytecode Analysis Report'
+                    link rel: 'stylesheet', type: 'text/css', href: BOOTSTRAP_CSS
+                    link rel: 'stylesheet', type: 'text/css', href: HIGHLIGHT_JS_CSS
+                    script(src: JQUERY_JS, type: 'text/javascript', '')
+                    script(src: BOOTSTRAP_JS, type: 'text/javascript', '')
+                    script(src: HIGHLIGHT_JS_JS, type: 'text/javascript', '')
+                    script('hljs.initHighlightingOnLoad();')
+                }
+                body {
+                    ul(class: 'breadcrumb') {
+                        li {
+                            a href: '../index.html', 'Home'
+                            span class: 'divider'
+                        }
+                        li {
+                            a filename.toUpperCase()
+                        }
+                    }
+                    h2 class: 'text-center', 'Bytecode Analysis for Jar: ' + filename
+
+                    div(class: 'row col-sm-10 text-center col-sm-offset-1') {
+                        h2 'Jar File Size Reduction (in bytes): ' + reduction
+                        h2 'Bytecode Instructions Removed: ' + results.linesRemoved.sum()
                     }
                 }
             }

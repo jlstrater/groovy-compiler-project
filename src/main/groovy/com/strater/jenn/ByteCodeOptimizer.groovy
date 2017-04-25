@@ -132,7 +132,7 @@ class ByteCodeOptimizer {
     @SuppressWarnings('GStringAsMapKey')
     OptimizationResult processClassFiles(FileInfo classFileInfo, String outputDir) {
         numLinesRemoved = 0
-        if (new File(classFileInfo.info).exists()) {
+        if (new File(classFileInfo.info).exists() && classFileInfo.extension == 'class') {
             ClassReader bytecodeReader = new ClassReader(new File(classFileInfo.info).bytes)
             ClassNode classNode = new ClassNode()
             bytecodeReader.accept(classNode, 0)
@@ -155,6 +155,12 @@ class ByteCodeOptimizer {
                     text: FileCompiler.javapOnBytecode(newClassFileInfo), linesRemoved: numLinesRemoved,
                     filename: classFileInfo.filename, totalLines: numLinesBefore,)
         }
+        File dir = new File(outputDir)
+        dir.mkdirs()
+        "cp $classFileInfo.info $outputDir".execute()
+        new OptimizationResult(compilationType: 'none', text: 'N/A', linesRemoved: numLinesRemoved,
+                filename: classFileInfo.filename, totalLines: 0,
+        )
     }
 
     @SuppressWarnings('NoDef')
@@ -190,7 +196,7 @@ class ByteCodeOptimizer {
             AbstractInsnNode current = nodes.next()
 
             if (current.opcode == GOTO) {
-                jumpPoints << current.next.index
+                jumpPoints << current.next?.index
             }
         }
         jumpPoints

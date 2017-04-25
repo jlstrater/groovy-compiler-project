@@ -111,7 +111,7 @@ class Benchmark {
             "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
 
             Map times = [:]
-            1.times { n ->
+            10.times { n ->
                 long time1 = System.nanoTime()
                 Process p = "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}"
                         .execute()

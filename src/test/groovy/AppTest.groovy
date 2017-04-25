@@ -30,7 +30,7 @@ class AppTest extends Specification {
         0 * _
 
         where:
-        filename << scriptFilenames
+        filename << scriptFilenames[0..5]
     }
 
     void "test against this application (with no args)"() {

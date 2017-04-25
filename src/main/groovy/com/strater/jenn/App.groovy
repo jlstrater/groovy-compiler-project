@@ -30,21 +30,70 @@ class App {
     }
 
     static void runAgainstFiles(String file) {
-        new File('build/bytecode').deleteDir()
+        File outputDir = new File ('build/bytecode')
+        outputDir.deleteDir() //clean out old results
+        outputDir.mkdir() // remake dir for this run
         FileInfo fileInfo = new FileInfo(file)
-        List beforeOutputFiles = fileCompiler.compileFile(fileInfo)
+        if (fileInfo.extension == 'jar') {
+            File jarFile = new File(fileInfo.info)
 
-        // reader, process bytecode, and write to new files
-        List afterOutputFiles = byteCodeOptimizer.processDirectory('build/bytecode', 'build/bytecode/new/')
+            //unzip jar
+            File tempFolder = new File('build/unzippedJars')
+            tempFolder.mkdir()
+            Process p = "jar xf $fileInfo.info".execute([], tempFolder)
+            p.waitFor()
 
-        // benchmark bytecode
-        List benchmarkData = benchmark.runBenchmark(fileInfo.filename)
+            // reader, process bytecode, and write to new files
+            List result = byteCodeOptimizer.processDirectory('build/unzippedJars', 'build/bytecode/')
 
-        //write to 'before' and 'after' report
-        writer.writeReport(fileInfo.filename, beforeOutputFiles, afterOutputFiles, benchmarkData)
-        report.write()
+            File jarFolder = new File('build/libs')
+            jarFolder.mkdir()
+            StringBuffer out = new StringBuffer()
+            StringBuffer error = new StringBuffer()
+            p = "jar cmvf META-INF/MANIFEST.MF ${fileInfo.filename}-optimized.jar .".execute([], outputDir)
+            p.consumeProcessOutput(out, error)
+            p.waitFor()
 
-        new File('build/bytecode').deleteDir()
+            if(out) {
+                log.info out.toString()
+            }
+
+            if (error) {
+                log.error error.toString()
+            }
+
+            p = "cp $fileInfo.filename-optimized.jar ../libs".execute([], outputDir)
+            p.consumeProcessOutput(out, error)
+            p.waitFor()
+            String jarLocation = "build/libs/$fileInfo.filename-optimized.jar"
+
+            //output report stats
+            Integer jarSize = jarFile.length()
+            File newJarFile = new File(jarLocation)
+            Integer newJarSize = newJarFile.length()
+
+            Integer reduction = newJarSize - jarSize
+
+            writer.writeJarReport(fileInfo.filename, result, reduction)
+            report.write()
+
+            tempFolder.deleteDir()
+            outputDir.deleteDir()
+        } else {
+            List beforeOutputFiles = fileCompiler.compileFile(fileInfo)
+
+            // reader, process bytecode, and write to new files
+            List afterOutputFiles = byteCodeOptimizer.processDirectory('build/bytecode', 'build/bytecode/new/')
+
+            // benchmark bytecode
+            List benchmarkData = benchmark.runBenchmark(fileInfo.filename)
+
+            //write to 'before' and 'after' report
+            writer.writeReport(fileInfo.filename, beforeOutputFiles, afterOutputFiles, benchmarkData)
+            report.write()
+
+            new File('build/bytecode').deleteDir()
+        }
     }
 
     static void runAgainstThisApplication() {

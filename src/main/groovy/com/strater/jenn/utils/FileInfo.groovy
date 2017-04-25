@@ -10,9 +10,9 @@ class FileInfo {
         this.info = fileInfo
         List tokens = fileInfo.split('/')
         String filenameAndExtension = tokens?.getAt(-1)
-        List filenameTokens = filenameAndExtension.split(/\./)
-        this.extension = filenameTokens[1]
-        this.filename = filenameTokens[0]
+        Integer extensionIndex = filenameAndExtension.contains('.') ? filenameAndExtension.lastIndexOf('.') : 0
+        this.extension = filenameAndExtension[extensionIndex + 1..-1]
+        this.filename = filenameAndExtension[0..<extensionIndex]
         this.path = tokens.size() > 1 ? tokens[0..-2].join('/') : '/'
     }
 
