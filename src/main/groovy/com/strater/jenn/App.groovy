@@ -46,7 +46,7 @@ class App {
             // reader, process bytecode, and write to new files
             List result = byteCodeOptimizer.processDirectory('build/unzippedJars', 'build/bytecode/')
 
-            File jarFolder = new File('build/libs')
+            File jarFolder = new File('build/jars')
             jarFolder.mkdir()
             StringBuffer out = new StringBuffer()
             StringBuffer error = new StringBuffer()
@@ -54,18 +54,10 @@ class App {
             p.consumeProcessOutput(out, error)
             p.waitFor()
 
-            if(out) {
-                log.info out.toString()
-            }
-
-            if (error) {
-                log.error error.toString()
-            }
-
-            p = "cp $fileInfo.filename-optimized.jar ../libs".execute([], outputDir)
+            p = "cp $fileInfo.filename-optimized.jar ../jars".execute([], outputDir)
             p.consumeProcessOutput(out, error)
             p.waitFor()
-            String jarLocation = "build/libs/$fileInfo.filename-optimized.jar"
+            String jarLocation = "build/jars/$fileInfo.filename-optimized.jar"
 
             //output report stats
             Integer jarSize = jarFile.length()
