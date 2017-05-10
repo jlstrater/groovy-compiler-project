@@ -31,8 +31,12 @@ class App {
 
     static void runAgainstFiles(String file) {
         File outputDir = new File ('build/bytecode')
-        outputDir.deleteDir() //clean out old results
-        outputDir.mkdir() // remake dir for this run
+        File snippetsDir = new File('build/docs/snippets')
+
+        outputDir.deleteDir()
+        outputDir.mkdir()
+        snippetsDir.mkdirs()
+
         FileInfo fileInfo = new FileInfo(file)
         if (fileInfo.extension == 'jar') {
             File jarFile = new File(fileInfo.info)

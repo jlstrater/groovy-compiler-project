@@ -10,6 +10,7 @@ class FileCompiler {
     private static final String GROOVYC_OUTPUT_DIR = 'build/bytecode/groovyc'
     private static final String INDY_OUTPUT_DIR = 'build/bytecode/indy'
     private static final String SC_OUTPUT_DIR = 'build/bytecode/static'
+    private static final String SNIPPETS_DIR = 'build/docs/snippets'
 
     List compileFile(FileInfo file) {
 
@@ -17,12 +18,18 @@ class FileCompiler {
 
         compileWithGroovyc(file)
         String groovycBytecode = fetchByteCode(file, GROOVYC_OUTPUT_DIR)
+        File groovycSnippet = new File(SNIPPETS_DIR + '/' + file.filename + '-groovyc.bytecode')
+        groovycSnippet.write groovycBytecode
 
         compileWithInvokeDynamic(file)
         String indyBytecode = fetchByteCode(file, INDY_OUTPUT_DIR)
+        File indySnippet = new File(SNIPPETS_DIR + '/' + file.filename + '-indy.bytecode')
+        indySnippet.write indyBytecode
 
         String errors = compileWithStaticConfig(file)
         String staticBytecode = errors ?: fetchByteCode(file, SC_OUTPUT_DIR)
+        File staticSnippet = new File(SNIPPETS_DIR + '/' + file.filename + '-static.bytecode')
+        staticSnippet.write staticBytecode
 
         [groovycBytecode, indyBytecode, staticBytecode]
     }

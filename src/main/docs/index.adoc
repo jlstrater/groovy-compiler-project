@@ -1,0 +1,70 @@
+= Static Analysis of Dynamic Languages
+Jennifer Strater <s161600@student.dtu.dk>
+{localdate}
+
+:toc:
+:icons: font
+:quick-uri: http://jlstrater.github.io/groovy-compiler-project
+
+This report describes the work done as part of the Compiler Construction Course and the special topics course Static
+Analysis of Dynamic Languages in the Spring Semester of 2017 by Jenn Strater. If you prefer, you can download this
+document as a link:../pdf/index.pdf[pdf] instead.
+
+== Introduction
+The study of static analysis in the context of dynamic languages is an interesting and complex problem because it
+presents different challenges than the ones found in traditional static languages.  For this study, I chose the
+dynamic programming language Groovy because of my background with the language and knowledge of some of the inner
+workings.
+
+Since dynamic languages, particularly Groovy, have custom logic to support their dynamic features and the language is
+primarily developed by volunteer open source contributors, some implementations of the language features are not as
+optimal as they could be.  Particularly when we look at benchmarking comparisons of Groovy to standard core Java, one
+can see the differences.  Investigating these differences in performance and implementation are the problem space for
+this project.
+
+=== The Three Compiler Options
+
+Within the groovy project, there are three different ways to compile groovy code: the legacy compiler, the indy option,
+and the static compilation flag.  The main differences between the three have to do with method invocation.
+
+==== Legacy Compiler
+In the legacy compiler methods are run using a callsite caching mechanism<<indy-blog-post>> as seen in Figure 1.
+
+[source,assembly, linenums]
+----
+include::{sourcedir}/helloworld-groovyc.bytecode[lines=5..12]
+----
+
+==== Invoke Dynamic (Indy)
+
+==== Static Compilation
+
+
+=== Scripts vs Applications
+
+== Identification of Potential Optimizations
+To begin any investigation into potential optimizations, it is important to first look at the cause and effect of
+various parts of the system.
+
+== The Source of the Problem
+=== Return Last Result By Default
+
+== Solutions
+=== Post Pass Optimization
+==== Load Pop
+==== Dupe Store Pop
+
+== Project
+=== Setup
+=== Test Cases
+=== Performance Differences
+=== Jar Size Differences
+=== Challenges
+
+== Next Steps
+=== Fix the Compiler
+
+== Bibliography
+[bibliography]
+- [[[indy-blogpost]]] Cedric Champeau. 'Using Groovy to play with invokedynamic'. 31 Jan 2013.
+http://melix.github.io/blog/2013/01/31/using_groovy_to_play_with.html
