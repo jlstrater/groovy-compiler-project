@@ -16,38 +16,49 @@ endif::[]
 The study of static analysis in the context of dynamic languages is an interesting and complex problem because it
 presents different challenges than the ones found in traditional static languages.  For this study, I chose the
 dynamic programming language Groovy because of my background with the language and knowledge of some of the inner
-workings.  Additionally, the bytecode manipulation and analysis framework ASM<<2>> was used because of it's interoperability
-with the current Groovy compiler.
+workings.  Additionally, the bytecode manipulation and analysis framework ASM<<1>> was used because of its
+use within the current Groovy compiler.
 
-Since dynamic languages, particularly Groovy, have custom logic to support their dynamic features and the language is
-primarily developed by volunteer open source contributors, some implementations of the language features are not as
-optimal as they could be.  Particularly when we look at benchmarking comparisons of Groovy to standard core Java, one
-can see the differences.  Investigating these differences in performance and implementation are the problem space for
-this project.
+Since dynamic languages, particularly Groovy, have custom logic to support their dynamic features, the implementation
+ may vary from other compilers such as ones for Java. Investigating the differences in performance and implementation
+ are the topic of this project.
+
+Additionally, since the language is primarily developed by volunteer open source contributors and not a full time
+dedicated support staff with resources to fix it, some implementations of the language features are not as optimal as
+they could be.  Particularly when we look at benchmarking comparisons of Groovy to standard core Java and the quality
+of the output of the bytecode prouced by the Groovy compiler, one can see the differences.  It's also been very useful
+and quite a unique experience to work with a working compiler hands-on used in many production systems around the world
+and to have direct access to the users and community.
 
 === The Three Compiler Options
 
-Within the groovy project, there are three different ways to compile groovy code: the legacy compiler, the indy option,
-and the static compilation flag.  The main differences between the three have to do with method invocation.  For the
-differences, let's look at the bytecode generated for a simple helloworld.groovy program.
+For background, within the groovy project, there are three different ways to compile groovy code: the legacy compiler
+also labeled `groovyc`, the indy option, and the static compilation flag.
 
-[source,groovy, linenums]
+
+The main differences between the three have to do with method
+invocation.  Let's look at the differences in the context of the bytecode generated for a simple helloworld.groovy
+program. The smallest `Hello, World!` example would be the simple script:
+[source,groovy]
 ----
 println 'Hello, World!'
 ----
 
 ==== Legacy Compiler
-In the legacy compiler methods are run using a callsite caching mechanism<<1>> as seen in Figure 1.
+In the legacy compiler, methods are run using a callsite caching mechanism<<2>> as seen in <<legacy-compilation>> which
+has much worse performance than other invocation strategies.
 
+[[legacy-compilation]]
+.Compilation with Groovyc
 [source,assembly, linenums]
 ----
 include::{sourcedir}/helloworld-groovyc.bytecode[lines=22..35]
 ----
 
 ==== Invoke Dynamic (Indy)
-Invoke Dynamic, aka Indy, is a flag set at compilation time as seen in the snippet below to specify that the code
-should be compiled using the Java7 feature InvokeDynamic instead of using the callsite caching mechanism of the legacy
-compiler.
+Invoke Dynamic, aka _Indy_, is a flag set at compilation to specify that the compiler should replace old style callsite
+caching mechanism with the Java7 InvokeDynamic instruction.  It also requires a version of groovy that supports the
+_indy_ option such as the `groovy-all` or the `groovy-indy` jars<<3>>.
 
 [source,shell]
 ----
@@ -58,18 +69,27 @@ The source code below is the same helloworld source code as the example above, b
 Notice the difference in the two main methods.  The overhead of the legacy compiler, in particular for maintaining the
 callsite information, is much higher than for using Indy.
 
-
 [source,assembly, linenums]
 ----
 include::{sourcedir}/helloworld-indy.bytecode[lines=17..25]
 ----
 
 ==== Static Compilation
-Another option for compiling groovy code is static compilation.  Static Compilation adds some additional functionality
-such as type checking and limiting the scope of Groovy's metaprogramming capabilities.  In small examples, there are few
-differences between Indy and Static Compilation. However, with larger more complex programs, Static Compilation is often
-the way to go.  However, because it is also the strictest compilation option, some programs may not compile if they use
-features of the Groovy language that violate static compilation.
+Another option for compiling groovy code is static compilation which is set through the config script as shown in
+<<sc-config>>.  Static Compilation adds some additional functionality such as type checking and limiting the scope of
+Groovy's metaprogramming capabilities.  In small examples, there are few differences between Indy and Static Compilation.
+However, with larger more complex programs, Static Compilation is often the way to go.  However, because it is also the
+strictest compilation option, some programs may not compile if they use features of the Groovy language that violate
+static compilation.
+
+[[sc-config]]
+.Static Compilation Configuration Script
+[source, groovy]
+----
+withConfig(configuration) {
+    ast(groovy.transform.CompileStatic)
+}
+----
 
 [source,assembly, linenums]
 ----
@@ -78,11 +98,24 @@ include::{sourcedir}/helloworld-static.bytecode[lines=17..25]
 
 === Scripts vs Applications
 
+The bytecode generated as seen in <<bytecode>> includes a lot more than a simple print statement.  In order for the code
+ to run on the JVM, Groovy adds a wrapper around the code of type `groovy.lang.Script`. The script contains a `run`
+ method with all of the code for the script. The main method runs the simple script.  There's also a MetaClass, that contains information about the Script.
+This isn't used in the simple Hello World example, but is used for complex dynamic features of Groovy.
+
+[[bytecode]]
+.Complete Bytecode Example for HelloWorld
+[source,assembly, linenums]
+----
+include::{sourcedir}/helloworld-static.bytecode[]
+----
+
 In that last example, we see the first mention of running a script. It is worth noting that in Groovy, you can run full
 applications with a main method just like in Java or there is a built-in mechanism for running small scripts.  The
 scripting functionality works by wrapping the code to be executed into a script class with a main method called run.
 This additional overhead can have affects on the performance of the code.  To look at more comparisons of the bytecode
-optimizations for scripts and applications/jars, see the link:../bytecode/index.html[bytecode report].
+optimizations for scripts and applications/jars, see the link:../bytecode/index.html[bytecode report] or Appendix A from
+ the pdf.
 
 == Identification of Potential Optimizations
 To begin any investigation into potential optimizations, it is important to first look at the cause and effect of
@@ -130,19 +163,62 @@ The source code in this project is published to http://github.com/jlstrater/groo
 
 === Setup
 The project is setup using the build tool Gradle.  For scripts, the basic application takes each script from the
-resource folder and applies each of the three compilation options using the command line execution feature of Java. After
-the bytecode is generated, it is fed back into the program using an ASM reader.
+resource folder and applies each of the three compilation options using the command line execution feature of Java.
+After the bytecode is generated, it is fed back into the program using an ASM reader.  Using the ASM framework, the
+bytecode is optimized to remove the extraneous instructions.  A separate pass is done to ensure the lines removed are
+not the target of a jump/goto operation.  The number of lines removed are counted for the reports.
 
 === Test Cases
+To test the efficacy of the bytecode optimizations, a variet of different test cases were used.  There were a number of
+scripts included in the resources directory that covered a wide variety of typical Groovy code operations including the
+simple hello world example, looping, complex branching, and pattern matching.  To ensure no breaking changes, the
+bytecode was run before and after the changes to ensure the correct output.
+
+In addition to the small scripts, a number of large jar files including the groovy-all distribution and this application
+were added to the test suite. For simplicity, the before and after source code for applications and jar files were not
+included in the report -- only the number of lines removed.
+
 === Performance Differences
+
+Since the optimization removes a lot of busy work operations, it was expected that the optimizations would result in a
+performance difference.  However, probably due to the high overhead of the groovy library in comparison to the scripts
+and applications run, we were unable to detect a statistically significant difference in the performance for any of the
+test cases.
+
 === Jar Size Differences
+
+After asking the Groovy compiler creators about the potential optimization on the community mailing list<<3>>, it was
+revealed that the performance of the JVM is highly tuned and therefore the optimization I was proposing would not be
+expected to have a major performance impact. However, one way it would have an impact is in the size of the output.  For
+most cases, the size of the jar doesn't matter; however, in very large applications, the size of the bytecode may exceed
+the limit of the JVM.  In that case, we could show that this optimization would have an advantage.  However, I do not
+have any examples that large to test.
+
 === Challenges
+As mentioned in the section on jar size differences, one of the major challenges of this project was coming up with
+large examples that would be testable.  Many large groovy applications have many dependencies that are actually Java and
+not Groovy or are packaged in a way that I could not use the traditional Java command line jar option to put it back
+together again after running the optimization.
+
 
 == Next Steps
+
+In the immediate future, I would like to submit my final post-pass optimzition as a pull request to the current Groovy
+compiler.  This would require integrating the current reader and writer into the existing ASM framework.
+
 === Fix the Compiler
+
+The long term goal of this project would be to fix the underlying problems with the compiler when it's generating these
+unnecessary instructions.  The potential spots for optimization would be in the handling of the return statement.
+First, if we know that the method is void, then the compiler does not need to keep track of anything on the stack.
+Next, if the method is not void then I would start by doing a backward analysis of the code to find the potential exits.
+After identifying the exits, only those statements need to be tracked on the stack and the rest of the statements can be
+  eliminated.
 
 == Bibliography
 [bibliography]
-- [[[1]]] Cedric Champeau. 'Using Groovy to play with invokedynamic'. 31 Jan 2013.
+- [[[1]]] ASM. 'ASM - Home Page'. 23 Dec 2016. http://asm.ow2.org
+- [[[2]]] Cedric Champeau. 'Using Groovy to play with invokedynamic'. 31 Jan 2013.
 http://melix.github.io/blog/2013/01/31/using_groovy_to_play_with.html
-- [[[2]]] ASM. 'ASM - Home Page'. 23 Dec 2016. http://asm.ow2.org
+- [[[3]]] Strater, Jennifer, Cédric Champeau, and Jochen Theodorou. "Potential Bytecode Optimization." Groovy Users
+Mailing List. Apache Groovy, 06 Apr. 2017. Web. 16 May 2017. http://mail-archives.apache.org/mod_mbox/groovy-users/201704.mbox/browser
