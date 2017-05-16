@@ -15,11 +15,13 @@ buildscript {
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
         classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.11'
+        classpath 'org.ajoberstar:gradle-git:1.7.1'
     }
 }
 
 plugins {
     id 'org.asciidoctor.convert' version '1.5.3'
+    id 'org.ajoberstar.github-pages' version '1.7.1'
 }
 
 apply plugin: 'groovy'
@@ -92,3 +94,11 @@ asciidoctor {
 }
 
 build.dependsOn asciidoctor
+
+githubPages {
+    repoUri = 'git@github.com:jlstrater/groovy-compiler-project.git'
+    targetBranch = 'gh-pages'
+    pages {
+        from files(buildDir.path + "/docs")
+    }
+}

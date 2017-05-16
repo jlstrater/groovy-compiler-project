@@ -16,7 +16,8 @@ endif::[]
 The study of static analysis in the context of dynamic languages is an interesting and complex problem because it
 presents different challenges than the ones found in traditional static languages.  For this study, I chose the
 dynamic programming language Groovy because of my background with the language and knowledge of some of the inner
-workings.
+workings.  Additionally, the bytecode manipulation and analysis framework ASM<<2>> was used because of it's interoperability
+with the current Groovy compiler.
 
 Since dynamic languages, particularly Groovy, have custom logic to support their dynamic features and the language is
 primarily developed by volunteer open source contributors, some implementations of the language features are not as
@@ -88,10 +89,9 @@ To begin any investigation into potential optimizations, it is important to firs
 various parts of the system.
 
 == The Source of the Problem
-When looking at the bytecode generated from each of the three compiler options, there are some common themes.
-Particularly when looking at method execution.
+When looking at the bytecode generated from each of the three compiler options, there are some common themes. This is
+particularly true when looking at method execution.
 
-=== Return Last Result By Default
 The main source of the extra overhead in Groovy bytecode is from the build up and tear down of the stack.  This happens
 to support the return by default feature of the Groovy programming language. The compiler keeps track of the result of
 each statement in case it needs to be returned.  However, if the method is void or has no possible route from that
@@ -125,7 +125,14 @@ we just chose these two.  Adding more small tweaks would have diminishing return
 problem should be fixed in the compiler itself instead of in a post-pass optimization.
 
 == Project
+The source code in this project is published to http://github.com/jlstrater/groovy-compiler-project[Github]. It contains
+  a simple Groovy application with tests and documentation as well as some example scripts, and jars.
+
 === Setup
+The project is setup using the build tool Gradle.  For scripts, the basic application takes each script from the
+resource folder and applies each of the three compilation options using the command line execution feature of Java. After
+the bytecode is generated, it is fed back into the program using an ASM reader.
+
 === Test Cases
 === Performance Differences
 === Jar Size Differences
@@ -138,3 +145,4 @@ problem should be fixed in the compiler itself instead of in a post-pass optimiz
 [bibliography]
 - [[[1]]] Cedric Champeau. 'Using Groovy to play with invokedynamic'. 31 Jan 2013.
 http://melix.github.io/blog/2013/01/31/using_groovy_to_play_with.html
+- [[[2]]] ASM. 'ASM - Home Page'. 23 Dec 2016. http://asm.ow2.org
