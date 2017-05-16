@@ -1,0 +1,78 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 42: [Static type checking] - The variable [args] is undeclared.
+ @ line 42, column 5.
+   if (args.length > 0)
+       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 43: [Static type checking] - The variable [args] is undeclared.
+ @ line 43, column 9.
+       n = args[0].toInteger()
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 44: [Static type checking] - Cannot find matching method java.lang.Object#compareTo(int). Please check if the declared type is right and if the method exists.
+ @ line 44, column 5.
+   if (n < 2)
+       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 47: [Static type checking] - Cannot find matching method int#leftShift(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 47, column 9.
+   def m = (1 << n) * 10000
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 50: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 50, column 5.
+   [n, n-1, n-2].each {
+       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 50: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 50, column 10.
+   [n, n-1, n-2].each {
+            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 51: [Static type checking] - Cannot find matching method int#leftShift(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 51, column 13.
+       def k = (1<<it) * 10000
+               ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 13: [Static type checking] - Cannot find matching method int#compareTo(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 13, column 12.
+       while (i <= m) {
+              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 14: [Static type checking] - Cannot find matching method java.lang.Object#getAt(int). Please check if the declared type is right and if the method exists.
+ @ line 14, column 9.
+           primes[i] = true
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 19: [Static type checking] - Cannot find matching method int#compareTo(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 19, column 12.
+       while (i <= m) {
+              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 20: [Static type checking] - Cannot find matching method java.lang.Object#getAt(int). Please check if the declared type is right and if the method exists.
+ @ line 20, column 13.
+           if (primes[i]) {
+               ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 22: [Static type checking] - Cannot find matching method int#compareTo(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 22, column 20.
+               while (k <= m) {
+                      ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 23: [Static type checking] - Cannot find matching method java.lang.Object#getAt(int). Please check if the declared type is right and if the method exists.
+ @ line 23, column 17.
+                   primes[k] = false
+                   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 35: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 35, column 30.
+       def numSpaces = fieldLen - bareNumber.length()
+                                ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/nsieve.groovy: 36: [Static type checking] - Cannot find matching method java.lang.String#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 36, column 31.
+       def sb = new StringBuffer(' ' * numSpaces)
+                                 ^
+
+15 errors
+

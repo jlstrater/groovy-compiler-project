@@ -18,7 +18,7 @@
         <a>HELLOWORLD</a>
       </li>
     </ul>
-    <h2 class='text-center'>Bytecode Analysis for script: HelloWorld</h2>
+    <h2 class='text-center'>Bytecode Analysis for script: helloworld</h2>
     <div class='row col-lg-5 col-lg-offset-4'>
       <pre>
         <code class='groovy'>println 'Hello, World!'
@@ -35,9 +35,21 @@
         </tr>
         <tr>
           <td>Lines Removed</td>
-          <td>Error</td>
-          <td>Error</td>
-          <td>Error</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>Total Lines - Before</td>
+          <td>105</td>
+          <td>52</td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td>Percentage of Lines Removed</td>
+          <td>0.0</td>
+          <td>0.0</td>
+          <td>0.0</td>
         </tr>
       </table>
     </div>
@@ -54,27 +66,27 @@
           </tr>
           <tr>
             <td>Benchmark Average - Before</td>
-            <td>421</td>
-            <td>452</td>
-            <td>379</td>
+            <td>408</td>
+            <td>435</td>
+            <td>381</td>
           </tr>
           <tr>
             <td>Benchmark Average - After</td>
-            <td>488</td>
-            <td>472</td>
-            <td>370</td>
+            <td>414</td>
+            <td>423</td>
+            <td>335</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - Before</td>
-            <td>16.49</td>
-            <td>23.77</td>
-            <td>27.09</td>
+            <td>15.25</td>
+            <td>18.07</td>
+            <td>38.58</td>
           </tr>
           <tr>
             <td>Benchmark Std Dev - After</td>
-            <td>30.02</td>
-            <td>41.67</td>
-            <td>30.35</td>
+            <td>25.6</td>
+            <td>8.74</td>
+            <td>7.13</td>
           </tr>
         </table>
       </div>
@@ -86,11 +98,11 @@
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
         <pre>
-          <code class='assembly'>Compiled from "HelloWorld.groovy"
-public class HelloWorld extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "helloworld.groovy"
+public class helloworld extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public HelloWorld();
+  public helloworld();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
@@ -98,7 +110,7 @@ public class HelloWorld extends groovy.lang.Script {
        7: astore_1
        8: return
 
-  public HelloWorld(groovy.lang.Binding);
+  public helloworld(groovy.lang.Binding);
     Code:
        0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_2
@@ -115,7 +127,7 @@ public class HelloWorld extends groovy.lang.Script {
        5: ldc           #27                 // int 0
        7: aaload
        8: ldc           #29                 // class org/codehaus/groovy/runtime/InvokerHelper
-      10: ldc           #2                  // class HelloWorld
+      10: ldc           #2                  // class helloworld
       12: aload_0
       13: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
       18: pop
@@ -139,7 +151,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #54                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class HelloWorld
+       4: ldc           #2                  // class helloworld
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #60                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -164,17 +176,17 @@ public class HelloWorld extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Invoke Dynamic</h2>
         <pre>
-          <code class='assembly'>Compiled from "HelloWorld.groovy"
-public class HelloWorld extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "helloworld.groovy"
+public class helloworld extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public HelloWorld();
+  public helloworld();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public HelloWorld(groovy.lang.Binding);
+  public helloworld(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -184,7 +196,7 @@ public class HelloWorld extends groovy.lang.Script {
   public static void main(java.lang.String...);
     Code:
        0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
-       2: ldc           #2                  // class HelloWorld
+       2: ldc           #2                  // class helloworld
        4: aload_0
        5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
       10: pop
@@ -194,7 +206,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: ldc           #44                 // String Hello, World!
-       3: invokedynamic #50,  0             // InvokeDynamic #1:invoke:(LHelloWorld;Ljava/lang/String;)Ljava/lang/Object;
+       3: invokedynamic #50,  0             // InvokeDynamic #1:invoke:(Lhelloworld;Ljava/lang/String;)Ljava/lang/Object;
        8: areturn
        9: nop
       10: athrow
@@ -203,7 +215,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #60                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class HelloWorld
+       4: ldc           #2                  // class helloworld
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #66                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -228,17 +240,17 @@ public class HelloWorld extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Static Compilation</h2>
         <pre>
-          <code class='assembly'>Compiled from "HelloWorld.groovy"
-public class HelloWorld extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "helloworld.groovy"
+public class helloworld extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public HelloWorld();
+  public helloworld();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public HelloWorld(groovy.lang.Binding);
+  public helloworld(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -247,7 +259,7 @@ public class HelloWorld extends groovy.lang.Script {
 
   public static void main(java.lang.String...);
     Code:
-       0: ldc           #2                  // class HelloWorld
+       0: ldc           #2                  // class helloworld
        2: aload_0
        3: invokestatic  #28                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
        6: pop
@@ -256,7 +268,7 @@ public class HelloWorld extends groovy.lang.Script {
   public java.lang.Object run();
     Code:
        0: aload_0
-       1: checkcast     #2                  // class HelloWorld
+       1: checkcast     #2                  // class helloworld
        4: ldc           #34                 // String Hello, World!
        6: invokevirtual #38                 // Method println:(Ljava/lang/Object;)V
        9: aconst_null
@@ -268,7 +280,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #46                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class HelloWorld
+       4: ldc           #2                  // class helloworld
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #52                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -298,11 +310,11 @@ public class HelloWorld extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Groovyc (Legacy)</h2>
         <pre>
-          <code class='assembly'>Compiled from "HelloWorld.groovy"
-public class HelloWorld extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "helloworld.groovy"
+public class helloworld extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public HelloWorld();
+  public helloworld();
     Code:
        0: aload_0
        1: invokespecial #15                 // Method groovy/lang/Script."&lt;init&gt;":()V
@@ -310,7 +322,7 @@ public class HelloWorld extends groovy.lang.Script {
        7: astore_1
        8: return
 
-  public HelloWorld(groovy.lang.Binding);
+  public helloworld(groovy.lang.Binding);
     Code:
        0: invokestatic  #19                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
        3: astore_2
@@ -327,7 +339,7 @@ public class HelloWorld extends groovy.lang.Script {
        5: ldc           #29                 // int 0
        7: aaload
        8: ldc           #31                 // class org/codehaus/groovy/runtime/InvokerHelper
-      10: ldc           #2                  // class HelloWorld
+      10: ldc           #2                  // class helloworld
       12: aload_0
       13: invokeinterface #37,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
       18: pop
@@ -351,7 +363,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #56                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class HelloWorld
+       4: ldc           #2                  // class helloworld
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #62                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -376,17 +388,17 @@ public class HelloWorld extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Invoke Dynamic</h2>
         <pre>
-          <code class='assembly'>Compiled from "HelloWorld.groovy"
-public class HelloWorld extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "helloworld.groovy"
+public class helloworld extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public HelloWorld();
+  public helloworld();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public HelloWorld(groovy.lang.Binding);
+  public helloworld(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -396,7 +408,7 @@ public class HelloWorld extends groovy.lang.Script {
   public static void main(java.lang.String...);
     Code:
        0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
-       2: ldc           #2                  // class HelloWorld
+       2: ldc           #2                  // class helloworld
        4: aload_0
        5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
       10: pop
@@ -406,7 +418,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: ldc           #44                 // String Hello, World!
-       3: invokedynamic #50,  0             // InvokeDynamic #1:invoke:(LHelloWorld;Ljava/lang/String;)Ljava/lang/Object;
+       3: invokedynamic #50,  0             // InvokeDynamic #1:invoke:(Lhelloworld;Ljava/lang/String;)Ljava/lang/Object;
        8: areturn
        9: nop
       10: athrow
@@ -415,7 +427,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #60                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class HelloWorld
+       4: ldc           #2                  // class helloworld
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #66                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
@@ -440,17 +452,17 @@ public class HelloWorld extends groovy.lang.Script {
       <div class='col-md-4'>
         <h2 class='text-center'>Static Compilation</h2>
         <pre>
-          <code class='assembly'>Compiled from "HelloWorld.groovy"
-public class HelloWorld extends groovy.lang.Script {
+          <code class='assembly'>Compiled from "helloworld.groovy"
+public class helloworld extends groovy.lang.Script {
   public static transient boolean __$stMC;
 
-  public HelloWorld();
+  public helloworld();
     Code:
        0: aload_0
        1: invokespecial #13                 // Method groovy/lang/Script."&lt;init&gt;":()V
        4: return
 
-  public HelloWorld(groovy.lang.Binding);
+  public helloworld(groovy.lang.Binding);
     Code:
        0: aload_0
        1: aload_1
@@ -459,7 +471,7 @@ public class HelloWorld extends groovy.lang.Script {
 
   public static void main(java.lang.String...);
     Code:
-       0: ldc           #2                  // class HelloWorld
+       0: ldc           #2                  // class helloworld
        2: aload_0
        3: invokestatic  #28                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
        6: pop
@@ -468,7 +480,7 @@ public class HelloWorld extends groovy.lang.Script {
   public java.lang.Object run();
     Code:
        0: aload_0
-       1: checkcast     #2                  // class HelloWorld
+       1: checkcast     #2                  // class helloworld
        4: ldc           #34                 // String Hello, World!
        6: invokevirtual #38                 // Method println:(Ljava/lang/Object;)V
        9: aconst_null
@@ -480,7 +492,7 @@ public class HelloWorld extends groovy.lang.Script {
     Code:
        0: aload_0
        1: invokevirtual #46                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       4: ldc           #2                  // class HelloWorld
+       4: ldc           #2                  // class helloworld
        6: if_acmpeq     14
        9: aload_0
       10: invokestatic  #52                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
