@@ -85,7 +85,10 @@ asciidoctor {
     outputDir file('build/docs')
     attributes \
         'sourcedir': file(buildDir.path + "/docs/snippets"),
-        'source-highlighter': 'coderay'
+        'source-highlighter': 'coderay',
+        'toc': '',
+        'idprefix': '',
+        'idseparator': '-'
 }
 
 build.dependsOn asciidoctor

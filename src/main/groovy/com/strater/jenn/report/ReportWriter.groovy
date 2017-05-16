@@ -3,7 +3,7 @@ package com.strater.jenn.report
 import groovy.xml.MarkupBuilder
 
 class ReportWriter {
-    public static final REPORT_DIR = 'build/reports/bytecode'
+    public static final REPORT_DIR = 'build/docs/bytecode'
     public static final BOOTSTRAP_JS = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
     public static final JQUERY_JS = 'https://code.jquery.com/jquery-3.1.1.slim.min.js'
     public static final HIGHLIGHT_JS_JS = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js'
