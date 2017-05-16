@@ -527,11 +527,7 @@ table.CodeRay td.code>pre{padding:0}
 </ul>
 </li>
 <li><a href="#identification-of-potential-optimizations">Identification of Potential Optimizations</a></li>
-<li><a href="#the-source-of-the-problem">The Source of the Problem</a>
-<ul class="sectlevel2">
-<li><a href="#return-last-result-by-default">Return Last Result By Default</a></li>
-</ul>
-</li>
+<li><a href="#the-source-of-the-problem">The Source of the Problem</a></li>
 <li><a href="#solutions">Solutions</a>
 <ul class="sectlevel2">
 <li><a href="#post-pass-optimization">Post Pass Optimization</a></li>
@@ -572,37 +568,46 @@ document as a <a href="../pdf/index.pdf">pdf</a> instead.</p>
 <p>The study of static analysis in the context of dynamic languages is an interesting and complex problem because it
 presents different challenges than the ones found in traditional static languages.  For this study, I chose the
 dynamic programming language Groovy because of my background with the language and knowledge of some of the inner
-workings.</p>
+workings.  Additionally, the bytecode manipulation and analysis framework ASM<a href="#1">[1]</a> was used because of its
+use within the current Groovy compiler.</p>
 </div>
 <div class="paragraph">
-<p>Since dynamic languages, particularly Groovy, have custom logic to support their dynamic features and the language is
-primarily developed by volunteer open source contributors, some implementations of the language features are not as
-optimal as they could be.  Particularly when we look at benchmarking comparisons of Groovy to standard core Java, one
-can see the differences.  Investigating these differences in performance and implementation are the problem space for
-this project.</p>
+<p>Since dynamic languages, particularly Groovy, have custom logic to support their dynamic features, the implementation
+ may vary from other compilers such as ones for Java. Investigating the differences in performance and implementation
+ are the topic of this project.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, since the language is primarily developed by volunteer open source contributors and not a full time
+dedicated support staff with resources to fix it, some implementations of the language features are not as optimal as
+they could be.  Particularly when we look at benchmarking comparisons of Groovy to standard core Java and the quality
+of the output of the bytecode prouced by the Groovy compiler, one can see the differences.  It&#8217;s also been very useful
+and quite a unique experience to work with a working compiler hands-on used in many production systems around the world
+and to have direct access to the users and community.</p>
 </div>
 <div class="sect2">
 <h3 id="the-three-compiler-options">The Three Compiler Options</h3>
 <div class="paragraph">
-<p>Within the groovy project, there are three different ways to compile groovy code: the legacy compiler, the indy option,
-and the static compilation flag.  The main differences between the three have to do with method invocation.  For the
-differences, let&#8217;s look at the bytecode generated for a simple helloworld.groovy program.</p>
+<p>For background, within the groovy project, there are three different ways to compile groovy code: the legacy compiler
+also labeled <code>groovyc</code>, the indy option, and the static compilation flag.</p>
+</div>
+<div class="paragraph">
+<p>The main differences between the three have to do with method
+invocation.  Let&#8217;s look at the differences in the context of the bytecode generated for a simple helloworld.groovy
+program. The smallest <code>Hello, World!</code> example would be the simple script:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy"><table class="CodeRay"><tr>
-  <td class="line-numbers"><pre>1
-</pre></td>
-  <td class="code"><pre>println <span class="string"><span class="delimiter">'</span><span class="content">Hello, World!</span><span class="delimiter">'</span></span></pre></td>
-</tr></table></code></pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">println <span class="string"><span class="delimiter">'</span><span class="content">Hello, World!</span><span class="delimiter">'</span></span></code></pre>
 </div>
 </div>
 <div class="sect3">
 <h4 id="legacy-compiler">Legacy Compiler</h4>
 <div class="paragraph">
-<p>In the legacy compiler methods are run using a callsite caching mechanism<a href="#1">[1]</a> as seen in Figure 1.</p>
+<p>In the legacy compiler, methods are run using a callsite caching mechanism<a href="#2">[2]</a> as seen in <a href="#legacy-compilation">Compilation with Groovyc</a> which
+has much worse performance than other invocation strategies.</p>
 </div>
-<div class="listingblock">
+<div id="legacy-compilation" class="listingblock">
+<div class="title">Compilation with Groovyc</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="assembly"><table class="CodeRay"><tr>
   <td class="line-numbers"><pre>1
@@ -640,9 +645,9 @@ differences, let&#8217;s look at the bytecode generated for a simple helloworld.
 <div class="sect3">
 <h4 id="invoke-dynamic-indy">Invoke Dynamic (Indy)</h4>
 <div class="paragraph">
-<p>Invoke Dynamic, aka Indy, is a flag set at compilation time as seen in the snippet below to specify that the code
-should be compiled using the Java7 feature InvokeDynamic instead of using the callsite caching mechanism of the legacy
-compiler.</p>
+<p>Invoke Dynamic, aka <em>Indy</em>, is a flag set at compilation to specify that the compiler should replace old style callsite
+caching mechanism with the Java7 InvokeDynamic instruction.  It also requires a version of groovy that supports the
+<em>indy</em> option such as the <code>groovy-all</code> or the <code>groovy-indy</code> jars<a href="#3">[3]</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -683,11 +688,20 @@ callsite information, is much higher than for using Indy.</p>
 <div class="sect3">
 <h4 id="static-compilation">Static Compilation</h4>
 <div class="paragraph">
-<p>Another option for compiling groovy code is static compilation.  Static Compilation adds some additional functionality
-such as type checking and limiting the scope of Groovy&#8217;s metaprogramming capabilities.  In small examples, there are few
-differences between Indy and Static Compilation. However, with larger more complex programs, Static Compilation is often
-the way to go.  However, because it is also the strictest compilation option, some programs may not compile if they use
-features of the Groovy language that violate static compilation.</p>
+<p>Another option for compiling groovy code is static compilation which is set through the config script as shown in
+<a href="#sc-config">Static Compilation Configuration Script</a>.  Static Compilation adds some additional functionality such as type checking and limiting the scope of
+Groovy&#8217;s metaprogramming capabilities.  In small examples, there are few differences between Indy and Static Compilation.
+However, with larger more complex programs, Static Compilation is often the way to go.  However, because it is also the
+strictest compilation option, some programs may not compile if they use features of the Groovy language that violate
+static compilation.</p>
+</div>
+<div id="sc-config" class="listingblock">
+<div class="title">Static Compilation Configuration Script</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">withConfig(configuration) {
+    ast(groovy.transform.CompileStatic)
+}</code></pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -718,11 +732,144 @@ features of the Groovy language that violate static compilation.</p>
 <div class="sect2">
 <h3 id="scripts-vs-applications">Scripts vs Applications</h3>
 <div class="paragraph">
+<p>The bytecode generated as seen in <a href="#bytecode">Complete Bytecode Example for HelloWorld</a> includes a lot more than a simple print statement.  In order for the code
+ to run on the JVM, Groovy adds a wrapper around the code of type <code>groovy.lang.Script</code>. The script contains a <code>run</code>
+ method with all of the code for the script. The main method runs the simple script.  There&#8217;s also a MetaClass, that contains information about the Script.
+This isn&#8217;t used in the simple Hello World example, but is used for complex dynamic features of Groovy.</p>
+</div>
+<div id="bytecode" class="listingblock">
+<div class="title">Complete Bytecode Example for HelloWorld</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="assembly"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+</pre></td>
+  <td class="code"><pre>Compiled from &quot;HelloWorld.groovy&quot;
+public class HelloWorld extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public HelloWorld();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script.&quot;&lt;init&gt;&quot;:()V
+       4: return
+
+  public HelloWorld(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script.&quot;&lt;init&gt;&quot;:(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class HelloWorld
+       2: aload_0
+       3: invokestatic  #28                 // Method org/codehaus/groovy/runtime/InvokerHelper.runScript:(Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+       6: pop
+       7: return
+
+  public java.lang.Object run();
+    Code:
+       0: aload_0
+       1: checkcast     #2                  // class HelloWorld
+       4: ldc           #34                 // String Hello, World!
+       6: invokevirtual #38                 // Method println:(Ljava/lang/Object;)V
+       9: aconst_null
+      10: areturn
+      11: aconst_null
+      12: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #46                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class HelloWorld
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #52                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #54                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #46                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #60                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #54                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #63                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>In that last example, we see the first mention of running a script. It is worth noting that in Groovy, you can run full
 applications with a main method just like in Java or there is a built-in mechanism for running small scripts.  The
 scripting functionality works by wrapping the code to be executed into a script class with a main method called run.
 This additional overhead can have affects on the performance of the code.  To look at more comparisons of the bytecode
-optimizations for scripts and applications/jars, see the <a href="../bytecode/index.html">bytecode report</a>.</p>
+optimizations for scripts and applications/jars, see the <a href="../bytecode/index.html">bytecode report</a> or Appendix A from
+ the pdf.</p>
 </div>
 </div>
 </div>
@@ -740,17 +887,14 @@ various parts of the system.</p>
 <h2 id="the-source-of-the-problem">The Source of the Problem</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When looking at the bytecode generated from each of the three compiler options, there are some common themes.
-Particularly when looking at method execution.</p>
+<p>When looking at the bytecode generated from each of the three compiler options, there are some common themes. This is
+particularly true when looking at method execution.</p>
 </div>
-<div class="sect2">
-<h3 id="return-last-result-by-default">Return Last Result By Default</h3>
 <div class="paragraph">
 <p>The main source of the extra overhead in Groovy bytecode is from the build up and tear down of the stack.  This happens
 to support the return by default feature of the Groovy programming language. The compiler keeps track of the result of
 each statement in case it needs to be returned.  However, if the method is void or has no possible route from that
 statement to the end, then the operations are not needed.</p>
-</div>
 </div>
 </div>
 </div>
@@ -798,34 +942,82 @@ problem should be fixed in the compiler itself instead of in a post-pass optimiz
 <div class="sect1">
 <h2 id="project">Project</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The source code in this project is published to <a href="http://github.com/jlstrater/groovy-compiler-project">Github</a>. It contains
+  a simple Groovy application with tests and documentation as well as some example scripts, and jars.</p>
+</div>
 <div class="sect2">
 <h3 id="setup">Setup</h3>
-
+<div class="paragraph">
+<p>The project is setup using the build tool Gradle.  For scripts, the basic application takes each script from the
+resource folder and applies each of the three compilation options using the command line execution feature of Java.
+After the bytecode is generated, it is fed back into the program using an ASM reader.  Using the ASM framework, the
+bytecode is optimized to remove the extraneous instructions.  A separate pass is done to ensure the lines removed are
+not the target of a jump/goto operation.  The number of lines removed are counted for the reports.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="test-cases">Test Cases</h3>
-
+<div class="paragraph">
+<p>To test the efficacy of the bytecode optimizations, a variet of different test cases were used.  There were a number of
+scripts included in the resources directory that covered a wide variety of typical Groovy code operations including the
+simple hello world example, looping, complex branching, and pattern matching.  To ensure no breaking changes, the
+bytecode was run before and after the changes to ensure the correct output.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the small scripts, a number of large jar files including the groovy-all distribution and this application
+were added to the test suite. For simplicity, the before and after source code for applications and jar files were not
+included in the report&#8201;&#8212;&#8201;only the number of lines removed.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="performance-differences">Performance Differences</h3>
-
+<div class="paragraph">
+<p>Since the optimization removes a lot of busy work operations, it was expected that the optimizations would result in a
+performance difference.  However, probably due to the high overhead of the groovy library in comparison to the scripts
+and applications run, we were unable to detect a statistically significant difference in the performance for any of the
+test cases.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="jar-size-differences">Jar Size Differences</h3>
-
+<div class="paragraph">
+<p>After asking the Groovy compiler creators about the potential optimization on the community mailing list<a href="#3">[3]</a>, it was
+revealed that the performance of the JVM is highly tuned and therefore the optimization I was proposing would not be
+expected to have a major performance impact. However, one way it would have an impact is in the size of the output.  For
+most cases, the size of the jar doesn&#8217;t matter; however, in very large applications, the size of the bytecode may exceed
+the limit of the JVM.  In that case, we could show that this optimization would have an advantage.  However, I do not
+have any examples that large to test.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="challenges">Challenges</h3>
-
+<div class="paragraph">
+<p>As mentioned in the section on jar size differences, one of the major challenges of this project was coming up with
+large examples that would be testable.  Many large groovy applications have many dependencies that are actually Java and
+not Groovy or are packaged in a way that I could not use the traditional Java command line jar option to put it back
+together again after running the optimization.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="next-steps">Next Steps</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In the immediate future, I would like to submit my final post-pass optimzition as a pull request to the current Groovy
+compiler.  This would require integrating the current reader and writer into the existing ASM framework.</p>
+</div>
 <div class="sect2">
 <h3 id="fix-the-compiler">Fix the Compiler</h3>
-
+<div class="paragraph">
+<p>The long term goal of this project would be to fix the underlying problems with the compiler when it&#8217;s generating these
+unnecessary instructions.  The potential spots for optimization would be in the handling of the return statement.
+First, if we know that the method is void, then the compiler does not need to keep track of anything on the stack.
+Next, if the method is not void then I would start by doing a backward analysis of the code to find the potential exits.
+After identifying the exits, only those statements need to be tracked on the stack and the rest of the statements can be
+  eliminated.</p>
+</div>
 </div>
 </div>
 </div>
@@ -835,8 +1027,15 @@ problem should be fixed in the compiler itself instead of in a post-pass optimiz
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
-<p><a id="1"></a>[1] Cedric Champeau. 'Using Groovy to play with invokedynamic'. 31 Jan 2013.
+<p><a id="1"></a>[1] ASM. 'ASM - Home Page'. 23 Dec 2016. <a href="http://asm.ow2.org" class="bare">http://asm.ow2.org</a></p>
+</li>
+<li>
+<p><a id="2"></a>[2] Cedric Champeau. 'Using Groovy to play with invokedynamic'. 31 Jan 2013.
 <a href="http://melix.github.io/blog/2013/01/31/using_groovy_to_play_with.html" class="bare">http://melix.github.io/blog/2013/01/31/using_groovy_to_play_with.html</a></p>
+</li>
+<li>
+<p><a id="3"></a>[3] Strater, Jennifer, Cédric Champeau, and Jochen Theodorou. "Potential Bytecode Optimization." Groovy Users
+Mailing List. Apache Groovy, 06 Apr. 2017. Web. 16 May 2017. <a href="http://mail-archives.apache.org/mod_mbox/groovy-users/201704.mbox/browser" class="bare">http://mail-archives.apache.org/mod_mbox/groovy-users/201704.mbox/browser</a></p>
 </li>
 </ul>
 </div>
@@ -845,7 +1044,7 @@ problem should be fixed in the compiler itself instead of in a post-pass optimiz
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-16 10:46:28 +02:00
+Last updated 2017-05-16 15:27:52 +02:00
 </div>
 </div>
 </body>
