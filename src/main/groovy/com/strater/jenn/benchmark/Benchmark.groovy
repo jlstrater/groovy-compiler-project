@@ -80,7 +80,7 @@ class Benchmark {
             StringBuffer out = new StringBuffer()
 
             Map times = [:]
-            10.times { n ->
+            20.times { n ->
                 long time1 = System.nanoTime()
                 Process p = "java -jar $jarFile.path $param ".execute()
                 p.consumeProcessErrorStream(error)
@@ -111,7 +111,7 @@ class Benchmark {
             "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}".execute()
 
             Map times = [:]
-            10.times { n ->
+            20.times { n ->
                 long time1 = System.nanoTime()
                 Process p = "java -cp $classDir:$GROOVY_CLASSPATH $filename ${param ?: ''}"
                         .execute()
