@@ -55,7 +55,7 @@ class FileReportWriter extends ReportWriter {
                     div(class: 'row col-lg-5 col-lg-offset-4') {
                         pre {
                             code class: 'groovy',
-                                    new File('build/resources/test/scripts/' + filename + '.groovy').text.stripIndent()
+                                    new File('src/test/resources/scripts/' + filename + '.groovy').text.stripIndent()
                         }
                     }
 
