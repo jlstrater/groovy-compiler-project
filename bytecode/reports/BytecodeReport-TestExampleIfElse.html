@@ -1,0 +1,994 @@
+<html>
+  <head>
+    <title>Bytecode Analysis Report</title>
+    <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+    <link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/default.min.css' />
+    <script src='https://code.jquery.com/jquery-3.1.1.slim.min.js' type='text/javascript'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js' type='text/javascript'></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <ul class='breadcrumb'>
+      <li>
+        <a href='../index.html'>Home</a>
+        <span class='divider' />
+      </li>
+      <li>
+        <a>TESTEXAMPLEIFELSE</a>
+      </li>
+    </ul>
+    <h2 class='text-center'>Bytecode Analysis for script: TestExampleIfElse</h2>
+    <div class='row col-lg-5 col-lg-offset-4'>
+      <pre>
+        <code class='groovy'>class TestExampleIfElse {
+    public static void main(String[] args) {
+       println add(0, 10)
+       println add(1, 2)
+    }
+
+    public static Integer add(Integer x, Integer y) {
+        if(x == 0 ) {
+            return y
+        } else {
+            return x + y
+        }
+    }
+}
+</code>
+      </pre>
+    </div>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
+      <table class='table'>
+        <tr>
+          <th></th>
+          <th>Groovyc</th>
+          <th>Indy</th>
+          <th>Static</th>
+        </tr>
+        <tr>
+          <td>Lines Removed</td>
+          <td>2</td>
+          <td>2</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>Total Lines - Before</td>
+          <td>197</td>
+          <td>125</td>
+          <td>122</td>
+        </tr>
+        <tr>
+          <td>Percentage of Lines Removed</td>
+          <td>1.0</td>
+          <td>1.6</td>
+          <td>4.9</td>
+        </tr>
+      </table>
+    </div>
+    <div class='row col-sm-10 text-center col-sm-offset-1'>
+      <h2>Benchmarks</h2>
+      <div class='col-sm-6 text-center'>
+        <h3>For parameter: null</h3>
+        <table class='table'>
+          <tr>
+            <th></th>
+            <th>Groovyc</th>
+            <th>Indy</th>
+            <th>Static</th>
+          </tr>
+          <tr>
+            <td>Benchmark Average - Before</td>
+            <td>393</td>
+            <td>434</td>
+            <td>306</td>
+          </tr>
+          <tr>
+            <td>Benchmark Average - After</td>
+            <td>407</td>
+            <td>446</td>
+            <td>319</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - Before</td>
+            <td>8.19</td>
+            <td>10.16</td>
+            <td>5.16</td>
+          </tr>
+          <tr>
+            <td>Benchmark Std Dev - After</td>
+            <td>8.44</td>
+            <td>12.27</td>
+            <td>8.6</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class='row col-sm-12'>
+      <h1>BEFORE</h1>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "TestExampleIfElse.groovy"
+public class TestExampleIfElse implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public TestExampleIfElse();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."&lt;init&gt;":()V
+       4: invokestatic  #21                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: aload_0
+       9: invokevirtual #25                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      12: astore_2
+      13: aload_2
+      14: aload_0
+      15: swap
+      16: putfield      #27                 // Field metaClass:Lgroovy/lang/MetaClass;
+      19: aload_2
+      20: pop
+      21: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #21                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #32                 // int 0
+       7: aaload
+       8: ldc           #2                  // class TestExampleIfElse
+      10: aload_1
+      11: ldc           #33                 // int 1
+      13: aaload
+      14: ldc           #2                  // class TestExampleIfElse
+      16: iconst_0
+      17: invokestatic  #39                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      20: bipush        10
+      22: invokestatic  #39                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      25: invokeinterface #45,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      30: invokeinterface #48,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      35: pop
+      36: aload_1
+      37: ldc           #49                 // int 2
+      39: aaload
+      40: ldc           #2                  // class TestExampleIfElse
+      42: aload_1
+      43: ldc           #50                 // int 3
+      45: aaload
+      46: ldc           #2                  // class TestExampleIfElse
+      48: iconst_1
+      49: invokestatic  #39                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      52: iconst_2
+      53: invokestatic  #39                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      56: invokeinterface #45,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      61: invokeinterface #48,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      66: pop
+      67: return
+
+  public static java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: invokestatic  #21                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: iconst_0
+       6: invokestatic  #39                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       9: invokestatic  #60                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      12: ifeq          20
+      15: aload_1
+      16: areturn
+      17: goto          40
+      20: aload_2
+      21: ldc           #61                 // int 4
+      23: aaload
+      24: aload_0
+      25: aload_1
+      26: invokeinterface #65,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      31: ldc           #35                 // class java/lang/Integer
+      33: invokestatic  #69                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      36: checkcast     #35                 // class java/lang/Integer
+      39: areturn
+      40: aconst_null
+      41: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #76                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class TestExampleIfElse
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #80                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #82                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #76                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #88                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #82                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #91                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #27                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #25                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #27                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #27                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #27                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #96                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #101,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #96                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #106,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #96                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #111,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "TestExampleIfElse.groovy"
+public class TestExampleIfElse implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public TestExampleIfElse();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."&lt;init&gt;":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: aload_1
+      16: pop
+      17: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class TestExampleIfElse
+       2: ldc           #2                  // class TestExampleIfElse
+       4: iconst_0
+       5: bipush        10
+       7: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;II)Ljava/lang/Object;
+      12: invokedynamic #46,  0             // InvokeDynamic #1:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      17: pop
+      18: ldc           #2                  // class TestExampleIfElse
+      20: ldc           #2                  // class TestExampleIfElse
+      22: iconst_1
+      23: iconst_2
+      24: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;II)Ljava/lang/Object;
+      29: invokedynamic #46,  0             // InvokeDynamic #1:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      34: pop
+      35: return
+
+  public static java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #55                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #61                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          16
+      11: aload_1
+      12: areturn
+      13: nop
+      14: nop
+      15: athrow
+      16: aload_0
+      17: aload_1
+      18: invokedynamic #66,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Object;
+      23: invokedynamic #72,  0             // InvokeDynamic #3:cast:(Ljava/lang/Object;)Ljava/lang/Integer;
+      28: areturn
+      29: nop
+      30: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #81                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class TestExampleIfElse
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #85                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #87                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #81                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #93                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #87                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #96                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #106,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #111,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #116,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly'>Compiled from "TestExampleIfElse.groovy"
+public class TestExampleIfElse implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public TestExampleIfElse();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."&lt;init&gt;":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: aload_1
+      16: pop
+      17: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class TestExampleIfElse
+       2: iconst_0
+       3: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       6: bipush        10
+       8: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      11: invokestatic  #37                 // Method add:(Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;
+      14: invokestatic  #43                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.println:(Ljava/lang/Object;Ljava/lang/Object;)V
+      17: aconst_null
+      18: pop
+      19: ldc           #2                  // class TestExampleIfElse
+      21: iconst_1
+      22: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      25: iconst_2
+      26: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      29: invokestatic  #37                 // Method add:(Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;
+      32: invokestatic  #43                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.println:(Ljava/lang/Object;Ljava/lang/Object;)V
+      35: aconst_null
+      36: pop
+      37: return
+
+  public static java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #51                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          16
+      11: aload_1
+      12: areturn
+      13: goto          30
+      16: aload_0
+      17: aload_1
+      18: invokestatic  #57                 // Method org/codehaus/groovy/runtime/dgmimpl/NumberNumberPlus.plus:(Ljava/lang/Number;Ljava/lang/Number;)Ljava/lang/Number;
+      21: ldc           #29                 // class java/lang/Integer
+      23: invokestatic  #61                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      26: checkcast     #29                 // class java/lang/Integer
+      29: areturn
+      30: aconst_null
+      31: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #68                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class TestExampleIfElse
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #72                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #74                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #68                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #80                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #74                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #83                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #88                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #93,  4           // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #88                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #98,  3           // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #88                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #103,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}
+</code>
+        </pre>
+      </div>
+    </div>
+    <div class='col-sm-12'>
+      <h2>AFTER</h2>
+    </div>
+    <div class='row col-lg-12'>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Groovyc (Legacy)</h2>
+        <pre>
+          <code class='assembly'>Compiled from "TestExampleIfElse.groovy"
+public class TestExampleIfElse implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public TestExampleIfElse();
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."&lt;init&gt;":()V
+       4: invokestatic  #23                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: aload_0
+       9: invokevirtual #27                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      12: astore_2
+      13: aload_2
+      14: aload_0
+      15: swap
+      16: putfield      #29                 // Field metaClass:Lgroovy/lang/MetaClass;
+      19: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #23                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #34                 // int 0
+       7: aaload
+       8: ldc           #2                  // class TestExampleIfElse
+      10: aload_1
+      11: ldc           #35                 // int 1
+      13: aaload
+      14: ldc           #2                  // class TestExampleIfElse
+      16: iconst_0
+      17: invokestatic  #41                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      20: bipush        10
+      22: invokestatic  #41                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      25: invokeinterface #47,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      30: invokeinterface #50,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      35: pop
+      36: aload_1
+      37: ldc           #51                 // int 2
+      39: aaload
+      40: ldc           #2                  // class TestExampleIfElse
+      42: aload_1
+      43: ldc           #52                 // int 3
+      45: aaload
+      46: ldc           #2                  // class TestExampleIfElse
+      48: iconst_1
+      49: invokestatic  #41                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      52: iconst_2
+      53: invokestatic  #41                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      56: invokeinterface #47,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      61: invokeinterface #50,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callStatic:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      66: pop
+      67: return
+
+  public static java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: invokestatic  #23                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: iconst_0
+       6: invokestatic  #41                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       9: invokestatic  #62                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      12: ifeq          20
+      15: aload_1
+      16: areturn
+      17: goto          40
+      20: aload_2
+      21: ldc           #63                 // int 4
+      23: aaload
+      24: aload_0
+      25: aload_1
+      26: invokeinterface #67,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      31: ldc           #37                 // class java/lang/Integer
+      33: invokestatic  #71                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      36: checkcast     #37                 // class java/lang/Integer
+      39: areturn
+      40: aconst_null
+      41: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #78                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class TestExampleIfElse
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #82                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #84                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #78                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #90                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #84                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #93                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #27                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #29                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #29                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #29                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #98                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #103,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #98                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #108,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #98                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #113,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Invoke Dynamic</h2>
+        <pre>
+          <code class='assembly'>Compiled from "TestExampleIfElse.groovy"
+public class TestExampleIfElse implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public TestExampleIfElse();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."&lt;init&gt;":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class TestExampleIfElse
+       2: ldc           #2                  // class TestExampleIfElse
+       4: iconst_0
+       5: bipush        10
+       7: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;II)Ljava/lang/Object;
+      12: invokedynamic #46,  0             // InvokeDynamic #1:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      17: pop
+      18: ldc           #2                  // class TestExampleIfElse
+      20: ldc           #2                  // class TestExampleIfElse
+      22: iconst_1
+      23: iconst_2
+      24: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;II)Ljava/lang/Object;
+      29: invokedynamic #46,  0             // InvokeDynamic #1:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      34: pop
+      35: return
+
+  public static java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #55                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #61                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          16
+      11: aload_1
+      12: areturn
+      13: nop
+      14: nop
+      15: athrow
+      16: aload_0
+      17: aload_1
+      18: invokedynamic #68,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Object;
+      23: invokedynamic #74,  0             // InvokeDynamic #3:cast:(Ljava/lang/Object;)Ljava/lang/Integer;
+      28: areturn
+      29: nop
+      30: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #81                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class TestExampleIfElse
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #85                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #87                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #81                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #93                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #87                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #96                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #106,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #111,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #103                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #116,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}
+</code>
+        </pre>
+      </div>
+      <div class='col-md-4'>
+        <h2 class='text-center'>Static Compilation</h2>
+        <pre>
+          <code class='assembly'>Compiled from "TestExampleIfElse.groovy"
+public class TestExampleIfElse implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public TestExampleIfElse();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."&lt;init&gt;":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #2                  // class TestExampleIfElse
+       2: iconst_0
+       3: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       6: bipush        10
+       8: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      11: invokestatic  #37                 // Method add:(Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;
+      14: invokestatic  #43                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.println:(Ljava/lang/Object;Ljava/lang/Object;)V
+      17: ldc           #2                  // class TestExampleIfElse
+      19: iconst_1
+      20: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      23: iconst_2
+      24: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      27: invokestatic  #37                 // Method add:(Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;
+      30: invokestatic  #43                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.println:(Ljava/lang/Object;Ljava/lang/Object;)V
+      33: return
+
+  public static java.lang.Integer add(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #51                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          16
+      11: aload_1
+      12: areturn
+      13: goto          30
+      16: aload_0
+      17: aload_1
+      18: invokestatic  #57                 // Method org/codehaus/groovy/runtime/dgmimpl/NumberNumberPlus.plus:(Ljava/lang/Number;Ljava/lang/Number;)Ljava/lang/Number;
+      21: ldc           #29                 // class java/lang/Integer
+      23: invokestatic  #61                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      26: checkcast     #29                 // class java/lang/Integer
+      29: areturn
+      30: aconst_null
+      31: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #68                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class TestExampleIfElse
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #72                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #74                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #68                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #80                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #74                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #83                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #88                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #93,  4           // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #88                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #98,  3           // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #88                 // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #103,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}
+</code>
+        </pre>
+      </div>
+    </div>
+  </body>
+</html>

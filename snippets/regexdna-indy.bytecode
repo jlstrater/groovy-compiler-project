@@ -1,0 +1,282 @@
+Compiled from "regexdna.groovy"
+public class regexdna extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public regexdna();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."<init>":()V
+       4: return
+
+  public regexdna(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class regexdna
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: ldc           #44                 // class java/lang/StringBuffer
+       2: invokedynamic #49,  0             // InvokeDynamic #1:init:(Ljava/lang/Class;)Ljava/lang/Object;
+       7: new           #51                 // class groovy/lang/Reference
+      10: dup_x1
+      11: swap
+      12: invokespecial #54                 // Method groovy/lang/Reference."<init>":(Ljava/lang/Object;)V
+      15: astore_1
+      16: aload_1
+      17: pop
+      18: ldc           #56                 // class java/lang/System
+      20: invokedynamic #61,  0             // InvokeDynamic #2:getProperty:(Ljava/lang/Class;)Ljava/lang/Object;
+      25: invokedynamic #66,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+      30: ldc           #68                 // String \n
+      32: invokedynamic #73,  0             // InvokeDynamic #4:invoke:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      37: ldc           #68                 // String \n
+      39: invokedynamic #76,  0             // InvokeDynamic #5:invoke:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      44: astore_2
+      45: aload_2
+      46: aload_1
+      47: checkcast     #51                 // class groovy/lang/Reference
+      50: swap
+      51: invokevirtual #79                 // Method groovy/lang/Reference.set:(Ljava/lang/Object;)V
+      54: aload_2
+      55: pop
+      56: aload_1
+      57: invokevirtual #82                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+      60: invokedynamic #85,  0             // InvokeDynamic #6:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+      65: astore_3
+      66: aload_3
+      67: ldc           #2                  // class regexdna
+      69: aload_0
+      70: ldc           #87                 // String initialLength
+      72: checkcast     #89                 // class java/lang/String
+      75: invokestatic  #95                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.setGroovyObjectProperty:(Ljava/lang/Object;Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;)V
+      78: aload_3
+      79: pop
+      80: aload_1
+      81: invokevirtual #82                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+      84: ldc           #97                 // String >.*\n|\n
+      86: invokestatic  #101                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.findRegex:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/regex/Matcher;
+      89: ldc           #103                // String
+      91: invokedynamic #106,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      96: astore        4
+      98: aload         4
+     100: aload_1
+     101: checkcast     #51                 // class groovy/lang/Reference
+     104: swap
+     105: invokevirtual #79                 // Method groovy/lang/Reference.set:(Ljava/lang/Object;)V
+     108: aload         4
+     110: pop
+     111: aload_1
+     112: invokevirtual #82                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     115: invokedynamic #85,  0             // InvokeDynamic #6:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+     120: astore        5
+     122: aload         5
+     124: ldc           #2                  // class regexdna
+     126: aload_0
+     127: ldc           #108                // String codeLength
+     129: checkcast     #89                 // class java/lang/String
+     132: invokestatic  #95                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.setGroovyObjectProperty:(Ljava/lang/Object;Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;)V
+     135: aload         5
+     137: pop
+     138: bipush        9
+     140: anewarray     #110                // class java/lang/Object
+     143: dup
+     144: iconst_0
+     145: ldc           #112                // String agggtaaa|tttaccct
+     147: aastore
+     148: dup
+     149: iconst_1
+     150: ldc           #114                // String [cgt]gggtaaa|tttaccc[acg]
+     152: aastore
+     153: dup
+     154: iconst_2
+     155: ldc           #116                // String a[act]ggtaaa|tttacc[agt]t
+     157: aastore
+     158: dup
+     159: iconst_3
+     160: ldc           #118                // String ag[act]gtaaa|tttac[agt]ct
+     162: aastore
+     163: dup
+     164: iconst_4
+     165: ldc           #120                // String agg[act]taaa|ttta[agt]cct
+     167: aastore
+     168: dup
+     169: iconst_5
+     170: ldc           #122                // String aggg[acg]aaa|ttt[cgt]ccct
+     172: aastore
+     173: dup
+     174: bipush        6
+     176: ldc           #124                // String agggt[cgt]aa|tt[acg]accct
+     178: aastore
+     179: dup
+     180: bipush        7
+     182: ldc           #126                // String agggta[cgt]a|t[acg]taccct
+     184: aastore
+     185: dup
+     186: bipush        8
+     188: ldc           #128                // String agggtaa[cgt]|[acg]ttaccct
+     190: aastore
+     191: invokestatic  #132                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+     194: new           #134                // class regexdna$_run_closure1
+     197: dup
+     198: aload_0
+     199: aload_0
+     200: aload_1
+     201: invokespecial #137                // Method regexdna$_run_closure1."<init>":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+     204: invokedynamic #142,  0            // InvokeDynamic #8:invoke:(Ljava/util/List;Lgroovy/lang/Closure;)Ljava/lang/Object;
+     209: pop
+     210: bipush        22
+     212: anewarray     #110                // class java/lang/Object
+     215: dup
+     216: iconst_0
+     217: ldc           #144                // String B
+     219: aastore
+     220: dup
+     221: iconst_1
+     222: ldc           #146                // String (c|g|t)
+     224: aastore
+     225: dup
+     226: iconst_2
+     227: ldc           #148                // String D
+     229: aastore
+     230: dup
+     231: iconst_3
+     232: ldc           #150                // String (a|g|t)
+     234: aastore
+     235: dup
+     236: iconst_4
+     237: ldc           #152                // String H
+     239: aastore
+     240: dup
+     241: iconst_5
+     242: ldc           #154                // String (a|c|t)
+     244: aastore
+     245: dup
+     246: bipush        6
+     248: ldc           #156                // String K
+     250: aastore
+     251: dup
+     252: bipush        7
+     254: ldc           #158                // String (g|t)
+     256: aastore
+     257: dup
+     258: bipush        8
+     260: ldc           #160                // String M
+     262: aastore
+     263: dup
+     264: bipush        9
+     266: ldc           #162                // String (a|c)
+     268: aastore
+     269: dup
+     270: bipush        10
+     272: ldc           #164                // String N
+     274: aastore
+     275: dup
+     276: bipush        11
+     278: ldc           #166                // String (a|c|g|t)
+     280: aastore
+     281: dup
+     282: bipush        12
+     284: ldc           #168                // String R
+     286: aastore
+     287: dup
+     288: bipush        13
+     290: ldc           #170                // String (a|g)
+     292: aastore
+     293: dup
+     294: bipush        14
+     296: ldc           #172                // String S
+     298: aastore
+     299: dup
+     300: bipush        15
+     302: ldc           #174                // String (c|t)
+     304: aastore
+     305: dup
+     306: bipush        16
+     308: ldc           #176                // String V
+     310: aastore
+     311: dup
+     312: bipush        17
+     314: ldc           #178                // String (a|c|g)
+     316: aastore
+     317: dup
+     318: bipush        18
+     320: ldc           #180                // String W
+     322: aastore
+     323: dup
+     324: bipush        19
+     326: ldc           #182                // String (a|t)
+     328: aastore
+     329: dup
+     330: bipush        20
+     332: ldc           #184                // String Y
+     334: aastore
+     335: dup
+     336: bipush        21
+     338: ldc           #174                // String (c|t)
+     340: aastore
+     341: invokestatic  #188                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createMap:([Ljava/lang/Object;)Ljava/util/Map;
+     344: new           #190                // class regexdna$_run_closure2
+     347: dup
+     348: aload_0
+     349: aload_0
+     350: aload_1
+     351: invokespecial #191                // Method regexdna$_run_closure2."<init>":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+     354: invokedynamic #194,  0            // InvokeDynamic #8:invoke:(Ljava/util/Map;Lgroovy/lang/Closure;)Ljava/lang/Object;
+     359: pop
+     360: aload_0
+     361: ldc           #103                // String
+     363: invokedynamic #200,  0            // InvokeDynamic #9:invoke:(Lregexdna;Ljava/lang/String;)Ljava/lang/Object;
+     368: pop
+     369: aload_0
+     370: aload_0
+     371: invokedynamic #204,  0            // InvokeDynamic #10:getProperty:(Lregexdna;)Ljava/lang/Object;
+     376: invokedynamic #207,  0            // InvokeDynamic #9:invoke:(Lregexdna;Ljava/lang/Object;)Ljava/lang/Object;
+     381: pop
+     382: aload_0
+     383: aload_0
+     384: invokedynamic #208,  0            // InvokeDynamic #11:getProperty:(Lregexdna;)Ljava/lang/Object;
+     389: invokedynamic #207,  0            // InvokeDynamic #9:invoke:(Lregexdna;Ljava/lang/Object;)Ljava/lang/Object;
+     394: pop
+     395: aload_0
+     396: aload_1
+     397: invokevirtual #82                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     400: invokedynamic #85,  0             // InvokeDynamic #6:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+     405: invokedynamic #207,  0            // InvokeDynamic #9:invoke:(Lregexdna;Ljava/lang/Object;)Ljava/lang/Object;
+     410: areturn
+     411: nop
+     412: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #218                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class regexdna
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #222                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #224                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #218                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #230                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #224                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #233                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}

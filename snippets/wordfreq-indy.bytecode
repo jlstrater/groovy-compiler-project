@@ -1,0 +1,222 @@
+Compiled from "wordfreq.groovy"
+public class wordfreq extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public wordfreq();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."<init>":()V
+       4: return
+
+  public wordfreq(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class wordfreq
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: ldc           #44                 // class java/util/TreeMap
+       2: invokedynamic #49,  0             // InvokeDynamic #1:init:(Ljava/lang/Class;)Ljava/lang/Object;
+       7: new           #51                 // class groovy/lang/Reference
+      10: dup_x1
+      11: swap
+      12: invokespecial #54                 // Method groovy/lang/Reference."<init>":(Ljava/lang/Object;)V
+      15: astore_1
+      16: aload_1
+      17: pop
+      18: ldc           #56                 // class java/lang/System
+      20: invokedynamic #61,  0             // InvokeDynamic #2:getProperty:(Ljava/lang/Class;)Ljava/lang/Object;
+      25: new           #63                 // class wordfreq$_run_closure1
+      28: dup
+      29: aload_0
+      30: aload_0
+      31: aload_1
+      32: invokespecial #66                 // Method wordfreq$_run_closure1."<init>":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+      35: invokedynamic #71,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;
+      40: pop
+      41: new           #73                 // class org/codehaus/groovy/runtime/powerassert/ValueRecorder
+      44: dup
+      45: invokespecial #74                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder."<init>":()V
+      48: astore_2
+      49: aload_1
+      50: invokevirtual #77                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+      53: dup
+      54: aload_2
+      55: swap
+      56: ldc           #78                 // int 8
+      58: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+      61: pop
+      62: aconst_null
+      63: invokestatic  #88                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareNotEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      66: dup
+      67: invokestatic  #94                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      70: aload_2
+      71: swap
+      72: ldc           #95                 // int 13
+      74: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+      77: pop
+      78: ifeq          88
+      81: aload_2
+      82: invokevirtual #98                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.clear:()V
+      85: goto          106
+      88: ldc           #100                // String assert dict != null
+      90: aload_2
+      91: invokestatic  #106                // Method org/codehaus/groovy/runtime/powerassert/AssertionRenderer.render:(Ljava/lang/String;Lorg/codehaus/groovy/runtime/powerassert/ValueRecorder;)Ljava/lang/String;
+      94: aconst_null
+      95: invokestatic  #110                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.assertFailed:(Ljava/lang/Object;Ljava/lang/Object;)V
+      98: goto          106
+     101: aload_2
+     102: invokevirtual #98                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.clear:()V
+     105: athrow
+     106: new           #73                 // class org/codehaus/groovy/runtime/powerassert/ValueRecorder
+     109: dup
+     110: invokespecial #74                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder."<init>":()V
+     113: astore_3
+     114: aload_1
+     115: invokevirtual #77                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     118: dup
+     119: aload_3
+     120: swap
+     121: ldc           #78                 // int 8
+     123: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     126: pop
+     127: invokedynamic #115,  0            // InvokeDynamic #4:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+     132: dup
+     133: aload_3
+     134: swap
+     135: ldc           #95                 // int 13
+     137: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     140: pop
+     141: aconst_null
+     142: invokestatic  #88                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareNotEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     145: dup
+     146: invokestatic  #94                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     149: aload_3
+     150: swap
+     151: ldc           #116                // int 22
+     153: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     156: pop
+     157: ifeq          167
+     160: aload_3
+     161: invokevirtual #98                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.clear:()V
+     164: goto          185
+     167: ldc           #118                // String assert dict.values() != null
+     169: aload_3
+     170: invokestatic  #106                // Method org/codehaus/groovy/runtime/powerassert/AssertionRenderer.render:(Ljava/lang/String;Lorg/codehaus/groovy/runtime/powerassert/ValueRecorder;)Ljava/lang/String;
+     173: aconst_null
+     174: invokestatic  #110                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.assertFailed:(Ljava/lang/Object;Ljava/lang/Object;)V
+     177: goto          185
+     180: aload_3
+     181: invokevirtual #98                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.clear:()V
+     184: athrow
+     185: new           #73                 // class org/codehaus/groovy/runtime/powerassert/ValueRecorder
+     188: dup
+     189: invokespecial #74                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder."<init>":()V
+     192: astore        4
+     194: aload_1
+     195: invokevirtual #77                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     198: dup
+     199: aload         4
+     201: swap
+     202: ldc           #119                // int 9
+     204: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     207: pop
+     208: invokedynamic #115,  0            // InvokeDynamic #4:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+     213: dup
+     214: aload         4
+     216: swap
+     217: ldc           #120                // int 14
+     219: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     222: pop
+     223: new           #122                // class wordfreq$_run_closure2
+     226: dup
+     227: aload_0
+     228: aload_0
+     229: invokespecial #124                // Method wordfreq$_run_closure2."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+     232: invokedynamic #127,  0            // InvokeDynamic #5:invoke:(Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;
+     237: dup
+     238: aload         4
+     240: swap
+     241: ldc           #128                // int 23
+     243: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     246: pop
+     247: aconst_null
+     248: invokestatic  #88                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareNotEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     251: dup
+     252: invokestatic  #94                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     255: aload         4
+     257: swap
+     258: ldc           #129                // int 50
+     260: invokevirtual #82                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.record:(Ljava/lang/Object;I)Ljava/lang/Object;
+     263: pop
+     264: ifeq          275
+     267: aload         4
+     269: invokevirtual #98                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.clear:()V
+     272: goto          295
+     275: ldc           #131                // String assert (dict.values().sort({ l, r -> r <=> l })) != null
+     277: aload         4
+     279: invokestatic  #106                // Method org/codehaus/groovy/runtime/powerassert/AssertionRenderer.render:(Ljava/lang/String;Lorg/codehaus/groovy/runtime/powerassert/ValueRecorder;)Ljava/lang/String;
+     282: aconst_null
+     283: invokestatic  #110                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.assertFailed:(Ljava/lang/Object;Ljava/lang/Object;)V
+     286: goto          295
+     289: aload         4
+     291: invokevirtual #98                 // Method org/codehaus/groovy/runtime/powerassert/ValueRecorder.clear:()V
+     294: athrow
+     295: aload_1
+     296: invokevirtual #77                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     299: invokedynamic #115,  0            // InvokeDynamic #4:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+     304: new           #133                // class wordfreq$_run_closure3
+     307: dup
+     308: aload_0
+     309: aload_0
+     310: invokespecial #134                // Method wordfreq$_run_closure3."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+     313: invokedynamic #127,  0            // InvokeDynamic #5:invoke:(Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;
+     318: new           #136                // class wordfreq$_run_closure4
+     321: dup
+     322: aload_0
+     323: aload_0
+     324: invokespecial #137                // Method wordfreq$_run_closure4."<init>":(Ljava/lang/Object;Ljava/lang/Object;)V
+     327: invokedynamic #140,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Lgroovy/lang/Closure;)Ljava/lang/Object;
+     332: areturn
+     333: nop
+     334: athrow
+    Exception table:
+       from    to  target type
+          49    98   101   any
+         114   177   180   any
+         194   286   289   any
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #152                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class wordfreq
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #156                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #158                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #152                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #164                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #158                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #167                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}

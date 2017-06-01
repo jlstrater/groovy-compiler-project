@@ -1,0 +1,206 @@
+Compiled from "threadring.groovy"
+public class threadring implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public threadring();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: aload_1
+      16: pop
+      17: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: sipush        503
+       3: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       6: new           #35                 // class groovy/lang/Reference
+       9: dup_x1
+      10: swap
+      11: invokespecial #38                 // Method groovy/lang/Reference."<init>":(Ljava/lang/Object;)V
+      14: astore_1
+      15: aload_1
+      16: pop
+      17: aload_0
+      18: iconst_0
+      19: invokestatic  #44                 // Method org/codehaus/groovy/runtime/BytecodeInterface8.objectArrayGet:([Ljava/lang/Object;I)Ljava/lang/Object;
+      22: ldc           #29                 // class java/lang/Integer
+      24: invokestatic  #50                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.asType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      27: checkcast     #29                 // class java/lang/Integer
+      30: invokevirtual #54                 // Method java/lang/Integer.intValue:()I
+      33: istore_2
+      34: iload_2
+      35: pop
+      36: aconst_null
+      37: new           #35                 // class groovy/lang/Reference
+      40: dup_x1
+      41: swap
+      42: invokespecial #38                 // Method groovy/lang/Reference."<init>":(Ljava/lang/Object;)V
+      45: astore_3
+      46: aload_3
+      47: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+      50: checkcast     #60                 // class MessageThread
+      53: pop
+      54: aconst_null
+      55: new           #35                 // class groovy/lang/Reference
+      58: dup_x1
+      59: swap
+      60: invokespecial #38                 // Method groovy/lang/Reference."<init>":(Ljava/lang/Object;)V
+      63: astore        4
+      65: aload         4
+      67: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+      70: checkcast     #60                 // class MessageThread
+      73: pop
+      74: new           #62                 // class groovy/lang/IntRange
+      77: dup
+      78: iconst_1
+      79: aload_1
+      80: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+      83: checkcast     #29                 // class java/lang/Integer
+      86: invokevirtual #54                 // Method java/lang/Integer.intValue:()I
+      89: iconst_1
+      90: invokespecial #65                 // Method groovy/lang/IntRange."<init>":(ZII)V
+      93: new           #67                 // class threadring$_main_closure1
+      96: dup
+      97: ldc           #2                  // class threadring
+      99: ldc           #2                  // class threadring
+     101: aload_1
+     102: aload         4
+     104: aload_3
+     105: invokespecial #70                 // Method threadring$_main_closure1."<init>":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;Lgroovy/lang/Reference;Lgroovy/lang/Reference;)V
+     108: invokestatic  #76                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.each:(Ljava/util/List;Lgroovy/lang/Closure;)Ljava/util/List;
+     111: pop
+     112: aload_3
+     113: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     116: checkcast     #60                 // class MessageThread
+     119: dup
+     120: astore        5
+     122: aload         4
+     124: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     127: checkcast     #60                 // class MessageThread
+     130: aload         5
+     132: invokevirtual #80                 // Method MessageThread.setNextThread:(LMessageThread;)V
+     135: aconst_null
+     136: pop
+     137: pop
+     138: aload_3
+     139: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     142: checkcast     #60                 // class MessageThread
+     145: new           #35                 // class groovy/lang/Reference
+     148: dup_x1
+     149: swap
+     150: invokespecial #38                 // Method groovy/lang/Reference."<init>":(Ljava/lang/Object;)V
+     153: astore        6
+     155: aload         6
+     157: pop
+     158: aload_1
+     159: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     162: checkcast     #29                 // class java/lang/Integer
+     165: new           #82                 // class threadring$_main_closure2
+     168: dup
+     169: ldc           #2                  // class threadring
+     171: ldc           #2                  // class threadring
+     173: aload         6
+     175: invokespecial #85                 // Method threadring$_main_closure2."<init>":(Ljava/lang/Object;Ljava/lang/Object;Lgroovy/lang/Reference;)V
+     178: invokestatic  #89                 // Method org/codehaus/groovy/runtime/DefaultGroovyMethods.times:(Ljava/lang/Number;Lgroovy/lang/Closure;)V
+     181: aconst_null
+     182: pop
+     183: aload_3
+     184: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     187: checkcast     #60                 // class MessageThread
+     190: iload_2
+     191: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     194: invokevirtual #93                 // Method MessageThread.enqueue:(Ljava/lang/Integer;)V
+     197: aconst_null
+     198: pop
+     199: aload_3
+     200: invokevirtual #58                 // Method groovy/lang/Reference.get:()Ljava/lang/Object;
+     203: checkcast     #60                 // class MessageThread
+     206: checkcast     #60                 // class MessageThread
+     209: invokevirtual #96                 // Method MessageThread.join:()V
+     212: aconst_null
+     213: pop
+     214: return
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #109                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class threadring
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #113                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #115                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #109                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #121                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #115                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #124                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #129                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #134,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #129                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #139,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #129                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #144,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}

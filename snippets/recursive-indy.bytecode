@@ -1,0 +1,298 @@
+Compiled from "recursive.groovy"
+public class recursive extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public recursive();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."<init>":()V
+       4: return
+
+  public recursive(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class recursive
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: ldc           #44                 // class java/lang/Integer
+       2: aload_0
+       3: invokedynamic #50,  0             // InvokeDynamic #1:getProperty:(Lrecursive;)Ljava/lang/Object;
+       8: iconst_0
+       9: invokedynamic #55,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      14: invokedynamic #60,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      19: astore_1
+      20: aload_1
+      21: pop
+      22: aload_0
+      23: ldc           #62                 // String Ack(3,%d): %d\n
+      25: aload_1
+      26: aload_0
+      27: iconst_3
+      28: aload_1
+      29: invokedynamic #68,  0             // InvokeDynamic #4:invoke:(Lrecursive;ILjava/lang/Object;)Ljava/lang/Object;
+      34: invokedynamic #73,  0             // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      39: pop
+      40: aload_0
+      41: ldc           #75                 // String Fib(%.1f): %.1f\n
+      43: ldc2_w        #76                 // double 27.0d
+      46: aload_1
+      47: invokedynamic #82,  0             // InvokeDynamic #6:invoke:(DLjava/lang/Object;)Ljava/lang/Object;
+      52: aload_0
+      53: ldc2_w        #76                 // double 27.0d
+      56: aload_1
+      57: invokedynamic #82,  0             // InvokeDynamic #6:invoke:(DLjava/lang/Object;)Ljava/lang/Object;
+      62: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      67: invokedynamic #73,  0             // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      72: pop
+      73: aload_1
+      74: iconst_1
+      75: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      80: dup
+      81: astore_1
+      82: pop
+      83: aload_0
+      84: ldc           #92                 // String Tak(%d,%d,%d): %d\n
+      86: aload_1
+      87: iconst_3
+      88: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      93: aload_1
+      94: iconst_2
+      95: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     100: aload_1
+     101: aload_0
+     102: aload_1
+     103: iconst_3
+     104: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     109: aload_1
+     110: iconst_2
+     111: invokedynamic #95,  0             // InvokeDynamic #9:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     116: aload_1
+     117: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     122: invokedynamic #103,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     127: pop
+     128: aload_0
+     129: ldc           #105                // String Fib(3): %d\n
+     131: aload_0
+     132: iconst_3
+     133: invokedynamic #108,  0            // InvokeDynamic #7:invoke:(Lrecursive;I)Ljava/lang/Object;
+     138: invokedynamic #111,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+     143: pop
+     144: aload_0
+     145: ldc           #113                // String Tak(3.0,2.0,1.0): %.1f\n
+     147: aload_0
+     148: ldc2_w        #114                // double 3.0d
+     151: ldc2_w        #116                // double 2.0d
+     154: dconst_1
+     155: invokedynamic #120,  0            // InvokeDynamic #10:invoke:(Lrecursive;DDD)Ljava/lang/Object;
+     160: invokedynamic #111,  0            // InvokeDynamic #5:invoke:(Lrecursive;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+     165: areturn
+     166: nop
+     167: athrow
+
+  public java.lang.Object ack(java.lang.Object, java.lang.Object);
+    Code:
+       0: aload_1
+       1: iconst_0
+       2: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #135                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          19
+      11: aload_2
+      12: iconst_1
+      13: invokedynamic #136,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      18: areturn
+      19: aload_2
+      20: iconst_0
+      21: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      24: invokestatic  #135                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      27: ifeq          45
+      30: aload_0
+      31: aload_1
+      32: iconst_1
+      33: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      38: iconst_1
+      39: invokedynamic #139,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;I)Ljava/lang/Object;
+      44: areturn
+      45: aload_0
+      46: aload_1
+      47: iconst_1
+      48: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      53: aload_0
+      54: aload_1
+      55: aload_2
+      56: iconst_1
+      57: invokedynamic #90,  0             // InvokeDynamic #8:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      62: invokedynamic #142,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      67: invokedynamic #142,  0            // InvokeDynamic #4:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      72: areturn
+      73: nop
+      74: athrow
+
+  public java.lang.Object fib(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          18
+      13: iconst_1
+      14: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: areturn
+      18: aload_0
+      19: iload_1
+      20: iconst_2
+      21: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      26: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      31: aload_0
+      32: iload_1
+      33: iconst_1
+      34: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      39: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      44: invokedynamic #150,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      49: areturn
+      50: nop
+      51: athrow
+
+  public java.lang.Object fib(double);
+    Code:
+       0: dload_1
+       1: ldc2_w        #116                // double 2.0d
+       4: dcmpg
+       5: ifge          12
+       8: iconst_1
+       9: goto          13
+      12: iconst_0
+      13: ifeq          21
+      16: dconst_1
+      17: invokestatic  #157                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      20: areturn
+      21: aload_0
+      22: dload_1
+      23: ldc2_w        #116                // double 2.0d
+      26: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      31: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      36: aload_0
+      37: dload_1
+      38: dconst_1
+      39: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      44: invokedynamic #87,  0             // InvokeDynamic #7:invoke:(Lrecursive;Ljava/lang/Object;)Ljava/lang/Object;
+      49: invokedynamic #150,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      54: areturn
+      55: nop
+      56: athrow
+
+  public java.lang.Object tak(int, int, int);
+    Code:
+       0: iload_2
+       1: iload_1
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          65
+      13: aload_0
+      14: aload_0
+      15: iload_1
+      16: iconst_1
+      17: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      22: iload_2
+      23: iload_3
+      24: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      29: aload_0
+      30: iload_2
+      31: iconst_1
+      32: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      37: iload_3
+      38: iload_1
+      39: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      44: aload_0
+      45: iload_3
+      46: iconst_1
+      47: invokedynamic #148,  0            // InvokeDynamic #8:invoke:(II)Ljava/lang/Object;
+      52: iload_1
+      53: iload_2
+      54: invokedynamic #165,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;II)Ljava/lang/Object;
+      59: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      64: areturn
+      65: iload_3
+      66: invokestatic  #129                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      69: areturn
+      70: nop
+      71: athrow
+
+  public java.lang.Object tak(double, double, double);
+    Code:
+       0: dload_3
+       1: dload_1
+       2: dcmpg
+       3: ifge          10
+       6: iconst_1
+       7: goto          11
+      10: iconst_0
+      11: ifeq          69
+      14: aload_0
+      15: aload_0
+      16: dload_1
+      17: dconst_1
+      18: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      23: dload_3
+      24: dload         5
+      26: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      31: aload_0
+      32: dload_3
+      33: dconst_1
+      34: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      39: dload         5
+      41: dload_1
+      42: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      47: aload_0
+      48: dload         5
+      50: dconst_1
+      51: invokedynamic #160,  0            // InvokeDynamic #8:invoke:(DD)Ljava/lang/Object;
+      56: dload_1
+      57: dload_3
+      58: invokedynamic #170,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;DD)Ljava/lang/Object;
+      63: invokedynamic #100,  0            // InvokeDynamic #10:invoke:(Lrecursive;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      68: areturn
+      69: dload         5
+      71: invokestatic  #157                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      74: areturn
+      75: nop
+      76: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #178                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class recursive
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #182                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #184                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #178                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #190                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #184                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #193                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}

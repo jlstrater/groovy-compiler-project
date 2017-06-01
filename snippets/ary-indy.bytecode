@@ -1,0 +1,249 @@
+Compiled from "ary.groovy"
+public class ary implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public ary();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: aload_1
+      16: pop
+      17: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #28                 // int 0
+       2: istore_1
+       3: iload_1
+       4: pop
+       5: ldc           #28                 // int 0
+       7: istore_2
+       8: iload_2
+       9: pop
+      10: ldc           #28                 // int 0
+      12: istore_3
+      13: iload_3
+      14: pop
+      15: ldc           #30                 // class java/lang/Integer
+      17: aload_0
+      18: iconst_0
+      19: invokedynamic #43,  0             // InvokeDynamic #0:invoke:([Ljava/lang/String;I)Ljava/lang/Object;
+      24: invokedynamic #48,  0             // InvokeDynamic #1:invoke:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+      29: invokestatic  #54                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+      32: istore        4
+      34: iload         4
+      36: pop
+      37: iload         4
+      39: multianewarray #56,  1            // class "[I"
+      43: astore        5
+      45: aload         5
+      47: pop
+      48: iload         4
+      50: multianewarray #56,  1            // class "[I"
+      54: astore        6
+      56: aload         6
+      58: pop
+      59: iconst_0
+      60: istore        7
+      62: iload         7
+      64: istore_1
+      65: iload         7
+      67: pop
+      68: iload_1
+      69: iload         4
+      71: if_icmpge     78
+      74: iconst_1
+      75: goto          79
+      78: iconst_0
+      79: ifeq          126
+      82: iload_1
+      83: iconst_1
+      84: invokedynamic #61,  0             // InvokeDynamic #2:invoke:(II)Ljava/lang/Object;
+      89: astore        8
+      91: aload         5
+      93: iload_1
+      94: aload         8
+      96: invokedynamic #66,  0             // InvokeDynamic #3:invoke:([IILjava/lang/Object;)Ljava/lang/Object;
+     101: pop
+     102: aload         8
+     104: pop
+     105: iload_1
+     106: dup
+     107: istore        9
+     109: invokedynamic #71,  0             // InvokeDynamic #4:invoke:(I)Ljava/lang/Object;
+     114: dup
+     115: invokestatic  #54                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     118: istore_1
+     119: pop
+     120: iload         9
+     122: pop
+     123: goto          68
+     126: iconst_0
+     127: istore        10
+     129: iload         10
+     131: istore_3
+     132: iload         10
+     134: pop
+     135: iload_3
+     136: sipush        1000
+     139: if_icmpge     146
+     142: iconst_1
+     143: goto          147
+     146: iconst_0
+     147: ifeq          267
+     150: iload         4
+     152: iconst_1
+     153: invokedynamic #74,  0             // InvokeDynamic #5:invoke:(II)Ljava/lang/Object;
+     158: astore        11
+     160: aload         11
+     162: invokestatic  #54                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     165: istore_2
+     166: aload         11
+     168: pop
+     169: iload_2
+     170: iconst_0
+     171: if_icmplt     178
+     174: iconst_1
+     175: goto          179
+     178: iconst_0
+     179: ifeq          246
+     182: aload         6
+     184: dup
+     185: astore        12
+     187: iload_2
+     188: dup
+     189: istore        13
+     191: aload         12
+     193: iload         13
+     195: invokedynamic #77,  0             // InvokeDynamic #0:invoke:([II)Ljava/lang/Object;
+     200: aload         5
+     202: iload_2
+     203: invokedynamic #77,  0             // InvokeDynamic #0:invoke:([II)Ljava/lang/Object;
+     208: invokedynamic #80,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     213: dup
+     214: astore        14
+     216: invokedynamic #66,  0             // InvokeDynamic #3:invoke:([IILjava/lang/Object;)Ljava/lang/Object;
+     221: pop
+     222: aload         14
+     224: pop
+     225: iload_2
+     226: dup
+     227: istore        15
+     229: invokedynamic #83,  0             // InvokeDynamic #6:invoke:(I)Ljava/lang/Object;
+     234: dup
+     235: invokestatic  #54                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     238: istore_2
+     239: pop
+     240: iload         15
+     242: pop
+     243: goto          169
+     246: iload_3
+     247: dup
+     248: istore        16
+     250: invokedynamic #71,  0             // InvokeDynamic #4:invoke:(I)Ljava/lang/Object;
+     255: dup
+     256: invokestatic  #54                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     259: istore_3
+     260: pop
+     261: iload         16
+     263: pop
+     264: goto          135
+     267: ldc           #85                 // class java/lang/System
+     269: invokedynamic #91,  0             // InvokeDynamic #7:getProperty:(Ljava/lang/Class;)Ljava/lang/Object;
+     274: aload         6
+     276: iconst_0
+     277: invokedynamic #77,  0             // InvokeDynamic #0:invoke:([II)Ljava/lang/Object;
+     282: ldc           #93                 // String
+     284: invokedynamic #96,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+     289: aload         6
+     291: iload         4
+     293: iconst_1
+     294: invokedynamic #74,  0             // InvokeDynamic #5:invoke:(II)Ljava/lang/Object;
+     299: invokedynamic #99,  0             // InvokeDynamic #0:invoke:([ILjava/lang/Object;)Ljava/lang/Object;
+     304: invokedynamic #80,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     309: invokedynamic #102,  0            // InvokeDynamic #8:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     314: pop
+     315: return
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #116                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class ary
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #122                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #124                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #116                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #130                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #124                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #133                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #140                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #143,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #140                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #146,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #140                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #151,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}

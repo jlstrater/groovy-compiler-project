@@ -1,0 +1,23 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/wordfreq.groovy: 14: [Static type checking] - Cannot find matching method java.lang.Object#toLowerCase(). Please check if the declared type is right and if the method exists.
+ @ line 14, column 17.
+           def s = word.toLowerCase()
+                   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/wordfreq.groovy: 16: [Static type checking] - Cannot find matching method java.lang.Object#plus(int). Please check if the declared type is right and if the method exists.
+ @ line 16, column 47.
+   = (entry == null) ? 1 : entry + 1
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/wordfreq.groovy: 24: [Static type checking] - Cannot find matching method java.lang.Object#compareTo(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 24, column 38.
+   assert (dict.values().sort({ l, r -> r <=> l })) != null
+                                        ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/wordfreq.groovy: 25: [Static type checking] - Cannot find matching method java.lang.Object#compareTo(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 25, column 30.
+   dict.values().sort({ l, r -> r <=> l }).each() { value ->
+                                ^
+
+4 errors
+

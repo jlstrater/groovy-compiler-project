@@ -1,0 +1,455 @@
+Compiled from "mandelbrot.groovy"
+public class mandelbrot extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public mandelbrot();
+    Code:
+       0: aload_0
+       1: invokespecial #16                 // Method groovy/lang/Script."<init>":()V
+       4: return
+
+  public mandelbrot(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #21                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #27                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class mandelbrot
+       4: aload_0
+       5: invokedynamic #41,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: dconst_0
+       1: dstore_1
+       2: dload_1
+       3: pop2
+       4: dconst_0
+       5: dstore_3
+       6: dload_3
+       7: pop2
+       8: dconst_0
+       9: dstore        5
+      11: dload         5
+      13: pop2
+      14: dconst_0
+      15: dstore        7
+      17: dload         7
+      19: pop2
+      20: iconst_0
+      21: i2d
+      22: dstore        9
+      24: dload         9
+      26: pop2
+      27: iconst_0
+      28: i2d
+      29: dstore        11
+      31: dload         11
+      33: pop2
+      34: getstatic     #47                 // Field $const$0:Ljava/math/BigDecimal;
+      37: invokestatic  #53                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.doubleUnbox:(Ljava/lang/Object;)D
+      40: dstore        13
+      42: dload         13
+      44: pop2
+      45: ldc           #37                 // int 0
+      47: istore        15
+      49: iload         15
+      51: pop
+      52: iconst_0
+      53: istore        16
+      55: iload         16
+      57: pop
+      58: iconst_0
+      59: istore        17
+      61: iload         17
+      63: pop
+      64: iconst_0
+      65: istore        18
+      67: iload         18
+      69: pop
+      70: iconst_0
+      71: istore        19
+      73: iload         19
+      75: pop
+      76: iconst_1
+      77: istore        20
+      79: iload         20
+      81: pop
+      82: bipush        50
+      84: istore        21
+      86: iload         21
+      88: pop
+      89: aload_0
+      90: invokedynamic #59,  0             // InvokeDynamic #1:getProperty:(Lmandelbrot;)Ljava/lang/Object;
+      95: invokedynamic #64,  0             // InvokeDynamic #2:getProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+     100: iconst_1
+     101: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     104: invokestatic  #76                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareGreaterThanEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     107: ifeq          134
+     110: ldc           #66                 // class java/lang/Integer
+     112: aload_0
+     113: invokedynamic #59,  0             // InvokeDynamic #1:getProperty:(Lmandelbrot;)Ljava/lang/Object;
+     118: iconst_0
+     119: invokedynamic #81,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     124: bipush        10
+     126: invokedynamic #86,  0             // InvokeDynamic #4:invoke:(Ljava/lang/Class;Ljava/lang/Object;I)Ljava/lang/Object;
+     131: goto          140
+     134: sipush        200
+     137: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     140: astore        22
+     142: aload         22
+     144: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     147: istore        15
+     149: aload         22
+     151: pop
+     152: iload         15
+     154: iload         15
+     156: invokedynamic #95,  0             // InvokeDynamic #5:invoke:(II)Ljava/lang/Object;
+     161: iconst_3
+     162: invokedynamic #98,  0             // InvokeDynamic #6:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     167: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     170: istore        23
+     172: iload         23
+     174: pop
+     175: iload         23
+     177: multianewarray #100,  1           // class "[B"
+     181: astore        24
+     183: aload         24
+     185: pop
+     186: ldc           #102                // class java/lang/String
+     188: ldc           #104                // String P4
+     190: bipush        10
+     192: i2c
+     193: invokestatic  #109                // Method java/lang/Character.valueOf:(C)Ljava/lang/Character;
+     196: getstatic     #113                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+     199: invokestatic  #117                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createPojoWrapper:(Ljava/lang/Object;Ljava/lang/Class;)Lorg/codehaus/groovy/runtime/wrappers/Wrapper;
+     202: invokedynamic #122,  0            // InvokeDynamic #7:invoke:(Ljava/lang/String;Lorg/codehaus/groovy/runtime/wrappers/Wrapper;)Ljava/lang/Object;
+     207: iload         15
+     209: invokedynamic #123,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     214: ldc           #125                // String
+     216: invokedynamic #128,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+     221: iload         15
+     223: invokedynamic #123,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     228: bipush        10
+     230: i2c
+     231: invokestatic  #109                // Method java/lang/Character.valueOf:(C)Ljava/lang/Character;
+     234: getstatic     #113                // Field java/lang/Character.TYPE:Ljava/lang/Class;
+     237: invokestatic  #117                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createPojoWrapper:(Ljava/lang/Object;Ljava/lang/Class;)Lorg/codehaus/groovy/runtime/wrappers/Wrapper;
+     240: invokedynamic #131,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;Lorg/codehaus/groovy/runtime/wrappers/Wrapper;)Ljava/lang/Object;
+     245: invokedynamic #136,  0            // InvokeDynamic #8:init:(Ljava/lang/Class;Ljava/lang/Object;)Ljava/lang/Object;
+     250: invokedynamic #142,  0            // InvokeDynamic #9:cast:(Ljava/lang/Object;)Ljava/lang/String;
+     255: astore        25
+     257: aload         25
+     259: pop
+     260: ldc           #144                // class java/lang/System
+     262: invokedynamic #149,  0            // InvokeDynamic #10:getProperty:(Ljava/lang/Class;)Ljava/lang/Object;
+     267: aload         25
+     269: invokedynamic #154,  0            // InvokeDynamic #11:invoke:(Ljava/lang/String;)Ljava/lang/Object;
+     274: iconst_0
+     275: aload         25
+     277: invokedynamic #155,  0            // InvokeDynamic #2:invoke:(Ljava/lang/String;)Ljava/lang/Object;
+     282: invokedynamic #160,  0            // InvokeDynamic #12:invoke:(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+     287: pop
+     288: iload         19
+     290: iload         23
+     292: if_icmpge     299
+     295: iconst_1
+     296: goto          300
+     299: iconst_0
+     300: ifeq          839
+     303: iconst_2
+     304: iload         17
+     306: dup
+     307: istore        26
+     309: invokedynamic #165,  0            // InvokeDynamic #13:invoke:(I)Ljava/lang/Object;
+     314: dup
+     315: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     318: istore        17
+     320: pop
+     321: iload         26
+     323: i2d
+     324: invokestatic  #170                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     327: getstatic     #171                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+     330: invokestatic  #117                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createPojoWrapper:(Ljava/lang/Object;Ljava/lang/Class;)Lorg/codehaus/groovy/runtime/wrappers/Wrapper;
+     333: invokedynamic #174,  0            // InvokeDynamic #5:invoke:(ILorg/codehaus/groovy/runtime/wrappers/Wrapper;)Ljava/lang/Object;
+     338: iload         15
+     340: invokedynamic #177,  0            // InvokeDynamic #14:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     345: getstatic     #179                // Field $const$1:Ljava/math/BigDecimal;
+     348: invokedynamic #184,  0            // InvokeDynamic #15:invoke:(Ljava/lang/Object;Ljava/math/BigDecimal;)Ljava/lang/Object;
+     353: astore        27
+     355: aload         27
+     357: invokestatic  #53                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.doubleUnbox:(Ljava/lang/Object;)D
+     360: dstore_1
+     361: aload         27
+     363: pop
+     364: iconst_2
+     365: iload         18
+     367: i2d
+     368: invokestatic  #170                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     371: getstatic     #171                // Field java/lang/Double.TYPE:Ljava/lang/Class;
+     374: invokestatic  #117                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createPojoWrapper:(Ljava/lang/Object;Ljava/lang/Class;)Lorg/codehaus/groovy/runtime/wrappers/Wrapper;
+     377: invokedynamic #174,  0            // InvokeDynamic #5:invoke:(ILorg/codehaus/groovy/runtime/wrappers/Wrapper;)Ljava/lang/Object;
+     382: iload         15
+     384: invokedynamic #177,  0            // InvokeDynamic #14:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     389: iconst_1
+     390: invokedynamic #185,  0            // InvokeDynamic #15:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+     395: astore        28
+     397: aload         28
+     399: invokestatic  #53                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.doubleUnbox:(Ljava/lang/Object;)D
+     402: dstore_3
+     403: aload         28
+     405: pop
+     406: iload         20
+     408: iconst_1
+     409: invokedynamic #188,  0            // InvokeDynamic #16:invoke:(II)Ljava/lang/Object;
+     414: dup
+     415: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     418: istore        20
+     420: pop
+     421: iload         20
+     423: iconst_1
+     424: invokedynamic #191,  0            // InvokeDynamic #17:invoke:(II)Ljava/lang/Object;
+     429: iconst_0
+     430: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     433: invokestatic  #194                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     436: ifeq          476
+     439: iload         16
+     441: dup
+     442: istore        29
+     444: invokedynamic #165,  0            // InvokeDynamic #13:invoke:(I)Ljava/lang/Object;
+     449: dup
+     450: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     453: istore        16
+     455: pop
+     456: iload         29
+     458: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     461: iload         21
+     463: invokestatic  #70                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     466: invokestatic  #197                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareLessThan:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     469: ifeq          476
+     472: iconst_1
+     473: goto          477
+     476: iconst_0
+     477: ifeq          632
+     480: dload         9
+     482: dload         9
+     484: invokedynamic #200,  0            // InvokeDynamic #5:invoke:(DD)Ljava/lang/Object;
+     489: dload         11
+     491: dload         11
+     493: invokedynamic #200,  0            // InvokeDynamic #5:invoke:(DD)Ljava/lang/Object;
+     498: invokedynamic #203,  0            // InvokeDynamic #15:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     503: dload_1
+     504: invokedynamic #206,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;D)Ljava/lang/Object;
+     509: astore        30
+     511: aload         30
+     513: invokestatic  #53                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.doubleUnbox:(Ljava/lang/Object;)D
+     516: dstore        5
+     518: aload         30
+     520: pop
+     521: iconst_2
+     522: dload         9
+     524: invokedynamic #209,  0            // InvokeDynamic #5:invoke:(ID)Ljava/lang/Object;
+     529: dload         11
+     531: invokedynamic #210,  0            // InvokeDynamic #5:invoke:(Ljava/lang/Object;D)Ljava/lang/Object;
+     536: dload_3
+     537: invokedynamic #206,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;D)Ljava/lang/Object;
+     542: astore        31
+     544: aload         31
+     546: invokestatic  #53                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.doubleUnbox:(Ljava/lang/Object;)D
+     549: dstore        7
+     551: aload         31
+     553: pop
+     554: dload         5
+     556: dstore        32
+     558: dload         32
+     560: dstore        9
+     562: dload         32
+     564: pop2
+     565: dload         7
+     567: dstore        34
+     569: dload         34
+     571: dstore        11
+     573: dload         34
+     575: pop2
+     576: iload         20
+     578: dload         9
+     580: dload         9
+     582: invokedynamic #200,  0            // InvokeDynamic #5:invoke:(DD)Ljava/lang/Object;
+     587: dload         11
+     589: dload         11
+     591: invokedynamic #200,  0            // InvokeDynamic #5:invoke:(DD)Ljava/lang/Object;
+     596: invokedynamic #211,  0            // InvokeDynamic #7:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     601: dload         13
+     603: invokestatic  #170                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     606: invokestatic  #214                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareGreaterThan:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     609: ifeq          616
+     612: iconst_1
+     613: goto          617
+     616: iconst_0
+     617: invokedynamic #217,  0            // InvokeDynamic #18:invoke:(II)Ljava/lang/Object;
+     622: dup
+     623: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     626: istore        20
+     628: pop
+     629: goto          421
+     632: iload         17
+     634: iload         15
+     636: if_icmpne     643
+     639: iconst_1
+     640: goto          644
+     643: iconst_0
+     644: ifeq          713
+     647: iload         18
+     649: dup
+     650: istore        36
+     652: invokedynamic #165,  0            // InvokeDynamic #13:invoke:(I)Ljava/lang/Object;
+     657: dup
+     658: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     661: istore        18
+     663: pop
+     664: iload         36
+     666: pop
+     667: iload         20
+     669: sipush        256
+     672: if_icmpge     679
+     675: iconst_1
+     676: goto          680
+     679: iconst_0
+     680: ifeq          713
+     683: iload         20
+     685: bipush        8
+     687: iload         15
+     689: bipush        8
+     691: invokedynamic #220,  0            // InvokeDynamic #19:invoke:(II)Ljava/lang/Object;
+     696: invokedynamic #223,  0            // InvokeDynamic #15:invoke:(ILjava/lang/Object;)Ljava/lang/Object;
+     701: invokedynamic #224,  0            // InvokeDynamic #16:invoke:(ILjava/lang/Object;)Ljava/lang/Object;
+     706: dup
+     707: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     710: istore        20
+     712: pop
+     713: iload         20
+     715: sipush        255
+     718: if_icmple     725
+     721: iconst_1
+     722: goto          726
+     725: iconst_0
+     726: ifeq          792
+     729: iload         20
+     731: sipush        255
+     734: invokedynamic #227,  0            // InvokeDynamic #20:invoke:(II)Ljava/lang/Object;
+     739: dup
+     740: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     743: istore        20
+     745: invokestatic  #231                // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.byteUnbox:(Ljava/lang/Object;)B
+     748: istore        37
+     750: aload         24
+     752: iload         19
+     754: dup
+     755: istore        38
+     757: invokedynamic #165,  0            // InvokeDynamic #13:invoke:(I)Ljava/lang/Object;
+     762: dup
+     763: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     766: istore        19
+     768: pop
+     769: iload         38
+     771: iload         37
+     773: invokedynamic #236,  0            // InvokeDynamic #21:invoke:(Ljava/lang/Object;IB)Ljava/lang/Object;
+     778: pop
+     779: iload         37
+     781: pop
+     782: iconst_1
+     783: istore        39
+     785: iload         39
+     787: istore        20
+     789: iload         39
+     791: pop
+     792: iload         17
+     794: iload         15
+     796: invokedynamic #220,  0            // InvokeDynamic #19:invoke:(II)Ljava/lang/Object;
+     801: dup
+     802: invokestatic  #90                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+     805: istore        17
+     807: pop
+     808: iconst_0
+     809: istore        40
+     811: iload         40
+     813: istore        16
+     815: iload         40
+     817: istore        41
+     819: iload         41
+     821: i2d
+     822: dstore        11
+     824: iload         41
+     826: istore        42
+     828: iload         42
+     830: i2d
+     831: dstore        9
+     833: iload         42
+     835: pop
+     836: goto          288
+     839: ldc           #144                // class java/lang/System
+     841: invokedynamic #149,  0            // InvokeDynamic #10:getProperty:(Ljava/lang/Class;)Ljava/lang/Object;
+     846: aload         24
+     848: iconst_0
+     849: iload         19
+     851: invokedynamic #239,  0            // InvokeDynamic #12:invoke:(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object;
+     856: areturn
+     857: nop
+     858: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #270                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class mandelbrot
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #274                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #276                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #270                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #282                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #276                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #285                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public static void __$swapInit();
+    Code:
+       0: new           #288                // class java/math/BigDecimal
+       3: dup
+       4: ldc_w         #290                // String 4.0
+       7: invokespecial #293                // Method java/math/BigDecimal."<init>":(Ljava/lang/String;)V
+      10: astore_0
+      11: aload_0
+      12: putstatic     #47                 // Field $const$0:Ljava/math/BigDecimal;
+      15: aload_0
+      16: pop
+      17: new           #288                // class java/math/BigDecimal
+      20: dup
+      21: ldc_w         #295                // String 1.5
+      24: invokespecial #293                // Method java/math/BigDecimal."<init>":(Ljava/lang/String;)V
+      27: astore_1
+      28: aload_1
+      29: putstatic     #179                // Field $const$1:Ljava/math/BigDecimal;
+      32: aload_1
+      33: pop
+      34: return
+
+  static {};
+    Code:
+       0: invokestatic  #298                // Method __$swapInit:()V
+       3: return
+}

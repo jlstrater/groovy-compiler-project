@@ -1,0 +1,388 @@
+Compiled from "binarytrees.groovy"
+public class binarytrees extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public binarytrees();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."<init>":()V
+       4: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public binarytrees(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #22                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #27                 // int 0
+       7: aaload
+       8: ldc           #29                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class binarytrees
+      12: aload_0
+      13: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #40                 // int 1
+       7: aaload
+       8: aload_1
+       9: ldc           #41                 // int 2
+      11: aaload
+      12: aload_0
+      13: invokeinterface #45,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGroovyObjectGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      18: invokeinterface #48,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      23: iconst_0
+      24: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      27: invokestatic  #60                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      30: ifeq          41
+      33: bipush        10
+      35: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      38: goto          73
+      41: aload_1
+      42: ldc           #61                 // int 3
+      44: aaload
+      45: aload_1
+      46: ldc           #62                 // int 4
+      48: aaload
+      49: aload_1
+      50: ldc           #63                 // int 5
+      52: aaload
+      53: aload_0
+      54: invokeinterface #45,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callGroovyObjectGetProperty:(Ljava/lang/Object;)Ljava/lang/Object;
+      59: iconst_0
+      60: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      63: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      68: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+      73: astore_2
+      74: aload_2
+      75: pop
+      76: iconst_4
+      77: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      80: astore_3
+      81: aload_3
+      82: pop
+      83: aload_1
+      84: ldc           #69                 // int 6
+      86: aaload
+      87: iconst_2
+      88: anewarray     #71                 // class java/lang/Object
+      91: dup
+      92: iconst_0
+      93: aload_1
+      94: ldc           #72                 // int 7
+      96: aaload
+      97: aload_3
+      98: iconst_2
+      99: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     102: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     107: aastore
+     108: dup
+     109: iconst_1
+     110: aload_2
+     111: aastore
+     112: invokestatic  #76                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createList:([Ljava/lang/Object;)Ljava/util/List;
+     115: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+     120: astore        4
+     122: aload         4
+     124: pop
+     125: aload_1
+     126: ldc           #77                 // int 8
+     128: aaload
+     129: aload         4
+     131: iconst_1
+     132: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     135: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     140: astore        5
+     142: aload         5
+     144: pop
+     145: aload_1
+     146: ldc           #78                 // int 9
+     148: aaload
+     149: aload_1
+     150: ldc           #79                 // int 10
+     152: aaload
+     153: ldc           #81                 // class TreeNode
+     155: iconst_0
+     156: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     159: aload         5
+     161: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     166: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+     171: astore        6
+     173: aload         6
+     175: pop
+     176: aload_1
+     177: ldc           #82                 // int 11
+     179: aaload
+     180: aload_0
+     181: new           #84                 // class org/codehaus/groovy/runtime/GStringImpl
+     184: dup
+     185: iconst_2
+     186: anewarray     #71                 // class java/lang/Object
+     189: dup
+     190: iconst_0
+     191: aload         5
+     193: aastore
+     194: dup
+     195: iconst_1
+     196: aload         6
+     198: aastore
+     199: iconst_3
+     200: anewarray     #86                 // class java/lang/String
+     203: dup
+     204: iconst_0
+     205: ldc           #88                 // String stretch tree of depth
+     207: aastore
+     208: dup
+     209: iconst_1
+     210: ldc           #90                 // String \t check:
+     212: aastore
+     213: dup
+     214: iconst_2
+     215: ldc           #92                 // String
+     217: aastore
+     218: invokespecial #95                 // Method org/codehaus/groovy/runtime/GStringImpl."<init>":([Ljava/lang/Object;[Ljava/lang/String;)V
+     221: invokeinterface #99,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     226: pop
+     227: aload_1
+     228: ldc           #100                // int 12
+     230: aaload
+     231: ldc           #81                 // class TreeNode
+     233: iconst_0
+     234: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     237: aload         4
+     239: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     244: astore        7
+     246: aload         7
+     248: pop
+     249: aload_3
+     250: astore        8
+     252: aload         8
+     254: pop
+     255: aload         8
+     257: aload         4
+     259: invokestatic  #103                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareLessThanEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+     262: ifeq          551
+     265: aload_1
+     266: ldc           #104                // int 13
+     268: aaload
+     269: iconst_1
+     270: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     273: aload_1
+     274: ldc           #105                // int 14
+     276: aaload
+     277: aload_1
+     278: ldc           #106                // int 15
+     280: aaload
+     281: aload         4
+     283: aload         8
+     285: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     290: aload_3
+     291: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     296: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     301: astore        9
+     303: aload         9
+     305: pop
+     306: iconst_0
+     307: istore        10
+     309: iload         10
+     311: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     314: astore        6
+     316: iload         10
+     318: pop
+     319: aconst_null
+     320: astore        11
+     322: aload_1
+     323: ldc           #107                // int 16
+     325: aaload
+     326: iconst_1
+     327: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     330: aload         9
+     332: ldc           #40                 // int 1
+     334: invokestatic  #111                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.createRange:(Ljava/lang/Object;Ljava/lang/Object;Z)Ljava/util/List;
+     337: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+     342: ldc           #113                // class java/util/Iterator
+     344: invokestatic  #117                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+     347: checkcast     #113                // class java/util/Iterator
+     350: astore        12
+     352: aload         12
+     354: invokeinterface #121,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     359: ifeq          455
+     362: aload         12
+     364: invokeinterface #124,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     369: astore        11
+     371: aload_1
+     372: ldc           #125                // int 17
+     374: aaload
+     375: aload         6
+     377: aload_1
+     378: ldc           #126                // int 18
+     380: aaload
+     381: aload_1
+     382: ldc           #127                // int 19
+     384: aaload
+     385: ldc           #81                 // class TreeNode
+     387: aload         11
+     389: aload         8
+     391: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     396: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+     401: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     406: dup
+     407: astore        6
+     409: pop
+     410: aload_1
+     411: ldc           #128                // int 20
+     413: aaload
+     414: aload         6
+     416: aload_1
+     417: ldc           #129                // int 21
+     419: aaload
+     420: aload_1
+     421: ldc           #130                // int 22
+     423: aaload
+     424: ldc           #81                 // class TreeNode
+     426: aload         11
+     428: invokestatic  #133                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.unaryMinus:(Ljava/lang/Object;)Ljava/lang/Object;
+     431: aload         8
+     433: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     438: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+     443: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     448: dup
+     449: astore        6
+     451: pop
+     452: goto          352
+     455: aload_1
+     456: ldc           #134                // int 23
+     458: aaload
+     459: aload_0
+     460: new           #84                 // class org/codehaus/groovy/runtime/GStringImpl
+     463: dup
+     464: iconst_3
+     465: anewarray     #71                 // class java/lang/Object
+     468: dup
+     469: iconst_0
+     470: aload_1
+     471: ldc           #135                // int 24
+     473: aaload
+     474: aload         9
+     476: iconst_2
+     477: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     480: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     485: aastore
+     486: dup
+     487: iconst_1
+     488: aload         8
+     490: aastore
+     491: dup
+     492: iconst_2
+     493: aload         6
+     495: aastore
+     496: iconst_4
+     497: anewarray     #86                 // class java/lang/String
+     500: dup
+     501: iconst_0
+     502: ldc           #92                 // String
+     504: aastore
+     505: dup
+     506: iconst_1
+     507: ldc           #137                // String \t trees of depth
+     509: aastore
+     510: dup
+     511: iconst_2
+     512: ldc           #90                 // String \t check:
+     514: aastore
+     515: dup
+     516: iconst_3
+     517: ldc           #92                 // String
+     519: aastore
+     520: invokespecial #95                 // Method org/codehaus/groovy/runtime/GStringImpl."<init>":([Ljava/lang/Object;[Ljava/lang/String;)V
+     523: invokeinterface #99,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     528: pop
+     529: aload_1
+     530: ldc           #138                // int 25
+     532: aaload
+     533: aload         8
+     535: iconst_2
+     536: invokestatic  #54                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     539: invokeinterface #66,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     544: dup
+     545: astore        8
+     547: pop
+     548: goto          255
+     551: aload_1
+     552: ldc           #139                // int 26
+     554: aaload
+     555: aload_0
+     556: new           #84                 // class org/codehaus/groovy/runtime/GStringImpl
+     559: dup
+     560: iconst_2
+     561: anewarray     #71                 // class java/lang/Object
+     564: dup
+     565: iconst_0
+     566: aload         4
+     568: aastore
+     569: dup
+     570: iconst_1
+     571: aload_1
+     572: ldc           #140                // int 27
+     574: aaload
+     575: aload         7
+     577: invokeinterface #68,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;)Ljava/lang/Object;
+     582: aastore
+     583: iconst_3
+     584: anewarray     #86                 // class java/lang/String
+     587: dup
+     588: iconst_0
+     589: ldc           #142                // String long lived tree of depth
+     591: aastore
+     592: dup
+     593: iconst_1
+     594: ldc           #90                 // String \t check:
+     596: aastore
+     597: dup
+     598: iconst_2
+     599: ldc           #92                 // String
+     601: aastore
+     602: invokespecial #95                 // Method org/codehaus/groovy/runtime/GStringImpl."<init>":([Ljava/lang/Object;[Ljava/lang/String;)V
+     605: invokeinterface #99,  3           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callCurrent:(Lgroovy/lang/GroovyObject;Ljava/lang/Object;)Ljava/lang/Object;
+     610: areturn
+     611: aconst_null
+     612: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #158                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class binarytrees
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #162                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #164                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #158                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #170                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #164                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #173                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}

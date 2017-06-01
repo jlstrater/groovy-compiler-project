@@ -1,0 +1,23 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/fannkuch.groovy: 9: [Static type checking] - The variable [args] is undeclared.
+ @ line 9, column 5.
+   if (args.length > 0) {
+       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/fannkuch.groovy: 10: [Static type checking] - The variable [args] is undeclared.
+ @ line 10, column 26.
+       n = Integer.parseInt(args[0])
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/fannkuch.groovy: 10: [Static type checking] - Cannot find matching method java.lang.Integer#parseInt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 10, column 9.
+       n = Integer.parseInt(args[0])
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/fannkuch.groovy: 12: [Static type checking] - Cannot find matching method fannkuch#fannkuch(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 12, column 39.
+   println("Pfannkuchen(" + n + ") = " + fannkuch(n))
+                                         ^
+
+4 errors
+

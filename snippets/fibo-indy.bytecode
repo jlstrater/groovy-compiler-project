@@ -1,0 +1,99 @@
+Compiled from "fibo.groovy"
+public class fibo extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public fibo();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."<init>":()V
+       4: return
+
+  public fibo(groovy.lang.Binding);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #18                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       5: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: ldc           #24                 // class org/codehaus/groovy/runtime/InvokerHelper
+       2: ldc           #2                  // class fibo
+       4: aload_0
+       5: invokedynamic #38,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Class;Ljava/lang/Class;[Ljava/lang/String;)Ljava/lang/Object;
+      10: pop
+      11: return
+
+  public java.lang.Object run();
+    Code:
+       0: aload_0
+       1: invokedynamic #48,  0             // InvokeDynamic #1:getProperty:(Lfibo;)Ljava/lang/Object;
+       6: iconst_0
+       7: invokedynamic #53,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Object;I)Ljava/lang/Object;
+      12: ldc           #55                 // class java/lang/Integer
+      14: invokedynamic #60,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      19: checkcast     #55                 // class java/lang/Integer
+      22: invokevirtual #64                 // Method java/lang/Integer.intValue:()I
+      25: istore_1
+      26: iload_1
+      27: pop
+      28: aload_0
+      29: aload_0
+      30: iload_1
+      31: invokedynamic #70,  0             // InvokeDynamic #4:invoke:(Lfibo;I)Ljava/lang/Object;
+      36: invokedynamic #75,  0             // InvokeDynamic #5:invoke:(Lfibo;Ljava/lang/Object;)Ljava/lang/Object;
+      41: areturn
+      42: nop
+      43: athrow
+
+  public int fib(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: if_icmpge     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ifeq          15
+      13: iconst_1
+      14: ireturn
+      15: aload_0
+      16: iload_1
+      17: iconst_2
+      18: invokedynamic #85,  0             // InvokeDynamic #6:invoke:(II)Ljava/lang/Object;
+      23: invokedynamic #86,  0             // InvokeDynamic #4:invoke:(Lfibo;Ljava/lang/Object;)Ljava/lang/Object;
+      28: aload_0
+      29: iload_1
+      30: iconst_1
+      31: invokedynamic #85,  0             // InvokeDynamic #6:invoke:(II)Ljava/lang/Object;
+      36: invokedynamic #86,  0             // InvokeDynamic #4:invoke:(Lfibo;Ljava/lang/Object;)Ljava/lang/Object;
+      41: invokedynamic #91,  0             // InvokeDynamic #7:invoke:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      46: invokestatic  #97                 // Method org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.intUnbox:(Ljava/lang/Object;)I
+      49: ireturn
+      50: nop
+      51: nop
+      52: athrow
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #106                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class fibo
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #112                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #114                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #106                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #120                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #114                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #123                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}

@@ -1,0 +1,28 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/mandelbrot.groovy: 10: [Static type checking] - The variable [args] is undeclared.
+ @ line 10, column 8.
+   res = (args.length >= 1) ? Integer.parseInt(args[0], 10) : 200
+          ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/mandelbrot.groovy: 10: [Static type checking] - Cannot find matching method java.lang.Object#compareTo(int). Please check if the declared type is right and if the method exists.
+ @ line 10, column 7.
+   res = (args.length >= 1) ? Integer.parseInt(args[0], 10) : 200
+         ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/mandelbrot.groovy: 10: [Static type checking] - The variable [args] is undeclared.
+ @ line 10, column 45.
+   ngth >= 1) ? Integer.parseInt(args[0], 1
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/mandelbrot.groovy: 10: [Static type checking] - Cannot find matching method java.lang.Integer#parseInt(java.lang.Object, int). Please check if the declared type is right and if the method exists.
+ @ line 10, column 28.
+   res = (args.length >= 1) ? Integer.parseInt(args[0], 10) : 200
+                              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/mandelbrot.groovy: 10: [Static type checking] - Cannot assign value of type java.lang.Object to variable of type int
+ @ line 10, column 26.
+   res = (args.length >= 1) ? Integer.parseInt(args[0], 10) : 200
+                            ^
+
+5 errors
+

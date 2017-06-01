@@ -1,0 +1,113 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 41: [Static type checking] - The variable [args] is undeclared.
+ @ line 41, column 10.
+   def n = (args.length == 0) ? 10 : args[0].toInteger()
+            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 41: [Static type checking] - The variable [args] is undeclared.
+ @ line 41, column 35.
+   def n = (args.length == 0) ? 10 : args[0].toInteger()
+                                     ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 44: [Static type checking] - Cannot find matching method java.lang.Object#plus(int). Please check if the declared type is right and if the method exists.
+ @ line 44, column 29.
+   def stretchDepth = maxDepth + 1
+                               ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 46: [Static type checking] - Cannot find matching method java.lang.Object#itemCheck(). Please check if the declared type is right and if the method exists.
+ @ line 46, column 13.
+   def check = (TreeNode.bottomUpTree(0, stretchDepth)).itemCheck()
+               ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 52: [Static type checking] - Cannot find matching method int#compareTo(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 52, column 8.
+   while (depth <= maxDepth) {
+          ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 53: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 53, column 37.
+       def iterations = 1 << (maxDepth - depth + minDepth)
+                                       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 53: [Static type checking] - Cannot find matching method java.lang.Object#plus(int). Please check if the declared type is right and if the method exists.
+ @ line 53, column 27.
+       def iterations = 1 << (maxDepth - depth + minDepth)
+                             ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 53: [Static type checking] - Cannot find matching method int#leftShift(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 53, column 24.
+       def iterations = 1 << (maxDepth - depth + minDepth)
+                          ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 56: [Static type checking] - Cannot find matching method java.lang.Object#itemCheck(). Please check if the declared type is right and if the method exists.
+ @ line 56, column 18.
+           check += (TreeNode.bottomUpTree(i, depth)).itemCheck()
+                    ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 56: [Static type checking] - Cannot find matching method int#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 56, column 9.
+           check += (TreeNode.bottomUpTree(i, depth)).itemCheck()
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 57: [Static type checking] - Cannot find matching method java.lang.Object#itemCheck(). Please check if the declared type is right and if the method exists.
+ @ line 57, column 18.
+           check += (TreeNode.bottomUpTree(-i,depth)).itemCheck()
+                    ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 57: [Static type checking] - Cannot find matching method int#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 57, column 9.
+           check += (TreeNode.bottomUpTree(-i,depth)).itemCheck()
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 64: [Static type checking] - Cannot find matching method java.lang.Object#itemCheck(). Please check if the declared type is right and if the method exists.
+ @ line 64, column 57.
+   f depth ${maxDepth}\t check: ${longLived
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 17: [Static type checking] - Cannot find matching method java.lang.Object#compareTo(int). Please check if the declared type is right and if the method exists.
+ @ line 17, column 13.
+           if (depth > 0) {
+               ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 19: [Static type checking] - Cannot find matching method int#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 19, column 35.
+                       bottomUpTree(2*item-1, depth-1),
+                                     ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 19: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 19, column 44.
+          bottomUpTree(2*item-1, depth-1),
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 20: [Static type checking] - Cannot find matching method int#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 20, column 34.
+                       bottomUpTree(2*item,   depth-1),
+                                    ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 20: [Static type checking] - Cannot find matching method java.lang.Object#minus(int). Please check if the declared type is right and if the method exists.
+ @ line 20, column 44.
+          bottomUpTree(2*item,   depth-1),
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 37: [Static type checking] - Cannot find matching method java.lang.Object#itemCheck(). Please check if the declared type is right and if the method exists.
+ @ line 37, column 28.
+           else return item + left.itemCheck() - right.itemCheck()
+                              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 37: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 37, column 26.
+           else return item + left.itemCheck() - right.itemCheck()
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 37: [Static type checking] - Cannot find matching method java.lang.Object#itemCheck(). Please check if the declared type is right and if the method exists.
+ @ line 37, column 47.
+   urn item + left.itemCheck() - right.item
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/binarytrees.groovy: 37: [Static type checking] - Cannot find matching method java.lang.Object#minus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 37, column 45.
+   eturn item + left.itemCheck() - right.it
+                                 ^
+
+22 errors
+

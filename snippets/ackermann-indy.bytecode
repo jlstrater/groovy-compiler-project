@@ -1,0 +1,183 @@
+Compiled from "ackermann.groovy"
+public class ackermann implements groovy.lang.GroovyObject {
+  public static transient boolean __$stMC;
+
+  public ackermann();
+    Code:
+       0: aload_0
+       1: invokespecial #17                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+       8: astore_1
+       9: aload_1
+      10: aload_0
+      11: swap
+      12: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      15: aload_1
+      16: pop
+      17: return
+
+  public static java.lang.Integer A(java.lang.Integer, java.lang.Integer);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: invokestatic  #39                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+       8: ifeq          24
+      11: aload_1
+      12: iconst_1
+      13: invokedynamic #53,  0             // InvokeDynamic #0:invoke:(Ljava/lang/Integer;I)Ljava/lang/Object;
+      18: invokedynamic #59,  0             // InvokeDynamic #1:cast:(Ljava/lang/Object;)Ljava/lang/Integer;
+      23: areturn
+      24: aload_1
+      25: iconst_0
+      26: invokestatic  #33                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      29: invokestatic  #39                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.compareEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z
+      32: ifeq          56
+      35: ldc           #2                  // class ackermann
+      37: aload_0
+      38: iconst_1
+      39: invokedynamic #62,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Integer;I)Ljava/lang/Object;
+      44: iconst_1
+      45: invokedynamic #66,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;Ljava/lang/Object;I)Ljava/lang/Object;
+      50: invokedynamic #59,  0             // InvokeDynamic #1:cast:(Ljava/lang/Object;)Ljava/lang/Integer;
+      55: areturn
+      56: ldc           #2                  // class ackermann
+      58: aload_0
+      59: iconst_1
+      60: invokedynamic #62,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Integer;I)Ljava/lang/Object;
+      65: ldc           #2                  // class ackermann
+      67: aload_0
+      68: aload_1
+      69: iconst_1
+      70: invokedynamic #62,  0             // InvokeDynamic #2:invoke:(Ljava/lang/Integer;I)Ljava/lang/Object;
+      75: invokedynamic #69,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;Ljava/lang/Integer;Ljava/lang/Object;)Ljava/lang/Object;
+      80: invokedynamic #72,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      85: invokedynamic #59,  0             // InvokeDynamic #1:cast:(Ljava/lang/Object;)Ljava/lang/Integer;
+      90: areturn
+      91: nop
+      92: athrow
+
+  public static void main(java.lang.String...);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: invokedynamic #84,  0             // InvokeDynamic #4:invoke:([Ljava/lang/String;I)Ljava/lang/Object;
+       7: invokedynamic #89,  0             // InvokeDynamic #5:invoke:(Ljava/lang/Object;)Ljava/lang/Object;
+      12: astore_1
+      13: aload_1
+      14: pop
+      15: ldc           #2                  // class ackermann
+      17: iconst_3
+      18: aload_1
+      19: invokedynamic #92,  0             // InvokeDynamic #3:invoke:(Ljava/lang/Class;ILjava/lang/Object;)Ljava/lang/Object;
+      24: astore_2
+      25: aload_2
+      26: pop
+      27: ldc           #2                  // class ackermann
+      29: new           #94                 // class org/codehaus/groovy/runtime/GStringImpl
+      32: dup
+      33: iconst_2
+      34: anewarray     #4                  // class java/lang/Object
+      37: dup
+      38: iconst_0
+      39: aload_1
+      40: aastore
+      41: dup
+      42: iconst_1
+      43: aload_2
+      44: aastore
+      45: iconst_3
+      46: anewarray     #96                 // class java/lang/String
+      49: dup
+      50: iconst_0
+      51: ldc           #98                 // String Ack(3,
+      53: aastore
+      54: dup
+      55: iconst_1
+      56: ldc           #100                // String ):
+      58: aastore
+      59: dup
+      60: iconst_2
+      61: ldc           #102                // String
+      63: aastore
+      64: invokespecial #105                // Method org/codehaus/groovy/runtime/GStringImpl."<init>":([Ljava/lang/Object;[Ljava/lang/String;)V
+      67: invokedynamic #110,  0            // InvokeDynamic #6:invoke:(Ljava/lang/Class;Lgroovy/lang/GString;)Ljava/lang/Object;
+      72: pop
+      73: return
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #119                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class ackermann
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #123                // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #125                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #119                // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #131                // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #125                // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #134                // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+
+  public groovy.lang.MetaClass getMetaClass();
+    Code:
+       0: aload_0
+       1: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       4: dup
+       5: ifnull        9
+       8: areturn
+       9: pop
+      10: aload_0
+      11: dup
+      12: invokevirtual #21                 // Method $getStaticMetaClass:()Lgroovy/lang/MetaClass;
+      15: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      18: aload_0
+      19: getfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+      22: areturn
+
+  public void setMetaClass(groovy.lang.MetaClass);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #23                 // Field metaClass:Lgroovy/lang/MetaClass;
+       5: return
+
+  public java.lang.Object invokeMethod(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #141                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #144,  4          // InterfaceMethod groovy/lang/MetaClass.invokeMethod:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+      12: areturn
+
+  public java.lang.Object getProperty(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #141                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: invokeinterface #149,  3          // InterfaceMethod groovy/lang/MetaClass.getProperty:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+      11: areturn
+
+  public void setProperty(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: invokevirtual #141                // Method getMetaClass:()Lgroovy/lang/MetaClass;
+       4: aload_0
+       5: aload_1
+       6: aload_2
+       7: invokeinterface #154,  4          // InterfaceMethod groovy/lang/MetaClass.setProperty:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)V
+      12: return
+}

@@ -1,0 +1,23 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/regexdna.groovy: 12: [Static type checking] - The variable [initialLength] is undeclared.
+ @ line 12, column 1.
+   initialLength = seq.length()
+   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/regexdna.groovy: 14: [Static type checking] - The variable [codeLength] is undeclared.
+ @ line 14, column 1.
+   codeLength = seq.length()
+   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/regexdna.groovy: 47: [Static type checking] - The variable [initialLength] is undeclared.
+ @ line 47, column 9.
+   println initialLength
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/regexdna.groovy: 48: [Static type checking] - The variable [codeLength] is undeclared.
+ @ line 48, column 9.
+   println codeLength
+           ^
+
+4 errors
+

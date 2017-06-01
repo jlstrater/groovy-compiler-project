@@ -1,0 +1,153 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 59: [Static type checking] - The variable [args] is undeclared.
+ @ line 59, column 10.
+   def n = (args.length == 0 ? 100 : args[0].toInteger())
+            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 59: [Static type checking] - The variable [args] is undeclared.
+ @ line 59, column 35.
+   def n = (args.length == 0 ? 100 : args[0].toInteger())
+                                     ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 10: [Static type checking] - Cannot find matching method java.util.List#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 10, column 20.
+       def u = [1.0D] * n
+                      ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 13: [Static type checking] - Cannot find matching method java.util.List#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 13, column 20.
+       def v = [0.0D] * n
+                      ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 22: [Static type checking] - The variable [vv] is undeclared.
+ @ line 22, column 18.
+       double vBv = vv = 0.0D
+                    ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 24: [Static type checking] - Cannot find matching method java.util.List#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 24, column 16.
+           vBv += u[i]*v[i]
+                  ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 24: [Static type checking] - Cannot find matching method java.util.List#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 24, column 21.
+           vBv += u[i]*v[i]
+                       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 24: [Static type checking] - Cannot find matching method java.util.List#multiply(java.util.List <java.lang.Double>). Please check if the declared type is right and if the method exists.
+ @ line 24, column 20.
+           vBv += u[i]*v[i]
+                      ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 24: [Static type checking] - Cannot find matching method double#plus(java.util.List <java.lang.Double>). Please check if the declared type is right and if the method exists.
+ @ line 24, column 9.
+           vBv += u[i]*v[i]
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 25: [Static type checking] - The variable [vv] is undeclared.
+ @ line 25, column 9.
+           vv  += v[i]*v[i]
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 25: [Static type checking] - Cannot find matching method java.util.List#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 25, column 16.
+           vv  += v[i]*v[i]
+                  ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 25: [Static type checking] - Cannot find matching method java.util.List#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 25, column 21.
+           vv  += v[i]*v[i]
+                       ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 25: [Static type checking] - Cannot find matching method java.util.List#multiply(java.util.List <java.lang.Double>). Please check if the declared type is right and if the method exists.
+ @ line 25, column 20.
+           vv  += v[i]*v[i]
+                      ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 28: [Static type checking] - The variable [vv] is undeclared.
+ @ line 28, column 28.
+       return Math.sqrt(vBv / vv)
+                              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 28: [Static type checking] - Cannot find matching method double#div(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 28, column 22.
+       return Math.sqrt(vBv / vv)
+                        ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 33, column 20.
+       return 1.0D / ((i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D)
+                      ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 33, column 31.
+       return 1.0D / ((i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D)
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#plus(double). Please check if the declared type is right and if the method exists.
+ @ line 33, column 28.
+       return 1.0D / ((i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D)
+                              ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 33, column 26.
+       return 1.0D / ((i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D)
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#div(double). Please check if the declared type is right and if the method exists.
+ @ line 33, column 43.
+   .0D / ((i+j) * (i + j + 1.0D) / 2.0D  + 
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#plus(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 33, column 51.
+   i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method java.lang.Object#plus(double). Please check if the declared type is right and if the method exists.
+ @ line 33, column 19.
+       return 1.0D / ((i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D)
+                     ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 33: [Static type checking] - Cannot find matching method double#div(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 33, column 17.
+       return 1.0D / ((i+j) * (i + j + 1.0D) / 2.0D  + i + 1.0D)
+                   ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 39: [Static type checking] - Cannot find matching method java.lang.Object#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 39, column 9.
+           Av[i] = 0.0D
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 40, column 26.
+           for (j in 0..<n) Av[i] += A(i,j) * v[j]
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 40, column 44.
+   j in 0..<n) Av[i] += A(i,j) * v[j]
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 40: [Static type checking] - Cannot find matching method java.lang.Object#multiply(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 40, column 42.
+    (j in 0..<n) Av[i] += A(i,j) * v[j]
+                                 ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 47: [Static type checking] - Cannot find matching method java.lang.Object#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 47, column 9.
+           Atv[i] = 0.0D
+           ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 48: [Static type checking] - Cannot find matching method java.lang.Object#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 48, column 26.
+           for (j in 0..<n) Atv[i] += A(j,i) * v[j]
+                            ^
+
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/spectralnorm.groovy: 48: [Static type checking] - Cannot find matching method java.lang.Object#getAt(java.lang.Object). Please check if the declared type is right and if the method exists.
+ @ line 48, column 45.
+    in 0..<n) Atv[i] += A(j,i) * v[j]
+                                 ^
+
+30 errors
+

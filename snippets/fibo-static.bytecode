@@ -1,0 +1,8 @@
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+/Users/jstrater/Documents/dev/groovy-compiler-project/build/resources/test/scripts/fibo.groovy: 4: [Static type checking] - The variable [args] is undeclared.
+ @ line 4, column 9.
+   int N = args[0] as int
+           ^
+
+1 error
+

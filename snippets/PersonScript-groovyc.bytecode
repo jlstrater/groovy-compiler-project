@@ -1,0 +1,96 @@
+Compiled from "PersonScript.groovy"
+public class PersonScript extends groovy.lang.Script {
+  public static transient boolean __$stMC;
+
+  public PersonScript();
+    Code:
+       0: aload_0
+       1: invokespecial #13                 // Method groovy/lang/Script."<init>":()V
+       4: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       7: astore_1
+       8: return
+
+  public PersonScript(groovy.lang.Binding);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_2
+       4: aload_0
+       5: aload_1
+       6: invokespecial #22                 // Method groovy/lang/Script."<init>":(Lgroovy/lang/Binding;)V
+       9: return
+
+  public static void main(java.lang.String...);
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #27                 // int 0
+       7: aaload
+       8: ldc           #29                 // class org/codehaus/groovy/runtime/InvokerHelper
+      10: ldc           #2                  // class PersonScript
+      12: aload_0
+      13: invokeinterface #35,  4           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.call:(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public java.lang.Object run();
+    Code:
+       0: invokestatic  #17                 // Method $getCallSiteArray:()[Lorg/codehaus/groovy/runtime/callsite/CallSite;
+       3: astore_1
+       4: aload_1
+       5: ldc           #40                 // int 1
+       7: aaload
+       8: ldc           #42                 // class Person
+      10: invokeinterface #46,  2           // InterfaceMethod org/codehaus/groovy/runtime/callsite/CallSite.callConstructor:(Ljava/lang/Object;)Ljava/lang/Object;
+      15: ldc           #42                 // class Person
+      17: invokestatic  #52                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.castToType:(Ljava/lang/Object;Ljava/lang/Class;)Ljava/lang/Object;
+      20: checkcast     #42                 // class Person
+      23: astore_2
+      24: aload_2
+      25: pop
+      26: ldc           #54                 // String Jenn
+      28: astore_3
+      29: aload_3
+      30: ldc           #2                  // class PersonScript
+      32: aload_2
+      33: ldc           #56                 // String first
+      35: checkcast     #58                 // class java/lang/String
+      38: invokestatic  #62                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.setGroovyObjectProperty:(Ljava/lang/Object;Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;)V
+      41: aload_3
+      42: pop
+      43: ldc           #64                 // String Strater
+      45: astore        4
+      47: aload         4
+      49: ldc           #2                  // class PersonScript
+      51: aload_2
+      52: ldc           #66                 // String last
+      54: checkcast     #58                 // class java/lang/String
+      57: invokestatic  #62                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.setGroovyObjectProperty:(Ljava/lang/Object;Ljava/lang/Class;Lgroovy/lang/GroovyObject;Ljava/lang/String;)V
+      60: aload         4
+      62: areturn
+      63: aconst_null
+      64: areturn
+
+  protected groovy.lang.MetaClass $getStaticMetaClass();
+    Code:
+       0: aload_0
+       1: invokevirtual #76                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: ldc           #2                  // class PersonScript
+       6: if_acmpeq     14
+       9: aload_0
+      10: invokestatic  #80                 // Method org/codehaus/groovy/runtime/ScriptBytecodeAdapter.initMetaClass:(Ljava/lang/Object;)Lgroovy/lang/MetaClass;
+      13: areturn
+      14: getstatic     #82                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      17: astore_1
+      18: aload_1
+      19: ifnonnull     34
+      22: aload_0
+      23: invokevirtual #76                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      26: invokestatic  #88                 // Method org/codehaus/groovy/reflection/ClassInfo.getClassInfo:(Ljava/lang/Class;)Lorg/codehaus/groovy/reflection/ClassInfo;
+      29: dup
+      30: astore_1
+      31: putstatic     #82                 // Field $staticClassInfo:Lorg/codehaus/groovy/reflection/ClassInfo;
+      34: aload_1
+      35: invokevirtual #91                 // Method org/codehaus/groovy/reflection/ClassInfo.getMetaClass:()Lgroovy/lang/MetaClass;
+      38: areturn
+}
